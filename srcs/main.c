@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "minishell.h"
 
 int	main(void)
 {
@@ -8,6 +6,6 @@ int	main(void)
 
 	while (1)
 	{
-		line = readline(":>");
+		line = readline(":> ");
 	}
 }
