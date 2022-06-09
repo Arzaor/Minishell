@@ -1,46 +1,67 @@
 #include "minishell.h"
 
+void prompt()
+{
+	char 	*term_type;
+	int 	ret;
+	char* color_cap;
+	char *reset_cmd;
+
+	term_type = getenv("TERM");
+	ret = tgetent(NULL, term_type);
+	color_cap = tgetstr("AF", NULL);
+	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
+	reset_cmd = tgetstr("md", NULL);
+	tputs(reset_cmd, 1, putchar);
+}
+
 void	start_minishell()
 {
 	char	*line;
-
+	char 	*cm_cap;
+	
 	while (1)
 	{
+		prompt();
 		line = readline(":> ");
-		if(strcmp(line,"exit") == 0)
-				break;
-		printf("%s",line);
+		if(line == NULL || strcmp(line, "exit") == 0)
+		{
+			if(line == NULL)
+			{
+				cm_cap = tgetstr("cm", NULL);
+				tputs(tgoto(cm_cap, 3,4), 1, putchar);
+				printf("exit");
+			}
+			break;
+		}
+		else{
+			if (line)
+				add_history(line);
+			free(line);
+		}	
 	}
 }
 
-void crtl_c(){
-	
-	int ret;
-	int column;
-	int  line_count;4
-	char *term_type;
-	char *cm_cap;
-	column = tgetnum("co");
-	line_count= tgetnum("li");
-
-	term_type = getenv("TERM");
-	//tputs (cl_cap, 1, putchar);
-	ret = tgetent(NULL,term_type);
-	cm_cap = tgetstr("cm", NULL);
-	printf("\n");
-	tputs(tgoto(cm_cap,1,1),1,putchar);
-	rl_on_new_line();
-	rl_redisplay();
-   //printf("\n");
-	
+void sig_handler(int signo)
+{
+	if(signo == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("",0);
+		rl_redisplay();
+	}
+	else if(signo == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 int		main(void)
 {
-	
-	// Hamza : Ajout des signaux
-	signal(SIGINT, crtl_c);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	start_minishell();
-
 	return 0;
 }
