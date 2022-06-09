@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	main(void)
+void	start_minishell()
 {
 	char	*line;
 
@@ -8,4 +8,10 @@ int	main(void)
 	{
 		line = readline(":> ");
 	}
+}
+
+int		main(void)
+{
+	// Hamza : Ajout des signaux
+	start_minishell();
 }
