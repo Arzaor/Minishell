@@ -7,6 +7,9 @@ void	start_minishell()
 	while (1)
 	{
 		line = readline(":> ");
+		if (line)
+			add_history(line);
+		parsing_builtins(line);
 	}
 }
 

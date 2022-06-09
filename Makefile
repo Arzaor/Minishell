@@ -1,30 +1,53 @@
-NAME	=	minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/01 11:56:43 by chchao            #+#    #+#              #
+#    Updated: 2022/06/09 14:42:33 by jbarette         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FLAGS	=	-Wall -Werror -Wextra -I ./includes -I ~/.brew/opt/readline/include -g
+NAME 		= minishell
 
-SRCS	=	srcs/main.c
+SRC_DIR 	= 	srcs/
+INC_DIR 	= 	includes/
 
-OBJS	=	$(SRCS:.c=.o)
+SRC 		=	main.c \
+				parsing.c
 
-LDIR	=	./libft
-LIBFT	=	libft/libft.a
+SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
+SRCS_ALL 	= 	${SRCS}
 
-all: $(NAME)
+OBJS 		= 	$(SRCS:.c=.o)
+
+CC			= 	gcc
+CFLAGS		=	-Wall -Wextra -Werror
+
+LIB_RDL 	= 	libreadline.a ./libft/libft.a
+
+%.o: %.c
+		${CC} $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(NAME): $(OBJS)
-		make -C $(LDIR)
-		gcc $(FLAGS) -lreadline -L ~/.brew/opt/readline/lib $(LIBFT) $(OBJS) -o $@
+		make -C ./libft
+		cp ./readline/libreadline.a ./
+		${CC} $(CFLAGS) $(OBJS) ${LIB_RDL} -lncurses -o $(NAME)
 
-$(OBJS): $(SRCS)
-	gcc $(FLAGS) -c $^ -o $@
+all:
+		$(MAKE) -j $(NAME)
 
 clean:
-	make -C $(LDIR) clean
-	rm -f $(OBJS)
-	rm -rf .objs
+		make -C ./libft clean
+		rm -rf $(OBJS)
 
-fclean: clean
-	make -C $(LDIR) fclean
-	rm -f $(NAME)
+fclean:	clean
+		make -C ./libft fclean
+		rm -rf $(NAME)
+		rm -rf libreadline.a
 
 re: fclean all
+
+.PHONY: all, clean, fclean, re
