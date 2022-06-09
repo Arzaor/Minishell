@@ -1,13 +1,19 @@
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "minishell.h"
 
-int	main(void)
+void	start_minishell()
 {
 	char	*line;
 
 	while (1)
 	{
-		line = readline(":>");
+		line = readline(":> ");
 	}
+}
+
+int		main(void)
+{
+	// Hamza : Ajout des signaux
+	start_minishell();
+
+	return 0;
 }
