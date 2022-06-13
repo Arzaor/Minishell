@@ -1,22 +1,21 @@
 #include "minishell.h"
 
-void	start_minishell()
+void	display_prompt()
 {
 	char	*line;
 
-	while (1)
-	{
-		line = readline(":> ");
-		if (line)
-			add_history(line);
-		parsing_builtins(line);
-	}
+	line = readline(":> ");
+	if (line)
+		add_history(line);
 }
 
 int		main(void)
 {
-	// Hamza : Ajout des signaux
-	start_minishell();
+	while (1)
+	{
+		// Hamza : Ajout des signaux
+		display_prompt();
+	}
 
 	return 0;
 }

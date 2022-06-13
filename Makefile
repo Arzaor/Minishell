@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 11:56:43 by chchao            #+#    #+#              #
-#    Updated: 2022/06/09 14:42:33 by jbarette         ###   ########.fr        #
+#    Updated: 2022/06/10 12:01:44 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR 	= 	srcs/
 INC_DIR 	= 	includes/
 
 SRC 		=	main.c \
-				parsing.c
+				lexer.c
 
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}
