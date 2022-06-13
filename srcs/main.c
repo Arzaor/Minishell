@@ -28,8 +28,9 @@ void	start_minishell()
 		{
 			if(line == NULL)
 			{
+				int line_count = tgetnum("li");
 				cm_cap = tgetstr("cm", NULL);
-				tputs(tgoto(cm_cap, 3,4), 1, putchar);
+				tputs(tgoto(cm_cap, 3,line_count-2), 1, putchar);
 				printf("exit");
 			}
 			break;
