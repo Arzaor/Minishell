@@ -15,7 +15,7 @@ static void style_prompt()
 	tputs(reset_cmd, 1, putchar);
 }
 
-static void	start_minishell()
+static void	start_minishell(char **env)
 {
 	char	*line;
 	char 	*cm_cap;
@@ -29,8 +29,9 @@ static void	start_minishell()
 			if(line == NULL)
 			{
 				int line_count = tgetnum("li");
+				int col_cocunt = tgetnum("cl");
 				cm_cap = tgetstr("cm", NULL);
-				tputs(tgoto(cm_cap, 3,line_count-2), 1, putchar);
+				tputs(tgoto(cm_cap, col_cocunt,line_count-2), 1, putchar);
 				printf("exit");
 			}
 			break;
@@ -39,7 +40,7 @@ static void	start_minishell()
 		{
 			if (line)
 				add_history(line);
-			parsing_symbols(line);
+			parsing_symbols(line,env);
 			free(line);
 		}	
 	}
@@ -61,10 +62,12 @@ static void sig_handler(int signo)
 	}
 }
 
-int		main(void)
+int		main(int argc, char **argv,char **env)
 {
+	argc = 0;
+	argv = 0;
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
-	start_minishell();
+	start_minishell(env);
 	return (0);
 }

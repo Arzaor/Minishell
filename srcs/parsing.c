@@ -35,7 +35,7 @@ static t_parser	*parsing_quotes(int count_single, int count_double, t_parser *pa
 	return (parser);
 }
 
-void	parsing_symbols(char *line)
+void	parsing_symbols(char *line,char **env)
 {
 	int			i;
 	int			count_single;
@@ -64,8 +64,8 @@ void	parsing_symbols(char *line)
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser);
 	parser = parsing_heredoc(line, parser);
-	printf("CMD : %s\nARGS : %s\nHEREDOC : %s\n", parser->parser_cmd, parser->parser_args, parser->parser_heredoc);
-	// handler_cmd(parser);
+	handler_cmd(parser,env);
+	//printf("CMD : %s\nARGS : %s\nHEREDOC : %s\n", parser->parser_cmd, parser->parser_args, parser->parser_heredoc);
 }
 
 t_parser	*parsing_cmd(char *line, t_parser *parser)
@@ -120,20 +120,31 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 	if (parser->parser_opt)
 		i += 3;
 	k = i;
-	while (line[i])
+	// faire un cas pour les quotes
+	if(parser->parser_single_quote)
 	{
-		if (line[i] == '>' || line[i] == '<')
-			break ;
-		count++;
-		i++;
-	}
-	i = k;
-	k = 0;
-	if (count > 0)
-	{
+		i = k;
+		k = 0;
 		parser->parser_args = malloc(sizeof(char) * count + 1);
-		while (k < count)
+		while (line[i])
 			parser->parser_args[k++] = line[i++];
+	}
+	else{
+		while (line[i])
+		{
+			if (line[i] == '>' || line[i] == '<')
+				break ;
+			count++;
+			i++;
+		}
+		i = k;
+		k = 0;
+		if (count > 0)
+		{
+			parser->parser_args = malloc(sizeof(char) * count + 1);
+			while (k < count)
+				parser->parser_args[k++] = line[i++];
+		}
 	}
 	return (parser);
 }
