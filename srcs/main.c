@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void prompt()
+static void style_prompt()
 {
 	int 	ret;
 	char 	*term_type;
@@ -15,14 +15,14 @@ void prompt()
 	tputs(reset_cmd, 1, putchar);
 }
 
-void	start_minishell()
+static void	start_minishell()
 {
 	char	*line;
 	char 	*cm_cap;
-	
+
 	while (1)
 	{
-		prompt();
+		style_prompt();
 		line = readline(":> ");
 		if(line == NULL || strcmp(line, "exit") == 0)
 		{
@@ -38,18 +38,19 @@ void	start_minishell()
 		{
 			if (line)
 				add_history(line);
+			parsing_symbols(line);
 			free(line);
 		}	
 	}
 }
 
-void sig_handler(int signo)
+static void sig_handler(int signo)
 {
 	if(signo == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("",0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	else if(signo == SIGQUIT)
@@ -64,5 +65,5 @@ int		main(void)
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	start_minishell();
-	return 0;
+	return (0);
 }

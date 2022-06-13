@@ -12,9 +12,27 @@
 # include <curses.h>
 # include <term.h>
 
-void	start_minishell();
-void	sig_handler(int signo);
-void	parsing_builtins(char *line);
-void	rl_replace_line(const char *text,int clear_undo);
+
+typedef struct	s_parser {
+	char	*parser_cmd;
+	char	*parser_opt;
+	char	*parser_args;
+	int		parser_double_quote;
+	int		parser_single_quote;
+	int		parser_left_redir;
+	int		parser_right_redir;
+	char	*parser_heredoc;
+}				t_parser;
+
+typedef struct		s_data
+{
+	t_parser		parser;
+	struct t_data	*next;
+}					t_data;
+
+void		rl_replace_line(const char *text,int clear_undo);
+void		parsing_symbols(char *line);
+t_parser	*parsing_cmd(char *line, t_parser *parser);
+t_parser	*init();
 
 #endif
