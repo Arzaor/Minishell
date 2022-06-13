@@ -12,10 +12,9 @@
 # include <curses.h>
 # include <term.h>
 
-
 typedef struct	s_parser {
 	char	*parser_cmd;
-	char	*parser_opt;
+	int		parser_opt;
 	char	*parser_args;
 	int		parser_double_quote;
 	int		parser_single_quote;
@@ -33,6 +32,11 @@ typedef struct		s_data
 void		rl_replace_line(const char *text,int clear_undo);
 void		parsing_symbols(char *line);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
+t_parser	*parsing_args(char *line, t_parser *parser);
+t_parser	*parsing_opts(char *line, t_parser *parser);
+t_parser	*parsing_heredoc(char *line, t_parser *parser);
 t_parser	*init();
+
+void	handler_cmd(t_parser *parser);
 
 #endif
