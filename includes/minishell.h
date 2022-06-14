@@ -30,6 +30,9 @@ typedef struct		s_data
 }					t_data;
 
 void		rl_replace_line(const char *text,int clear_undo);
+
+
+//PARSING
 void		parsing_symbols(char *line,char **env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
@@ -37,6 +40,8 @@ t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 t_parser	*init();
 
-void	handler_cmd(t_parser *parser, char **env);
+//CMD
+void handler_cmd(t_parser *parser);
+void		create_cmd(t_parser *parser, char **env);
 
 #endif

@@ -2,6 +2,7 @@
 
 static void pwd(){
 	char pwd[256];
+	
 	if (getcwd(pwd, sizeof(pwd)) != NULL) {
 		printf("Current working dir: %s\n", pwd);
 	} 
@@ -18,7 +19,7 @@ static void ft_env(char **env){
 		i++;
 	}
 }
-void  handler_cmd(t_parser *parser,char **env){
+void  create_cmd(t_parser *parser,char **env){
 
 	if(!ft_strncmp(parser->parser_cmd,"cat",3))
 		printf("cat");
@@ -34,3 +35,7 @@ void  handler_cmd(t_parser *parser,char **env){
 		ft_env(env);
 }
 
+void handler_cmd(t_parser *parser)
+{
+
+}
