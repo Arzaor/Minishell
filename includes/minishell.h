@@ -23,12 +23,6 @@ typedef struct	s_parser {
 	char	*parser_heredoc;
 }				t_parser;
 
-typedef struct		s_data
-{
-	t_parser		parser;
-	struct t_data	*next;
-}					t_data;
-
 void		rl_replace_line(const char *text,int clear_undo);
 
 
@@ -38,7 +32,10 @@ t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
+//init free
 t_parser	*init();
+void free_parser(t_parser *parser);
+
 
 //CMD
 void handler_cmd(t_parser *parser);

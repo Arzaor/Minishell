@@ -22,9 +22,10 @@ static t_parser	*parsing(t_parser *parser, int count_single, int count_double, c
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser);
 	parser = parsing_heredoc(line, parser);
+	return (parser);
 }
 
-static t_parser	*parsing_cmd(char *line, t_parser *parser)
+t_parser	*parsing_cmd(char *line, t_parser *parser)
 {
 	int		i;
 	int		y;
@@ -32,6 +33,7 @@ static t_parser	*parsing_cmd(char *line, t_parser *parser)
 
 	i = 0;	
 	y = 0;
+	count = 0;
 	while (line[i])
 	{
 		if (ft_isalpha(line[i]))
@@ -47,7 +49,7 @@ static t_parser	*parsing_cmd(char *line, t_parser *parser)
 	return (parser);
 }
 
-static t_parser	*parsing_opts(char *line, t_parser *parser)
+t_parser	*parsing_opts(char *line, t_parser *parser)
 {
 	int		i;
 
@@ -84,5 +86,7 @@ void	parsing_symbols(char *line, char **env)
 			count_double++;
 		i++;
 	}
-	handler_cmd(parsing(parser, count_single, count_double, line), env);
+	create_cmd(parsing(parser, count_single, count_double, line), env);
+	printf("CMD: %s || OPT: %d || ARG: %s || herdot: %s ",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc);
+	free_parser(parser);
 }

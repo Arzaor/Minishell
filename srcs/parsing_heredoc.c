@@ -14,6 +14,7 @@ t_parser	*save_heredoc(t_parser *parser, int count, int i, char *line)
 			i++;
 		}
 	}
+	return (parser);
 }
 
 t_parser	*parsing_heredoc(char *line, t_parser *parser)
@@ -33,6 +34,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 			i += 3;
 		else
 			i += 2;
+		k = i;
 		while (line[i] && line[i] != ' ')
 		{
 			count++;
