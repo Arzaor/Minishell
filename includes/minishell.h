@@ -36,7 +36,6 @@ t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 t_parser	*init();
-
-void	handler_cmd(t_parser *parser, char **env);
+void		handler_cmd(t_parser *parser, char **env);
 
 #endif

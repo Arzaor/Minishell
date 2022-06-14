@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/13 16:52:07 by hterras          ###   ########.fr        #
+#    Updated: 2022/06/14 14:09:42 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ SRC_DIR 	= 	srcs/
 INC_DIR 	= 	includes/
 
 SRC 		=	main.c \
+				init.c \
 				parsing.c \
-				handler_cmd.c
+				handler_cmd.c \
+				parsing_args.c \
+				parsing_heredoc.c \
 				
 
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
