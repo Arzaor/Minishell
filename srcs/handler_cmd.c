@@ -11,7 +11,8 @@ static void pwd(){
 	}
 }
 
-static void ft_env(char **env){
+static void ft_env(char **env)
+{
 	int i = 0;
 	while(env[i])
 	{
@@ -19,7 +20,9 @@ static void ft_env(char **env){
 		i++;
 	}
 }
-void  create_cmd(t_parser *parser,char **env){
+
+void  create_cmd(t_parser *parser,char **env)
+{
 
 	if(!ft_strncmp(parser->parser_cmd,"cat",3))
 		printf("cat");
