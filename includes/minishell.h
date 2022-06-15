@@ -47,7 +47,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser);
 //CMD
 void	handler_cmd(t_parser *parser, char **env);
 void	create_cmd(t_parser *parser, char **env);
-void	ft_cat(t_parser *parser);
+void	ft_echo(t_parser *parser);
 
 //UTILS
 int	ft_strcmp(const char *s1, const char *s2);

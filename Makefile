@@ -6,7 +6,7 @@
 #    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/15 14:39:11 by hterras          ###   ########.fr        #
+#    Updated: 2022/06/15 15:11:44 by hterras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC 		=	main.c \
 				parsing_heredoc.c \
 				create_env.c \
 				utils.c \
-				ft_cat.c \
+				ft_echo.c \
 				
 
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})

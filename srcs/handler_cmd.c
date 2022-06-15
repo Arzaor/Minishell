@@ -33,11 +33,17 @@ static void	ft_env(char **env)
 
 static bool	is_build_in(char *cmd)
 {
-	int	i;
+	const char	*built_in[7];
+	int			i;
 
 	i = 0;
-	const char *built_in[] = {"cat", "cd", "pwd", "export", "unset", "env", NULL};
-
+	built_in[0] = "echo";
+	built_in[1] = "cd";
+	built_in[2] = "pwd";
+	built_in[3] = "export";
+	built_in[4] = "unset";
+	built_in[5] = "env";
+	built_in[6] = NULL;
 	while (built_in[i])
 	{
 		if (!ft_strcmp(built_in[i], cmd))
@@ -47,14 +53,14 @@ static bool	is_build_in(char *cmd)
 	return (false);
 }
 
-void  create_cmd(t_parser *parser, char **env)
+void	create_cmd(t_parser *parser, char **env)
 {
-	char **new_env;
+	char	**new_env;
 
 	new_env = create_env(env);
-	if (!ft_strncmp(parser->parser_cmd, "cat", 3))
-		ft_cat(parser);
-	if (!ft_strncmp(parser->parser_cmd,"cd",2))
+	if (!ft_strncmp(parser->parser_cmd, "echo", 3))
+		ft_echo(parser);
+	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		printf("cd");
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
 		pwd();
@@ -64,8 +70,6 @@ void  create_cmd(t_parser *parser, char **env)
 		printf("unset");
 	if (!ft_strncmp(parser->parser_cmd, "env", 3))
 		ft_env(env);
-	if (!ft_strncmp(parser->parser_cmd, "env",6))
-		ft_env(new_env);
 }
 
 void	handler_cmd(t_parser *parser, char **env)
