@@ -57,7 +57,7 @@ static bool	is_build_in(char *cmd)
 void	create_cmd(t_parser *parser, char **env)
 {
 	if (!ft_strncmp(parser->parser_cmd, "cat", 3))
-		printf("cat");
+		ft_cat(parser);
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		printf("cd");
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
