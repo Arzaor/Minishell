@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	**create_env(char **env)
+t_env *create_env(char **env)
 {
 	int		i;
 	int		k, j;
@@ -22,11 +22,7 @@ char	**create_env(char **env)
 		k++;
 		j++;
 	}
-	while (new_env->first != NULL)
-	{
-		delete_env(new_env);
-	}
-	return (env_tab);
+	return (new_env);
 }
 
 void	insert_env(t_env *env, char *value)
@@ -36,7 +32,7 @@ void	insert_env(t_env *env, char *value)
 	new = malloc(sizeof(*new));
 	if (env == NULL || new == NULL)
 		exit(EXIT_FAILURE);
-	new->value = value;
+	new->value = ft_strdup(value);
 	new->next = env->first;
 	env->first = new;
 }

@@ -38,15 +38,15 @@ typedef struct			s_env
 void		rl_replace_line(const char *text,int clear_undo);
 
 //PARSING
-void		parsing_symbols(char *line,char **env);
+void		parsing_symbols(char *line, t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 
 //CMD
-void	handler_cmd(t_parser *parser, char **env);
-void	create_cmd(t_parser *parser, char **env);
+void	handler_cmd(t_parser *parser, t_env *env);
+void	create_cmd(t_parser *parser, t_env *env);
 void	ft_echo(t_parser *parser);
 
 //UTILS
@@ -59,7 +59,7 @@ t_env		*init_env();
 
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
-char	**create_env(char **env);
+t_env *create_env(char **env);
 void		insert_env(t_env *env, char *value);
 void		delete_env(t_env *env);
 void	display_tab(char **env_tab);

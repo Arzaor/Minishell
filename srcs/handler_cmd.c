@@ -19,16 +19,9 @@ static void	pwd(void)
 	array = NULL;
 }*/
 
-static void	ft_env(char **env)
+static void	ft_env(t_env *env)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+	display_linked_list(env);
 }
 
 static bool	is_build_in(char *cmd)
@@ -53,11 +46,14 @@ static bool	is_build_in(char *cmd)
 	return (false);
 }
 
-void	create_cmd(t_parser *parser, char **env)
+void	ft_export(t_env *env,char *value)
 {
-	char	**new_env;
+	if(value)
+		insert_env(env,value);
 
-	new_env = create_env(env);
+}
+void	create_cmd(t_parser *parser, t_env *env)
+{
 	if (!ft_strncmp(parser->parser_cmd, "echo", 3))
 		ft_echo(parser);
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
@@ -65,14 +61,14 @@ void	create_cmd(t_parser *parser, char **env)
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
 		pwd();
 	if (!ft_strncmp(parser->parser_cmd, "export", 6))
-		printf("export");
+		ft_export(env,parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "unset", 5))
 		printf("unset");
 	if (!ft_strncmp(parser->parser_cmd, "env", 3))
 		ft_env(env);
 }
 
-void	handler_cmd(t_parser *parser, char **env)
+void	handler_cmd(t_parser *parser, t_env *env)
 {
 	if (is_build_in(parser->parser_cmd))
 		create_cmd(parser, env);

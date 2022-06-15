@@ -63,7 +63,7 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 	return (parser);
 }
 
-void	parsing_symbols(char *line, char **env)
+void	parsing_symbols(char *line, t_env *env)
 {
 	int			i;
 	int			count_single;
@@ -87,6 +87,6 @@ void	parsing_symbols(char *line, char **env)
 		i++;
 	}
 	handler_cmd(parsing(parser, count_single, count_double, line), env);
-	// printf("CMD: %s || OPT: %d || ARG: %s || herdot: %s ",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc);
+	//printf("CMD: %s || OPT: %d || ARG: %s || herdot: %s ",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc);
 	free_parser(parser);
 }
