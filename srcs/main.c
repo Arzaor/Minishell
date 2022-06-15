@@ -64,8 +64,8 @@ static void sig_handler(int signo)
 
 int		main(int argc, char **argv,char **env)
 {
-	argc = 0;
-	argv = 0;
+	(void)argc;
+	(void)argv;
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	start_minishell(env);
