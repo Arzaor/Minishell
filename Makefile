@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/15 15:11:44 by hterras          ###   ########.fr        #
+#    Updated: 2022/06/15 15:39:31 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 		=	main.c \
 				create_env.c \
 				utils.c \
 				ft_echo.c \
+				ft_export.c \
 				
 
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})

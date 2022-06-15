@@ -19,7 +19,9 @@ static void	start_minishell(char **env)
 {
 	char	*line;
 	char 	*cm_cap;
+	t_env	*envp;
 
+	envp = create_env(env);
 	while (1)
 	{
 		style_prompt();
@@ -40,10 +42,11 @@ static void	start_minishell(char **env)
 		{
 			if (line)
 				add_history(line);
-			parsing_symbols(line,env);
+			parsing_symbols(line, envp);
 			free(line);
-		}	
+		}
 	}
+	free(envp);
 }
 
 static void sig_handler(int signo)
