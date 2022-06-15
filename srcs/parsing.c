@@ -86,7 +86,7 @@ void	parsing_symbols(char *line, char **env)
 			count_double++;
 		i++;
 	}
-	create_cmd(parsing(parser, count_single, count_double, line), env);
-	printf("CMD: %s || OPT: %d || ARG: %s || herdot: %s ",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc);
+	handler_cmd(parsing(parser, count_single, count_double, line), env);
+	//printf("CMD: %s || OPT: %d || ARG: %s || herdot: %s ",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc);
 	free_parser(parser);
 }

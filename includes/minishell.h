@@ -38,7 +38,7 @@ void free_parser(t_parser *parser);
 
 
 //CMD
-void handler_cmd(t_parser *parser);
+void handler_cmd(t_parser *parser, char **env);
 void		create_cmd(t_parser *parser, char **env);
 
 #endif
