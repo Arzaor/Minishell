@@ -9,6 +9,15 @@ static void	pwd(void)
 	else
 		perror("getcwd() error");
 }
+/*static void	free_array(char **array)
+{
+	for (int i = 0; array[i]; i++) {
+		free(array[i]);
+		array[i] = NULL;
+	}
+	free(array);
+	array = NULL;
+}*/
 
 static void	ft_env(char **env)
 {
@@ -38,11 +47,14 @@ static bool	is_build_in(char *cmd)
 	return (false);
 }
 
-void	create_cmd(t_parser *parser, char **env)
+void  create_cmd(t_parser *parser, char **env)
 {
+	char **new_env;
+
+	new_env = create_env(env);
 	if (!ft_strncmp(parser->parser_cmd, "cat", 3))
 		ft_cat(parser);
-	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
+	if (!ft_strncmp(parser->parser_cmd,"cd",2))
 		printf("cd");
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
 		pwd();
@@ -52,6 +64,8 @@ void	create_cmd(t_parser *parser, char **env)
 		printf("unset");
 	if (!ft_strncmp(parser->parser_cmd, "env", 3))
 		ft_env(env);
+	if (!ft_strncmp(parser->parser_cmd, "env",6))
+		ft_env(new_env);
 }
 
 void	handler_cmd(t_parser *parser, char **env)
@@ -60,4 +74,5 @@ void	handler_cmd(t_parser *parser, char **env)
 		create_cmd(parser, env);
 	else
 		printf("command pas a faire a geres");
+	(void)parser;
 }

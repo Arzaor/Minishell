@@ -16,6 +16,22 @@ t_parser	*init()
 	return (parser);
 }
 
+t_env		*init_env()
+{
+	t_env		*env;
+	t_element	*element;
+
+	env = malloc(sizeof(*env));
+	element = malloc(sizeof(element));
+
+	if (env == NULL || element == NULL)
+		exit(EXIT_FAILURE);
+	element->value = NULL;
+	element->next = NULL;
+	env->first = element;
+	return (env);
+}
+
 void free_parser(t_parser *parser)
 {
 	free(parser->parser_cmd);

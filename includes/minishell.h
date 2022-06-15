@@ -13,18 +13,29 @@
 # include <term.h>
 
 typedef struct	s_parser {
-	char	*parser_cmd;
-	int		parser_opt;
-	char	*parser_args;
-	int		parser_double_quote;
-	int		parser_single_quote;
-	int		parser_left_redir;
-	int		parser_right_redir;
-	char	*parser_heredoc;
+	char		*parser_cmd;
+	int			parser_opt;
+	char		*parser_args;
+	int			parser_double_quote;
+	int			parser_single_quote;
+	int			parser_left_redir;
+	int			parser_right_redir;
+	char		*parser_heredoc;
 }				t_parser;
 
-void		rl_replace_line(const char *text,int clear_undo);
+typedef struct			s_element
+{
+	char				*value;
+	struct s_element	*next;
+}						t_element;
 
+typedef struct			s_env
+{
+	t_element			*first;
+}						t_env;
+
+
+void		rl_replace_line(const char *text,int clear_undo);
 
 //PARSING
 void		parsing_symbols(char *line,char **env);
@@ -32,9 +43,6 @@ t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
-//init free
-t_parser	*init();
-void free_parser(t_parser *parser);
 
 //CMD
 void	handler_cmd(t_parser *parser, char **env);
@@ -43,5 +51,18 @@ void	ft_cat(t_parser *parser);
 
 //UTILS
 int	ft_strcmp(const char *s1, const char *s2);
+
+// INIT & FREE
+t_parser	*init();
+void		free_parser(t_parser *parser);
+t_env		*init_env();
+
+// HANDLER LINKED LIST
+void		display_linked_list(t_env *env);
+char	**create_env(char **env);
+void		insert_env(t_env *env, char *value);
+void		delete_env(t_env *env);
+void	display_tab(char **env_tab);
+
 
 #endif
