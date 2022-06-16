@@ -2,24 +2,14 @@
 
 t_env *create_env(char **env)
 {
-	int		i;
-	int		k, j;
+	int		j;
 	t_env	*new_env;
-	char	**env_tab;
 
-	i = 0;
-	k = 0;
 	new_env = init_env();
-	while (env[i])
-		i++;
-	env_tab = malloc(sizeof(char *) * i + 1);
 	j = 0;
 	while (env[j])
 	{
 		insert_env(new_env, env[j]);
-		env_tab[k] = malloc(sizeof(char) * ft_strlen(env[j]) + 1);
-		env_tab[k] = env[j];
-		k++;
 		j++;
 	}
 	return (new_env);

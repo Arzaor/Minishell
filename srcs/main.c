@@ -19,6 +19,7 @@ static void	start_minishell(char **env)
 {
 	char	*line;
 	char 	*cm_cap;
+
 	t_env	*envp;
 
 	envp = create_env(env);
