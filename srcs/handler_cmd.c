@@ -46,7 +46,7 @@ static bool	is_build_in(char *cmd)
 	return (false);
 }
 
-static char **tri_tab(t_env *env)
+static char **create_tab(t_env *env)
 {
 	t_element *current = env->first;
 
@@ -75,13 +75,14 @@ static char **tri_tab(t_env *env)
 
 void	ft_export(t_env *env,char *value)
 {
-	printf("ok");
 	char **tri;
-	tri = tri_tab(env);
-	free(tri);
-	//insert_env(env,value);
-	(void)value;
-
+	if(value == NULL)
+	{
+		tri = create_tab(env);
+		free(tri);
+	}
+	else
+		insert_env(env,value);
 }
 void	create_cmd(t_parser *parser, t_env *env)
 {
