@@ -1,38 +1,83 @@
 #include "minishell.h"
 
-void ft_echo(t_parser *parser)
+void	ft_echo(t_parser *parser)
 {
-	int i;
+	int		i;
+	int		k;
+	int		in_quote;
+	int		s;
+	char	*arg;
+	char	*new_arg;
 
 	i = 0;
-	if (parser->parser_args)
+	k = 0;
+	in_quote = 0;
+	s = 0;
+	arg = parser->parser_args;
+	new_arg = malloc(sizeof(char) * ft_strlen(parser->parser_args) + 1);
+	while (arg[i])
 	{
-		if (!parser->parser_single_quote && !parser->parser_double_quote)
-			printf("%s", parser->parser_args);
-		if ((parser->parser_single_quote % 2 != 0) && (parser->parser_single_quote % 2 != 0))
-			printf("Error quotes.");
-		else if ((parser->parser_single_quote % 2 != 0) || (parser->parser_single_quote % 2 != 0))
+		if (arg[i] != '"' && arg[i] != '\'')
+			new_arg[k++] = arg[i];
+		else if (arg[i] == '"')
 		{
-			while (parser->parser_args[i])
+			s = i;
+			while (arg[++i])
 			{
-				if (parser->parser_args[i] == '\'')
+				if (arg[i] == '"')
 				{
-					int k = 0;
-					while (parser->parser_args[k])
-					{
-						if (parser->parser_args[k] == '"')
-							printf("%c", parser->parser_args[i]);
-						else
-							i++;
-						k++;
-					}
+					in_quote = 1;
+					break ;
 				}
-				i++;
 			}
+			// i = deuxième guillemet
+			// s = premier guillemet
+			if (in_quote)
+			{
+				while (++s < i)
+				{
+					if (arg[s] == '"')
+						s++;
+					new_arg[k++] = arg[s];
+				}
+			}
+			else
+			{
+				printf("Format quotes.");
+				break ;
+			}
+			in_quote = 0;
 		}
-		if (!parser->parser_opt)
-			printf("\n");
+		else if (arg[i] == '\'')
+		{
+			s = i;
+			while (arg[++i])
+			{
+				if (arg[i] == '\'')
+				{
+					in_quote = 1;
+					break ;
+				}
+			}
+			if (in_quote)
+			{
+				while (++s < i)
+				{
+					if (arg[s] == '\'')
+						s++;
+					new_arg[k++] = arg[s];
+				}
+			}
+			else
+			{
+				printf("Format quotes.");
+				break ;
+			}
+			in_quote = 0;
+		}
+		i++;
 	}
-	else
+	printf("%s", new_arg);
+	if (!parser->parser_opt || !parser->parser_args)
 		printf("\n");
 }
