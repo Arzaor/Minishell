@@ -45,10 +45,12 @@ t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 
 //CMD
-void	handler_cmd(t_parser *parser, t_env *env);
+void	handler_cmd(t_parser *parser, t_env *env, char **cmds);
 void	create_cmd(t_parser *parser, t_env *env);
 void	ft_echo(t_parser *parser);
+void	ft_cd(t_parser *parser);
 void	ft_export(t_env *env,char *value);
+void	ft_unset(t_env *env, char *arg);
 
 //UTILS
 int	ft_strcmp(const char *s1, const char *s2);

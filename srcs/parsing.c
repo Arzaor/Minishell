@@ -71,6 +71,7 @@ void	parsing_symbols(char *line, t_env *env)
 	int			count_single;
 	int			count_double;
 	t_parser	*parser;
+	char		**cmds;
 
 	i = 0;
 	count_single = 0;
@@ -88,7 +89,8 @@ void	parsing_symbols(char *line, t_env *env)
 			parser->parser_double_quote++;
 		i++;
 	}
-	handler_cmd(parsing(parser, line), env);
+	cmds = ft_split(line, ' ');
+	handler_cmd(parsing(parser, line), env, cmds);
 	printf("CMD: %s || OPT: %d || ARG: %s || HEREDOC : %s || SINGLE_QUOTE : %d || DOUBLE_QUOTE : %d\n",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc, parser->parser_single_quote, parser->parser_double_quote);
 	free_parser(parser);
 }
