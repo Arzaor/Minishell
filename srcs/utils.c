@@ -15,3 +15,37 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (diff);
 }
+
+char	**create_tab(t_env *env)
+{
+	t_element *current = env->first;
+
+	int i = 0;
+	int j = 0;
+	char **tri_tab;
+
+	tri_tab = NULL;
+	while(current != NULL)
+	{
+		current = current->next;
+		i++;
+	}
+	current = env->first;
+	tri_tab = malloc(sizeof(char *) * i + 1);
+	while(current != NULL)
+	{
+		tri_tab[j++] = current->value;
+		current = current->next;
+	}
+	return (tri_tab);
+}
+
+void	free_array(char **array)
+{
+	for (int i = 0; array[i]; i++) {
+		free(array[i]);
+		array[i] = NULL;
+	}
+	free(array);
+	array = NULL;
+}

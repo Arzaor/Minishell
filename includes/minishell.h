@@ -48,9 +48,12 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser);
 void	handler_cmd(t_parser *parser, t_env *env);
 void	create_cmd(t_parser *parser, t_env *env);
 void	ft_echo(t_parser *parser);
+void	ft_export(t_env *env,char *value);
 
 //UTILS
 int	ft_strcmp(const char *s1, const char *s2);
+char	**create_tab(t_env *env);
+void	free_array(char **array);
 
 // INIT & FREE
 t_parser	*init();

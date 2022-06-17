@@ -9,15 +9,6 @@ static void	pwd(void)
 	else
 		perror("getcwd() error");
 }
-/*static void	free_array(char **array)
-{
-	for (int i = 0; array[i]; i++) {
-		free(array[i]);
-		array[i] = NULL;
-	}
-	free(array);
-	array = NULL;
-}*/
 
 static void	ft_env(t_env *env)
 {
@@ -46,44 +37,6 @@ static bool	is_build_in(char *cmd)
 	return (false);
 }
 
-static char **create_tab(t_env *env)
-{
-	t_element *current = env->first;
-
-	int i = 0;
-	int j = 0;
-	char **tri_tab;
-
-	tri_tab = NULL;
-	while(current != NULL)
-	{
-		current = current->next;
-		i++;
-	}
-	current = env->first;
-	tri_tab = malloc(sizeof(char *) * i + 1);
-	while(current != NULL)
-	{
-		tri_tab[j++] = current->value;
-		current = current->next;
-	}
-	i = 0;
-	while (tri_tab[i])
-		printf("%s\n", tri_tab[i++]);
-	return (tri_tab);
-}
-
-void	ft_export(t_env *env,char *value)
-{
-	char **tri;
-	if(value == NULL)
-	{
-		tri = create_tab(env);
-		free(tri);
-	}
-	else
-		insert_env(env,value);
-}
 void	create_cmd(t_parser *parser, t_env *env)
 {
 	if (!ft_strncmp(parser->parser_cmd, "echo", 3))

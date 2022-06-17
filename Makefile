@@ -6,7 +6,7 @@
 #    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/15 15:11:44 by hterras          ###   ########.fr        #
+#    Updated: 2022/06/17 12:20:20 by hterras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 		=	main.c \
 				create_env.c \
 				utils.c \
 				ft_echo.c \
+				ft_export.c \
 				
 
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
