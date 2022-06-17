@@ -19,7 +19,6 @@ static void	start_minishell(char **env)
 {
 	char	*line;
 	char 	*cm_cap;
-
 	t_env	*envp;
 
 	envp = create_env(env);
@@ -43,7 +42,7 @@ static void	start_minishell(char **env)
 		{
 			if (line)
 				add_history(line);
-			parsing_symbols(line,envp);
+			parsing_symbols(line, envp);
 			free(line);
 		}
 	}

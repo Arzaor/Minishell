@@ -65,7 +65,6 @@ void		display_linked_list(t_env *env);
 t_env *create_env(char **env);
 void		insert_env(t_env *env, char *value);
 void		delete_env(t_env *env);
-void	display_tab(char **env_tab);
-
+void		display_tab(char **env_tab);
 
 #endif
