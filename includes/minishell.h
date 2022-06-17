@@ -49,12 +49,14 @@ void	handler_cmd(t_parser *parser, t_env *env);
 void	create_cmd(t_parser *parser, t_env *env);
 void	ft_echo(t_parser *parser);
 void	ft_export(t_env *env,char *value);
+t_env* unset(t_env *env,char *args);
+
 
 //UTILS
 int	ft_strcmp(const char *s1, const char *s2);
 char	**create_tab(t_env *env);
 void	free_array(char **array);
-
+void ft_test(t_env *env,char *args);
 // INIT & FREE
 t_parser	*init();
 void		free_parser(t_parser *parser);
