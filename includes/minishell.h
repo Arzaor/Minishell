@@ -23,6 +23,8 @@ typedef struct	s_parser {
 	int			parser_single_quote;
 	int			parser_left_redir;
 	int			parser_right_redir;
+	int			parser_dleft_redir;
+	int			parser_dright_redir;
 	char		*parser_heredoc;
 }				t_parser;
 
@@ -57,10 +59,10 @@ void	ft_export(t_env *env,char *value);
 void	ft_unset(t_env *env, char *arg);
 
 //UTILS
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 char	**create_tab(t_env *env);
 void	free_array(char **array);
-void ft_test(t_env *env,char *args);
+void	ft_test(t_env *env,char *args);
 // INIT & FREE
 t_parser	*init();
 void		free_parser(t_parser *parser);
@@ -68,9 +70,15 @@ t_env		*init_env();
 
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
-t_env *create_env(char **env);
+t_env		*create_env(char **env);
 void		insert_env(t_env *env, char *value);
 void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
+
+//REDIR
+int		handler_dright_redir(t_parser *parser);
+void	handler_redir(t_parser *parser, char **cmds, t_env *env);
+int handler_right_redir(t_parser *parser);
+
 
 #endif

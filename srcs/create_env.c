@@ -96,7 +96,7 @@ void	display_tab(char **env_tab)
 	int i = 0;
 	while (env_tab[i])
 	{
-		printf("%s\n", env_tab[i]);
+		ft_putstr_fd(env_tab[i],1);
 		i++;
 	}
 }

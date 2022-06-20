@@ -33,4 +33,3 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 	}
 	return (parser);
 }
-
