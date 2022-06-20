@@ -63,7 +63,7 @@ static bool	is_build_in(char *cmd)
 
 void	create_cmd(t_parser *parser, t_env *env)
 {
-	if (!ft_strncmp(parser->parser_cmd, "echo", 3))
+	if (!ft_strncmp(parser->parser_cmd, "echo", 4))
 		ft_echo(parser, env);
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		ft_cd(parser);
@@ -102,7 +102,8 @@ static void	get_absolute_path(char *path, t_parser *parser)
 		i++;
 	}
 	free_array(path_split);
-	parser->parser_cmd = bin;
+	if (bin)
+		parser->parser_cmd = bin;
 }
 
 static void	exec_cmd(t_parser *parser, char **cmds)
@@ -138,11 +139,11 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 {
 	int saveout1 = 0;
 
-	if(parser->parser_right_redir == 2)
+	if (parser->parser_right_redir == 2)
 		saveout1 = handler_right_redir(parser);
-	if(parser->parser_dright_redir == 4)
+	if (parser->parser_dright_redir == 4)
 		saveout1 = handler_dright_redir(parser);
-	if(is_build_in(parser->parser_cmd))
+	if (is_build_in(parser->parser_cmd))
 		create_cmd(parser,env);
 	else
 		exec_cmd(parser, cmds);
@@ -163,34 +164,19 @@ int handler_right_redir(t_parser *parser)
 {
 	int		saveout1;
 	int		fd;
-	fd = open(parser->parser_heredoc,O_RDWR);
+	fd = open(parser->parser_heredoc, O_RDWR);
 	saveout1 = dup(1);
 	close(1);
 	if(fd == -1)
-		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR | O_APPEND, 0666), 1);
+		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR, 0666), 1);
 	else
-		dup2(open(parser->parser_heredoc,O_TRUNC | O_RDWR, 0666), 1);
+		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR, 0666), 1);
 	return (saveout1);
 }
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
-	char	*path;
-	char	*bin;
-	char	**path_split;
-	int		i;
-
-	path = NULL;
-	bin = NULL;
-	path_split = NULL;
-	i = 0;
-
-	if (is_build_in(parser->parser_cmd))
-		handler_redir(parser,cmds,env);
-	else
-	{
-		if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-			get_absolute_path(get_path(env), parser);
-		handler_redir(parser, cmds,env);
-	}
+	if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
+		get_absolute_path(get_path(env), parser);
+	handler_redir(parser, cmds,env);
 }

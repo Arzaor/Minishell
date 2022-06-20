@@ -23,7 +23,6 @@ t_parser	*parsing_cmd(char *line, t_parser *parser)
 	parser->parser_cmd = malloc(sizeof(char) * i + 1);
 	while (count < i)
 		parser->parser_cmd[y++] = line[count++];
-	parser->parser_cmd[y] = '\0';
 	return (parser);
 }
 

@@ -27,7 +27,7 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 	k = 0;
 	if (count > 0)
 	{
-		parser->parser_args = malloc(sizeof(char) * count + 2);
+		parser->parser_args = malloc(sizeof(char) * count + 1);
 		while (k < count)
 			parser->parser_args[k++] = line[i++];
 	}
