@@ -48,7 +48,7 @@ void	create_cmd(t_parser *parser, t_env *env)
 	if (!ft_strncmp(parser->parser_cmd, "export", 6))
 		ft_export(env,parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "unset", 5))
-		ft_test(env,parser->parser_args);
+		ft_export(env,parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "env", 3))
 		ft_env(env);
 }
