@@ -176,7 +176,7 @@ int handler_right_redir(t_parser *parser)
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
-	if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
+	if (!is_build_in(parser->parser_cmd) && cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 		get_absolute_path(get_path(env), parser);
 	handler_redir(parser, cmds,env);
 }
