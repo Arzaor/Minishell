@@ -90,7 +90,14 @@ void	parsing_symbols(char *line, t_env *env)
 		i++;
 	}
 	cmds = ft_split(line, ' ');
+	i = 0;
+	while (cmds[i])
+	{
+		if (cmds[i][0] == '>')
+			cmds[i] = NULL;
+		i++;
+	}
 	handler_cmd(parsing(parser, line), env, cmds);
-	printf("CMD: %s || OPT: %d || ARG: %s || HEREDOC : %s || SINGLE_QUOTE : %d || DOUBLE_QUOTE : %d\n",parser->parser_cmd,parser->parser_opt,parser->parser_args,parser->parser_heredoc, parser->parser_single_quote, parser->parser_double_quote);
+	// printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
 	free_parser(parser);
 }

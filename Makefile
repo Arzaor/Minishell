@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/17 23:40:31 by jbarette         ###   ########.fr        #
+#    Updated: 2022/06/20 03:27:42 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC 		=	main.c \
 				ft_cd.c \
 				ft_unset.c \
 				
-
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}
 

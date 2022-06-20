@@ -63,7 +63,7 @@ static bool	is_build_in(char *cmd)
 void	create_cmd(t_parser *parser, t_env *env)
 {
 	if (!ft_strncmp(parser->parser_cmd, "echo", 3))
-		ft_echo(parser);
+		ft_echo(parser, env);
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		ft_cd(parser);
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
@@ -125,6 +125,27 @@ static void	exec_cmd(t_parser *parser, char **cmds)
 	}
 }
 
+static void	clean_redir(t_parser *parser, int saveout1)
+{
+	if (parser->parser_right_redir)
+		dup2(saveout1, 1);
+}
+
+static void	handler_redir(t_parser *parser, char **cmds)
+{
+	int		saveout1;
+
+	saveout1 = 0;
+	if (parser->parser_right_redir)
+	{
+		saveout1 = dup(1);
+		close(1);
+		dup2(open(parser->parser_heredoc, O_WRONLY|O_CREAT, 0666), 1);
+	}
+	exec_cmd(parser, cmds);
+	clean_redir(parser, saveout1);
+}
+
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	char	*path;
@@ -140,8 +161,8 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 		create_cmd(parser, env);
 	else
 	{
-		if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0) {
+		if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 			get_absolute_path(get_path(env), parser);
-		exec_cmd(parser, cmds);
+		handler_redir(parser, cmds);
 	}
 }
