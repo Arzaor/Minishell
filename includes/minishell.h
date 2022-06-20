@@ -60,7 +60,7 @@ void	ft_unset(t_env *env, char *arg);
 int	ft_strcmp(const char *s1, const char *s2);
 char	**create_tab(t_env *env);
 void	free_array(char **array);
-
+void ft_test(t_env *env,char *args);
 // INIT & FREE
 t_parser	*init();
 void		free_parser(t_parser *parser);

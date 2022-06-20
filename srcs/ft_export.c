@@ -10,7 +10,7 @@ static void	ft_tri_tab(char **tri,int count)
 	{
 		while(j < count)
 		{
-			if(ft_strcmp(tri[i],tri[j]) > 0)
+			if(ft_strcmp(tri[i],tri[j]) < 0)
 			{
 				t = tri[i];
 				tri[i] = tri[j];
@@ -27,16 +27,17 @@ void	ft_export(t_env *env, char *value)
 {
 	char **tri;
 	int i = 0;
+	int j = 0;
 	int count = 0;
 	if(value == NULL)
 	{
 		tri = create_tab(env);
 		while(tri[i])
 			i++;
-		count = i - 1;
+		count = i;
 		ft_tri_tab(tri,i);
-		while(count >= 0)
-     		printf("declare -x %s\n ", tri[count--]);
+		while(j < count)
+     		printf("declare -x %s\n ", tri[j++]);
 		free(tri);
 	}
 	else
