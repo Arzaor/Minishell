@@ -20,10 +20,12 @@ char	**create_tab(t_env *env)
 {
 	t_element *current = env->first;
 
-	int i = 0;
-	int j = 0;
-	char **tri_tab;
+	int		i;
+	int		j;
+	char	**tri_tab;
 
+	i = 0;
+	j = 0;
 	tri_tab = NULL;
 	while(current != NULL)
 	{

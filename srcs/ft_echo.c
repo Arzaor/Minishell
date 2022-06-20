@@ -18,6 +18,7 @@ static char	*find_environment_var(t_env *env, char *env_var)
 		}
 		current = current->next;
 	}
+	free_array(split_env);
 	return NULL;
 }
 
@@ -33,95 +34,81 @@ static int	check_dollars(t_parser *parser, int i, t_env *env)
 	count = i;
 	k = 0;
 	result = NULL;
-	while (parser->parser_args[i] && parser->parser_args[i] != ' ')
+	while (parser->parser_args[i])
+	{
+		if (parser->parser_args[i] == ' ')
+			break ;
+		if (parser->parser_args[i] == '\'')
+			break ;
+		if (parser->parser_args[i] == '"')
+			break ;
 		i++;
+	}
 	env_var = malloc(sizeof(char) * i + 1);
 	while (count <= i)
 	{
 		env_var[k++] = parser->parser_args[count];
 		count++;
 	}
+	env_var[k] = '\0';
 	result = find_environment_var(env, env_var);
 	if (result != NULL)
 		printf("%s", result);
-	return i - 1;
+	return i;
 }
+
+static int		ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
+{
+	int		s;
+	int		in_quote;
+
+	s = 0;
+	in_quote = 0;
+	s = i;
+	while (parser->parser_args[++i])
+	{
+		if (parser->parser_args[i] == quote)
+		{
+			in_quote = 1;
+			break ;
+		}
+	}
+	if (in_quote)
+	{
+		while (s < i)
+		{
+			if (parser->parser_args[s] == '$' && quote == '"')
+				s = check_dollars(parser, s, env);
+			if (parser->parser_args[s] == quote)
+				s++;
+			printf("%c", parser->parser_args[s++]);
+		}
+	}
+	else
+		printf("Format quotes.");
+	return i;
+}
+
 void	ft_echo(t_parser *parser, t_env *env)
 {
 	int		i;
-	int		k;
-	int		s;
-	int		in_quote;
-	char	*new_arg;
 
 	i = 0;
-	k = 0;
-	s = 0;
-	in_quote = 0;
-	new_arg = malloc(sizeof(char) * ft_strlen(parser->parser_args) + 1);
-	while (parser->parser_args[i])
+	if (parser->parser_args)
 	{
-		if (parser->parser_args[i] != '"' && parser->parser_args[i] != '\'' && parser->parser_args[i] != '$')
-			new_arg[k++] = parser->parser_args[i];
-		else if (parser->parser_args[i] == '"')
+		while (parser->parser_args[i])
 		{
-			s = i;
-			while (parser->parser_args[++i])
-			{
-				if (parser->parser_args[i] == '"')
-				{
-					in_quote = 1;
-					break ;
-				}
-			}
-			if (in_quote)
-			{
-				while (++s < i)
-				{
-					if (parser->parser_args[s] == '"')
-						s++;
-					new_arg[k++] = parser->parser_args[s];
-				}
-			}
-			else
-			{
-				printf("Format quotes.");
-				break ;
-			}
-			in_quote = 0;
+			if (parser->parser_args[i] != '"' && parser->parser_args[i] != '\'' && parser->parser_args[i] != '$')
+				printf("%c", parser->parser_args[i]);
+			else if (parser->parser_args[i] == '"' || parser->parser_args[i] == '\'')
+				i = ft_check_quote(parser, i, parser->parser_args[i], env);
+			else if (parser->parser_args[i] == '$')
+				i = check_dollars(parser, i, env);
+			i++;
 		}
-		else if (parser->parser_args[i] == '\'')
-		{
-			s = i;
-			while (parser->parser_args[++i])
-			{
-				if (parser->parser_args[i] == '\'')
-				{
-					in_quote = 1;
-					break ;
-				}
-			}
-			if (in_quote)
-			{
-				while (++s < i)
-				{
-					if (parser->parser_args[s] == '\'')
-						s++;
-					new_arg[k++] = parser->parser_args[s];
-				}
-			}
-			else
-			{
-				printf("Format quotes.");
-				break ;
-			}
-			in_quote = 0;
-		}
-		else if (parser->parser_args[i] == '$')
-			i = check_dollars(parser, i, env);
-		i++;
+		if (!parser->parser_opt)
+			printf("\n");
 	}
-	printf("%s", new_arg);
-	if (!parser->parser_opt || !parser->parser_args)
+	else
 		printf("\n");
 }

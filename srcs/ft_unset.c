@@ -21,9 +21,11 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
         element->next = delete_element(element->next, env, arg);
         return element;
     }
+	free_array(split_arg);
 }
 
 void	ft_unset(t_env *env, char *arg)
 {
-	delete_element(env->first, env, arg);
+	if (arg)
+		delete_element(env->first, env, arg);
 }

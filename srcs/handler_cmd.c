@@ -19,12 +19,13 @@ static char	*get_path(t_env *env)
 {
 	t_element	*current = env->first;
 	char		*path_dif;
-	int			i = 0;
+	char		**path;
 	
 	path_dif = 0;
+	path = NULL;
 	while (current != NULL)
 	{
-		char **path = ft_split(current->value, '=');
+		path = ft_split(current->value, '=');
 		if (current->value != NULL)
 		{
 			if (ft_strncmp("PATH", path[0], ft_strlen(path[0])) == 0)
@@ -120,8 +121,8 @@ static void	exec_cmd(t_parser *parser, char **cmds)
 	else
 	{
 		if (execve(parser->parser_cmd, cmds, NULL) == -1)
-			printf("shell");
-		exit(EXIT_FAILURE);
+			printf("bash: %s: command not found\n", cmds[0]);
+		exit(0);
 	}
 }
 

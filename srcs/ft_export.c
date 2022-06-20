@@ -25,19 +25,23 @@ static void	ft_tri_tab(char **tri,int count)
 
 void	ft_export(t_env *env, char *value)
 {
-	char **tri;
-	int i = 0;
-	int j = 0;
-	int count = 0;
-	if(value == NULL)
+	char	**tri;
+	int		i;
+	int		j;
+	int		count;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	if (!value)
 	{
 		tri = create_tab(env);
 		while(tri[i])
 			i++;
 		count = i;
-		ft_tri_tab(tri,i);
-		while(j < count)
-     		printf("declare -x %s\n ", tri[j++]);
+		ft_tri_tab(tri, i);
+		while (j < count)
+     		printf("declare -x %s\n", tri[j++]);
 		free(tri);
 	}
 	else

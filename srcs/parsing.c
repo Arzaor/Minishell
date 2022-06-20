@@ -1,25 +1,7 @@
 #include "minishell.h"
 
-/*
-static t_parser	*parsing_quotes(int count_single, int count_double, t_parser *parser)
-{
-	if (count_single > 0)
-	{
-		if (count_single % 2 == 0)
-			parser->parser_single_quote = 1;
-	}
-	if (count_double > 0)
-	{
-		if (count_double % 2 == 0)
-			parser->parser_double_quote = 1;
-	}
-	return (parser);
-}
-*/
-
 static t_parser	*parsing(t_parser *parser, char *line)
 {
-	// parser = parsing_quotes(parser);
 	parser = parsing_cmd(line, parser);
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser);
@@ -36,18 +18,12 @@ t_parser	*parsing_cmd(char *line, t_parser *parser)
 	i = 0;	
 	y = 0;
 	count = 0;
-	while (line[i])
-	{
-		if (ft_isalpha(line[i]))
-			count++;
-		else
-			break ;
+	while (ft_isalpha(line[i]))
 		i++;
-	}
-	parser->parser_cmd = malloc(sizeof(char) * count + 1);
-	i = 0;
-	while (i < count)
-		parser->parser_cmd[y++] = line[i++];
+	parser->parser_cmd = malloc(sizeof(char) * i + 1);
+	while (count < i)
+		parser->parser_cmd[y++] = line[count++];
+	parser->parser_cmd[y] = '\0';
 	return (parser);
 }
 
@@ -98,6 +74,7 @@ void	parsing_symbols(char *line, t_env *env)
 		i++;
 	}
 	handler_cmd(parsing(parser, line), env, cmds);
-	// printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
+	printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
+	free_array(cmds);
 	free_parser(parser);
 }

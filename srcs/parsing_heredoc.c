@@ -13,6 +13,7 @@ t_parser	*save_heredoc(t_parser *parser, int count, int i, char *line)
 			parser->parser_heredoc[k++] = line[i];
 			i++;
 		}
+		parser->parser_heredoc[k] = '\0';
 	}
 	return (parser);
 }

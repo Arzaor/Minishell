@@ -26,24 +26,33 @@ static void	start_minishell(char **env)
 	{
 		style_prompt();
 		line = readline(":> ");
-		if(line == NULL || strcmp(line, "exit") == 0)
+		if (line == NULL)
 		{
-			if(line == NULL)
+			int line_count = tgetnum("li");
+			int col_cocunt = tgetnum("cl");
+			cm_cap = tgetstr("cm", NULL);
+			tputs(tgoto(cm_cap, col_cocunt + 4,line_count - 2), 1, putchar);
+			printf("exit");
+			break ;
+		}
+		if (ft_strlen(line) > 0)
+		{
+			if (ft_strcmp(line, "exit") == 0)
 			{
 				int line_count = tgetnum("li");
 				int col_cocunt = tgetnum("cl");
 				cm_cap = tgetstr("cm", NULL);
-				tputs(tgoto(cm_cap, col_cocunt,line_count-2), 1, putchar);
+				tputs(tgoto(cm_cap, col_cocunt + 4,line_count - 2), 1, putchar);
 				printf("exit");
+				break ;
 			}
-			break;
-		}
-		else
-		{
-			if (line)
-				add_history(line);
-			parsing_symbols(line, envp);
-			free(line);
+			else
+			{
+				if (line)
+					add_history(line);
+				parsing_symbols(line, envp);
+				free(line);
+			}
 		}
 	}
 	free(envp);
