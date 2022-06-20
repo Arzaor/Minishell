@@ -129,16 +129,35 @@ static void	exec_cmd(t_parser *parser, char **cmds)
 
 static void	clean_redir(t_parser *parser, int saveout1)
 {
+	if (parser->parser_left_redir == 1)
+		dup2(saveout1, 0);
 	if (parser->parser_right_redir)
 		dup2(saveout1, 1);
 	if(parser->parser_dright_redir)
-		dup2(saveout1,1);
+		dup2(saveout1, 1);
+}
+
+
+static int handler_left_redir(t_parser *parser)
+{
+	int		saveout1;
+	int		fd;
+	fd = open(parser->parser_heredoc, O_RDONLY);
+	saveout1 = dup(0);
+	close(0);
+	if(fd == -1)
+		printf("bash: %s: No such file or directory\n", parser->parser_heredoc);
+	else
+		dup2(fd, 0);
+	return (saveout1);
 }
 
 void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 {
 	int saveout1 = 0;
 
+	if (parser->parser_left_redir == 1)
+		saveout1 = handler_left_redir(parser); // mauvais nom depuis tout a lheure
 	if (parser->parser_right_redir == 2)
 		saveout1 = handler_right_redir(parser);
 	if (parser->parser_dright_redir == 4)
@@ -149,6 +168,7 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 		exec_cmd(parser, cmds);
 	clean_redir(parser, saveout1);
 }
+
 
 int handler_dright_redir(t_parser *parser)
 {

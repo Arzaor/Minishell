@@ -72,7 +72,7 @@ void	parsing_symbols(char *line, t_env *env)
 	i = 0;
 	while (cmds[i])
 	{
-		if (cmds[i][0] == '>')
+		if (cmds[i][0] == '>' || cmds[i][0] == '<')
 			cmds[i] = NULL;
 		i++;
 	}
