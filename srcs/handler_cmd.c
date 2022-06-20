@@ -19,7 +19,6 @@ static char	*get_path(t_env *env)
 {
 	t_element	*current = env->first;
 	char		*path_dif;
-	int			i = 0;
 	
 	path_dif = 0;
 	while (current != NULL)
@@ -129,21 +128,43 @@ static void	clean_redir(t_parser *parser, int saveout1)
 {
 	if (parser->parser_right_redir)
 		dup2(saveout1, 1);
+	if(parser->parser_dright_redir)
+		dup2(saveout1,1);
 }
 
-static void	handler_redir(t_parser *parser, char **cmds)
+void	handler_redir(t_parser *parser, char **cmds,t_env *env)
+{
+	int saveout1 = 0;
+
+	if(parser->parser_right_redir == 2)
+		saveout1 = handler_right_redir(parser);
+	if(parser->parser_dright_redir == 4)
+		saveout1 = handler_dright_redir(parser);
+	if(is_build_in(parser->parser_cmd))
+		create_cmd(parser,env);
+	else
+		exec_cmd(parser, cmds);
+	clean_redir(parser, saveout1);
+}
+
+int handler_dright_redir(t_parser *parser)
 {
 	int		saveout1;
+	
+	saveout1 = dup(1);
+	close(1);
+	dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR | O_APPEND, 0666), 1);
+	return (saveout1);
+}
 
-	saveout1 = 0;
-	if (parser->parser_right_redir)
-	{
-		saveout1 = dup(1);
-		close(1);
-		dup2(open(parser->parser_heredoc, O_WRONLY|O_CREAT, 0666), 1);
-	}
-	exec_cmd(parser, cmds);
-	clean_redir(parser, saveout1);
+int handler_right_redir(t_parser *parser)
+{
+	int		saveout1;
+	
+	saveout1 = dup(1);
+	close(1);
+	dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR | O_APPEND, 0666), 1);
+	return (saveout1);
 }
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
@@ -157,12 +178,13 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 	bin = NULL;
 	path_split = NULL;
 	i = 0;
+
 	if (is_build_in(parser->parser_cmd))
-		create_cmd(parser, env);
+		handler_redir(parser,cmds,env);
 	else
 	{
 		if (cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 			get_absolute_path(get_path(env), parser);
-		handler_redir(parser, cmds);
+		handler_redir(parser, cmds,env);
 	}
 }

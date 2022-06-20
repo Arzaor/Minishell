@@ -33,7 +33,7 @@ static void	start_minishell(char **env)
 				int line_count = tgetnum("li");
 				int col_cocunt = tgetnum("cl");
 				cm_cap = tgetstr("cm", NULL);
-				tputs(tgoto(cm_cap, col_cocunt,line_count-2), 1, putchar);
+				tputs(tgoto(cm_cap, col_cocunt + 4,line_count - 2), 1, putchar);
 				printf("exit");
 			}
 			break;

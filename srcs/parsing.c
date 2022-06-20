@@ -79,10 +79,14 @@ void	parsing_symbols(char *line, t_env *env)
 	parser = init();
 	while (line[i])
 	{
-		if (line[i] == '<')
+		if (line[i] == '<' && line[i + 1] != '<')
 			parser->parser_left_redir = 1;
-		if (line[i] == '>')
-			parser->parser_right_redir = 1;
+		if (line[i] == '>' && line[i - 1] != '>' && line[i+ 1] != '>')
+			parser->parser_right_redir = 2;
+		if (line[i] == '<' && line[i + 1] == '<')
+			parser->parser_dleft_redir = 3;
+		if(line[i] == '>' && line[i + 1] == '>')
+			parser->parser_dright_redir = 4;
 		if (line[i] == '\'')
 			parser->parser_single_quote++;
 		if (line[i] == '"')
@@ -97,7 +101,8 @@ void	parsing_symbols(char *line, t_env *env)
 			cmds[i] = NULL;
 		i++;
 	}
+	//printf("%d",parser->parser_dleft_redir);
 	handler_cmd(parsing(parser, line), env, cmds);
-	// printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
+	//printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
 	free_parser(parser);
 }
