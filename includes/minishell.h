@@ -49,6 +49,7 @@ t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
+char		*get_env(t_env *env, char *search);
 
 //CMD
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds);

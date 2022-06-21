@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static char	*find_environment_var(t_env *env, char *env_var)
+char	*find_environment_var(t_env *env, char *env_var)
 {
 	char **split_env;
 
@@ -18,7 +18,6 @@ static char	*find_environment_var(t_env *env, char *env_var)
 		}
 		current = current->next;
 	}
-	free_array(split_env);
 	return NULL;
 }
 
@@ -45,15 +44,17 @@ static int	check_dollars(t_parser *parser, int i, t_env *env)
 		i++;
 	}
 	env_var = malloc(sizeof(char) * i + 1);
-	while (count <= i)
+	while (count < i)
 	{
 		env_var[k++] = parser->parser_args[count];
 		count++;
 	}
 	env_var[k] = '\0';
-	result = find_environment_var(env, env_var);
+	result = get_env(env, env_var);
 	if (result != NULL)
 		printf("%s", result);
+	free (result);
+	free (env_var);
 	return i;
 }
 
