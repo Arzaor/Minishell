@@ -17,25 +17,27 @@ static void	ft_env(t_env *env)
 
 static char	*get_path(t_env *env)
 {
-	t_element	*current = env->first;
-	char		*path_dif;
-	char		**path;
-	
-	path_dif = 0;
+	char	**tab_env;
+	char	**path;
+	char	*path_dif;
+	int		i;
+
+	tab_env = create_tab(env);
+	i = 0;
 	path = NULL;
-	while (current != NULL)
+	path_dif = 0;
+	while (tab_env[i])
 	{
-		path = ft_split(current->value, '=');
-		if (current->value != NULL)
+		path = ft_split(tab_env[i], '=');
+		if (ft_strncmp("PATH", path[0], ft_strlen(path[0])) == 0)
 		{
-			if (ft_strncmp("PATH", path[0], ft_strlen(path[0])) == 0)
-			{
-				path_dif = malloc(sizeof(char) * ft_strlen(path[1] + 1));
-				path_dif = path[1];
-			}
+			path_dif = malloc(sizeof(char) * ft_strlen(path[1] + 1));
+			path_dif = path[1];
 		}
-		current = current->next;
+		i++;
 	}
+	free_array(path);
+	free(tab_env);
 	return (path_dif);
 }
 
@@ -85,25 +87,23 @@ static void	get_absolute_path(char *path, t_parser *parser)
 
 	i = 0;
 	path_split = ft_split(path, ':');
-	free (path);
-	path = NULL;
 	while (path_split[i])
 	{
-		bin = (char *)calloc(sizeof(char), (strlen(path_split[i]) + 1 + strlen(parser->parser_cmd) + 1));
+		bin = ft_calloc(sizeof(char), (strlen(path_split[i]) + 1 + strlen(parser->parser_cmd) + 1));
 		if (bin == NULL)
 			break ;
 		strcat(bin, path_split[i]);
 		strcat(bin, "/");
 		strcat(bin, parser->parser_cmd);
 		if (access(bin, F_OK) == 0)
+		{
+			parser->parser_cmd = bin;
+			free(bin);
 			break ;
-		free(bin);
-		bin = NULL;
+		}
 		i++;
 	}
 	free_array(path_split);
-	if (bin)
-		parser->parser_cmd = bin;
 }
 
 static void	exec_cmd(t_parser *parser, char **cmds)
@@ -197,6 +197,9 @@ int handler_right_redir(t_parser *parser)
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-		get_absolute_path(get_path(env), parser);
-	handler_redir(parser, cmds,env);
+	{
+		char	*path = get_path(env);
+		// get_absolute_path("test", parser);
+	}
+	handler_redir(parser, cmds, env);
 }

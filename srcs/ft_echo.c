@@ -81,11 +81,19 @@ static int		ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 				s = check_dollars(parser, s, env);
 			if (parser->parser_args[s] == quote)
 				s++;
-			printf("%c", parser->parser_args[s++]);
+			else
+				printf("%c", parser->parser_args[s++]);
 		}
 	}
 	else
 		printf("Format quotes.");
+	return i;
+}
+
+int		ft_show_code(t_parser *parser, int i)
+{
+	i += 1;
+	printf("%d", g_code);
 	return i;
 }
 
@@ -100,9 +108,11 @@ void	ft_echo(t_parser *parser, t_env *env)
 		{
 			if (parser->parser_args[i] != '"' && parser->parser_args[i] != '\'' && parser->parser_args[i] != '$')
 				printf("%c", parser->parser_args[i]);
+			else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+				i = ft_show_code(parser, i);
 			else if (parser->parser_args[i] == '"' || parser->parser_args[i] == '\'')
 				i = ft_check_quote(parser, i, parser->parser_args[i], env);
-			else if (parser->parser_args[i] == '$')
+			else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
 				i = check_dollars(parser, i, env);
 			i++;
 		}
