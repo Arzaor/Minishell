@@ -2,13 +2,14 @@
 
 static t_element* delete_element(t_element *element, t_env *env, char *arg)
 {
-    t_element *current, *precent;
+    t_element *current;
+	t_element *precent;
 
     current = element;
+	precent = NULL;
     if (element == NULL)
         return NULL;
-	char **split_arg = ft_split(current->value, '=');
-    if (ft_strncmp(arg, split_arg[0], ft_strlen(split_arg[0])) == 0)
+    if (ft_strncmp(arg, current->value, ft_strlen(arg)) == 0)
     {
         precent = current->next;
 		if (current == env->first)
@@ -21,7 +22,6 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
         element->next = delete_element(element->next, env, arg);
         return element;
     }
-	free_array(split_arg);
 }
 
 void	ft_unset(t_env *env, char *arg)
