@@ -15,28 +15,35 @@ static void	ft_env(t_env *env)
 	display_linked_list(env);
 }
 
-static char	*get_path(t_env *env)
+char	*get_env(t_env *env, char *search)
 {
-	t_element	*current = env->first;
-	char		*path_dif;
-	char		**path;
-	
-	path_dif = 0;
+	char	**tab_env;
+	char	**path;
+	char	*path_def;
+	int		i, k;
+
+	tab_env = create_tab(env);
+	i = 0;
+	k = 0;
 	path = NULL;
-	while (current != NULL)
+	path_def = 0;
+	while (tab_env[i])
 	{
-		path = ft_split(current->value, '=');
-		if (current->value != NULL)
-		{
-			if (ft_strncmp("PATH", path[0], 4) == 0)
-			{
-				path_dif = malloc(sizeof(char) * ft_strlen(path[1] + 1));
-				path_dif = path[1];
-			}
-		}
-		current = current->next;
+		if (ft_strncmp(search, tab_env[i], ft_strlen(search)) == 0)
+			break ;
+		i++;
 	}
-	return (path_dif);
+	if (tab_env[i])
+	{
+		path = ft_split(tab_env[i], '=');
+		i = 0;
+		path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
+		while (path[1][i])
+			path_def[k++] = path[1][i++];
+		free_array(path);
+	}
+	free(tab_env);
+	return (path_def);
 }
 
 static bool	is_build_in(char *cmd)
@@ -86,10 +93,9 @@ static void	get_absolute_path(char *path, t_parser *parser)
 	i = 0;
 	path_split = ft_split(path, ':');
 	free (path);
-	path = NULL;
 	while (path_split[i])
 	{
-		bin = (char *)calloc(sizeof(char), (strlen(path_split[i]) + 1 + strlen(parser->parser_cmd) + 1));
+		bin = ft_calloc(sizeof(char), (strlen(path_split[i]) + 1 + strlen(parser->parser_cmd) + 1));
 		if (bin == NULL)
 			break ;
 		strcat(bin, path_split[i]);
@@ -211,6 +217,6 @@ int handler_right_redir(t_parser *parser)
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-		get_absolute_path(get_path(env), parser);
-	handler_redir(parser, cmds,env);
+		get_absolute_path(get_env(env, "PATH"), parser);
+	handler_redir(parser, cmds, env);
 }

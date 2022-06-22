@@ -33,9 +33,9 @@ void	delete_env(t_env *env)
 		exit(EXIT_FAILURE);
 	if (env->first != NULL)
 	{
-		t_element *to_delete_env = env->first;
+		t_element *to__env = env->first;
 		env->first = env->first->next;
-		free(to_delete_env);
+		free(to__env);
 	}
 }
 
@@ -52,45 +52,6 @@ void	display_linked_list(t_env *env)
 	}
 }
 
-t_env* unset(t_env *env,char *args)
-{
-	//t_env  *tmp;
-	//char *value;
-	//value = "ll";
-	if (env == NULL)
-		exit(EXIT_FAILURE);
-	t_element *current = env->first;
-	/*if(ft_strcmp(current->value,args))
-		{
-			free(env);
-			return (NULL);
-		}*/
-	while(current != NULL)
-	{
-		if(!ft_strcmp(current->value,args))
-		{
-			printf("T: %s\n",current->value);
-			printf("T: %s\n",current->next->value);
-
-			//value = current->value;
-			//current->value = current->next->value;
-			//free(value);
-			break;
-		}
-		else
-		{
-			printf("NOOOOOOOOO\n");
-			current->value = current->next->value;
-		}
-		printf("T: %s\n",current->value);
-	}
-	return (env);
-}
-void ft_test(t_env *env,char *args)
-{
-	env = unset(env,args);
-	display_linked_list(env);
-}
 void	display_tab(char **env_tab)
 {
 	int i = 0;

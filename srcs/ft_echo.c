@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static char	*find_environment_var(t_env *env, char *env_var)
+char	*find_environment_var(t_env *env, char *env_var)
 {
 	char **split_env;
 
@@ -18,7 +18,6 @@ static char	*find_environment_var(t_env *env, char *env_var)
 		}
 		current = current->next;
 	}
-	free_array(split_env);
 	return NULL;
 }
 
@@ -45,16 +44,17 @@ static int	check_dollars(t_parser *parser, int i, t_env *env)
 		i++;
 	}
 	env_var = malloc(sizeof(char) * i + 1);
-	while (count <= i)
+	while (count < i)
 	{
 		env_var[k++] = parser->parser_args[count];
 		count++;
 	}
 	env_var[k] = '\0';
-	result = find_environment_var(env, env_var);
+	result = get_env(env, env_var);
 	if (result != NULL)
 		printf("%s", result);
-	free(env_var);
+	free (result);
+	free (env_var);
 	return i;
 }
 
@@ -82,11 +82,19 @@ static int		ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 				s = check_dollars(parser, s, env);
 			if (parser->parser_args[s] == quote)
 				s++;
-			printf("%c", parser->parser_args[s++]);
+			else
+				printf("%c", parser->parser_args[s++]);
 		}
 	}
 	else
 		printf("Format quotes.");
+	return i;
+}
+
+int		ft_show_code(t_parser *parser, int i)
+{
+	i += 1;
+	printf("%d", g_code);
 	return i;
 }
 
@@ -101,9 +109,11 @@ void	ft_echo(t_parser *parser, t_env *env)
 		{
 			if (parser->parser_args[i] != '"' && parser->parser_args[i] != '\'' && parser->parser_args[i] != '$')
 				printf("%c", parser->parser_args[i]);
+			else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+				i = ft_show_code(parser, i);
 			else if (parser->parser_args[i] == '"' || parser->parser_args[i] == '\'')
 				i = ft_check_quote(parser, i, parser->parser_args[i], env);
-			else if (parser->parser_args[i] == '$')
+			else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
 				i = check_dollars(parser, i, env);
 			i++;
 		}
