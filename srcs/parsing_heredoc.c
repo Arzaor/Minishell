@@ -31,10 +31,28 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	{
 		while (line[i] != '>' && line[i] != '<')
 			i++;
-		if (line[i + 1] == '>' || line[i + 1] == '<')
-			i += 3;
-		else
+		if((line[i] == '>' && ft_isalpha(line[i + 1]))|| (line[i] == '<' && ft_isalpha(line[i + 1])))
+		{
+			printf("simple alpha");
+			i += 1;
+		}
+		if((line[i] == '>' && line[i + 1] == ' ' )|| (line[i] == '<' && line[i + 1] == ' '))
+		{
+			printf("simlle");
 			i += 2;
+		}
+			
+		if((line[i] == '>' && line[i + 1] == '>' && ft_isalpha(line[i + 2]))|| (line[i] == '<' && line[i + 1] == '<' &&ft_isalpha(line[i + 2])))
+		{
+			printf("double alpha");
+			i += 2;
+		}
+			
+		if((line[i + 1] =='>' && line[i + 2] == ' ') || (line[i + 1] == '<' && line[i + 2] == ' '))
+		{
+			printf("double vide");
+			i += 3;
+		}
 		k = i;
 		while (line[i] && line[i] != ' ')
 		{
