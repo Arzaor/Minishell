@@ -24,9 +24,9 @@ static void	start_minishell(char **env)
 	envp = create_env(env);
 	while (1)
 	{
-		// style_prompt();
+		style_prompt();
 		line = readline(":> ");
-		/*if (line == NULL)
+		if (line == NULL)
 		{
 			int line_count = tgetnum("li");
 			int col_cocunt = tgetnum("cl");
@@ -34,10 +34,10 @@ static void	start_minishell(char **env)
 			tputs(tgoto(cm_cap, col_cocunt + 4,line_count - 2), 1, putchar);
 			printf("exit");
 			break ;
-		}*/
+		}
 		if (ft_strlen(line) > 0)
 		{
-			/*if (ft_strcmp(line, "exit") == 0)
+			if (ft_strcmp(line, "exit") == 0)
 			{
 				int line_count = tgetnum("li");
 				int col_cocunt = tgetnum("cl");
@@ -47,12 +47,12 @@ static void	start_minishell(char **env)
 				break ;
 			}
 			else
-			{*/
+			{
 				if (line)
 					add_history(line);
 				parsing_symbols(line, envp);
 				free(line);
-			//}
+			}
 		}
 	}
 	free(envp);

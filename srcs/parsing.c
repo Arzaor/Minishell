@@ -54,7 +54,7 @@ void	parsing_symbols(char *line, t_env *env)
 	parser = init();
 	while (line[i])
 	{
-		if (line[i] == '<' && line[i + 1] != '<')
+		if (line[i] == '<' && line[i - 1] != '<' && line[i + 1] != '<')
 			parser->parser_left_redir = 1;
 		if (line[i] == '>' && line[i - 1] != '>' && line[i+ 1] != '>')
 			parser->parser_right_redir = 2;

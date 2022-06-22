@@ -28,7 +28,7 @@ static char	*get_path(t_env *env)
 		path = ft_split(current->value, '=');
 		if (current->value != NULL)
 		{
-			if (ft_strncmp("PATH", path[0], ft_strlen(path[0])) == 0)
+			if (ft_strncmp("PATH", path[0], 4) == 0)
 			{
 				path_dif = malloc(sizeof(char) * ft_strlen(path[1] + 1));
 				path_dif = path[1];
@@ -131,14 +131,16 @@ static void	clean_redir(t_parser *parser, int saveout1)
 {
 	if (parser->parser_left_redir == 1)
 		dup2(saveout1, 0);
-	if (parser->parser_right_redir)
+	if (parser->parser_right_redir == 2)
 		dup2(saveout1, 1);
-	if(parser->parser_dright_redir)
+	if (parser->parser_dleft_redir == 3)
+		dup2(saveout1, 0);
+	if(parser->parser_dright_redir == 4)
 		dup2(saveout1, 1);
 }
 
 
-static int handler_left_redir(t_parser *parser)
+int handler_left_redir(t_parser *parser)
 {
 	int		saveout1;
 	int		fd;
@@ -157,9 +159,11 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 	int saveout1 = 0;
 
 	if (parser->parser_left_redir == 1)
-		saveout1 = handler_left_redir(parser); // mauvais nom depuis tout a lheure
+		saveout1 = handler_left_redir(parser);
 	if (parser->parser_right_redir == 2)
 		saveout1 = handler_right_redir(parser);
+	if (parser->parser_dleft_redir == 3)
+		saveout1 = handler_dleft_redir(parser);
 	if (parser->parser_dright_redir == 4)
 		saveout1 = handler_dright_redir(parser);
 	if (is_build_in(parser->parser_cmd))
@@ -169,6 +173,16 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 	clean_redir(parser, saveout1);
 }
 
+int handler_dleft_redir(t_parser *parser)
+{
+	int		saveout1;
+	
+	saveout1 = dup(0);
+	close(0);
+	while (parser->parser_heredoc != STDIN_FILENO)
+	dup2(1, 0);
+	return (saveout1);
+}
 
 int handler_dright_redir(t_parser *parser)
 {
@@ -188,9 +202,9 @@ int handler_right_redir(t_parser *parser)
 	saveout1 = dup(1);
 	close(1);
 	if(fd == -1)
-		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR, 0666), 1);
+		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR), 1);
 	else
-		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR, 0666), 1);
+		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR), 1);
 	return (saveout1);
 }
 

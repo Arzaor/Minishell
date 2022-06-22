@@ -27,7 +27,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	i = 0;
 	k = 0;
 	count = 0;
-	if (parser->parser_right_redir || parser->parser_left_redir || parser->parser_dright_redir || parser->parser_dleft_redir)
+	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
 	{
 		while (line[i] != '>' && line[i] != '<')
 			i++;

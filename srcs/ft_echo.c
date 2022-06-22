@@ -54,6 +54,7 @@ static int	check_dollars(t_parser *parser, int i, t_env *env)
 	result = find_environment_var(env, env_var);
 	if (result != NULL)
 		printf("%s", result);
+	free(env_var);
 	return i;
 }
 
