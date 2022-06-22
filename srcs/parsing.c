@@ -49,11 +49,12 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 
 void	parsing_symbols(char *line, t_env *env)
 {
-	int			i, pos, nbr;
+	int			i, k, h, s;
 	int			count_single;
 	int			count_double;
 	t_parser	*parser;
 	char		**cmds;
+	char		**cmds_bis;
 
 	i = 0;
 	count_single = 0;
@@ -62,40 +63,35 @@ void	parsing_symbols(char *line, t_env *env)
 	while (line[i])
 	{
 		if (line[i] == '<' && line[i - 1] != '<' && line[i + 1] != '<')
+		{
+			cmds = ft_split(line, '<');
 			parser->parser_left_redir = 1;
+		}
 		if (line[i] == '>' && line[i - 1] != '>' && line[i+ 1] != '>')
+		{
+			cmds = ft_split(line, '>');
 			parser->parser_right_redir = 2;
+		}
 		if (line[i] == '<' && line[i + 1] == '<')
+		{
+			cmds = ft_split(line, '<');
 			parser->parser_dleft_redir = 3;
+		}
 		if(line[i] == '>' && line[i + 1] == '>')
+		{
+			cmds = ft_split(line, '>');
 			parser->parser_dright_redir = 4;
+		}
 		if (line[i] == '\'')
 			parser->parser_single_quote++;
 		if (line[i] == '"')
 			parser->parser_double_quote++;
 		i++;
 	}
-	cmds = ft_split(line, ' ');
-	i = 0;
-	pos = 0;
-	nbr = 0;
-	while (cmds[pos])
-	{
-		if (cmds[pos][0] == '>' || cmds[pos][0] == '<')
-			break ;
-		pos++;
-	}
-	while (cmds[nbr])
-		nbr++;
-	i = pos - 1;
-	while (i < nbr - 1)
-	{
-		cmds[i] = cmds[i + 1];
-		i++;
-	}
-	//printf("%d",parser->parser_dleft_redir);
-	handler_cmd(parsing(parser, line), env, cmds);
+	cmds_bis = ft_split(cmds[0], ' ');
+	handler_cmd(parsing(parser, line), env, cmds_bis);
 	printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
 	free_array(cmds);
+	free_array(cmds_bis);
 	free_parser(parser);
 }
