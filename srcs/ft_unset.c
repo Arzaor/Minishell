@@ -1,8 +1,19 @@
 #include "minishell.h"
 
-static t_element* delete_element(t_element *element, t_env *env, char *arg)
+static void delete_element(t_element *element, t_env *env, char *arg)
 {
-    t_element *current;
+	t_element *current = element;
+	while ((element = element->next) != NULL)
+	{
+		if (ft_strncmp(arg, element->value, ft_strlen(arg)) == 0)
+		{
+			current->next = element->next;
+			free(element);
+			break ;
+		}
+		current = element;
+	}
+    /*t_element *current;
 	t_element *precent;
 
     current = element;
@@ -21,7 +32,7 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
     {
         element->next = delete_element(element->next, env, arg);
         return element;
-    }
+    }*/
 }
 
 void	ft_unset(t_env *env, char *arg)

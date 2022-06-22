@@ -33,9 +33,9 @@ void	delete_env(t_env *env)
 		exit(EXIT_FAILURE);
 	if (env->first != NULL)
 	{
-		t_element *to_delete_env = env->first;
+		t_element *to__env = env->first;
 		env->first = env->first->next;
-		free(to_delete_env);
+		free(to__env);
 	}
 }
 

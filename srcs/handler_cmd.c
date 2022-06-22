@@ -33,15 +33,17 @@ char	*get_env(t_env *env, char *search)
 			break ;
 		i++;
 	}
-	path = ft_split(tab_env[i], '=');
-	i = 0;
-	path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
-	while (path[1][i])
-		path_def[k++] = path[1][i++];
-	free_array(path);
+	if (tab_env[i])
+	{
+		path = ft_split(tab_env[i], '=');
+		i = 0;
+		path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
+		while (path[1][i])
+			path_def[k++] = path[1][i++];
+		free_array(path);
+	}
 	free(tab_env);
 	return (path_def);
-	
 }
 
 static bool	is_build_in(char *cmd)
