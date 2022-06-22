@@ -31,14 +31,20 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	{
 		while (line[i] != '>' && line[i] != '<')
 			i++;
-		if((line[i] == '>' && ft_isalpha(line[i + 1]))|| (line[i] == '<' && ft_isalpha(line[i + 1])))
+		if ((line[i] == '>' && ft_isalpha(line[i + 1])) || (line[i] == '<' && ft_isalpha(line[i + 1])))
 			i += 1;
-		if((line[i] == '>' && line[i + 1] == ' ' )|| (line[i] == '<' && line[i + 1] == ' '))
+		else if ((line[i] == '>' && line[i + 1] == ' ' ) || (line[i] == '<' && line[i + 1] == ' '))
 			i += 2;
-		if((line[i] == '>' && line[i + 1] == '>' && ft_isalpha(line[i + 2]))|| (line[i] == '<' && line[i + 1] == '<' &&ft_isalpha(line[i + 2])))
+		else if ((line[i] == '>' && line[i + 1] == '>' && ft_isalpha(line[i + 2]))|| (line[i] == '<' && line[i + 1] == '<' &&ft_isalpha(line[i + 2])))
 			i += 2;
-		if((line[i + 1] =='>' && line[i + 2] == ' ') || (line[i + 1] == '<' && line[i + 2] == ' '))
+		else if ((line[i + 1] =='>' && line[i + 2] == ' ') || (line[i + 1] == '<' && line[i + 2] == ' '))
 			i += 3;
+		else
+		{
+			printf("bash: syntax error near unexpected token `newline'\n");
+			parser->parser_heredoc = NULL;
+			return (parser);
+		}
 		k = i;
 		while (line[i] && line[i] != ' ')
 		{

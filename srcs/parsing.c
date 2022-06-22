@@ -18,11 +18,18 @@ t_parser	*parsing_cmd(char *line, t_parser *parser)
 	i = 0;	
 	y = 0;
 	count = 0;
-	while (ft_isalpha(line[i]))
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			break ;
+		if (line[i] == '>' || line[i] == '<')
+			break ;
 		i++;
+	}
 	parser->parser_cmd = malloc(sizeof(char) * i + 1);
 	while (count < i)
 		parser->parser_cmd[y++] = line[count++];
+	parser->parser_cmd[y] = '\0';
 	return (parser);
 }
 
@@ -42,7 +49,7 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 
 void	parsing_symbols(char *line, t_env *env)
 {
-	int			i;
+	int			i, pos, nbr;
 	int			count_single;
 	int			count_double;
 	t_parser	*parser;
@@ -70,10 +77,20 @@ void	parsing_symbols(char *line, t_env *env)
 	}
 	cmds = ft_split(line, ' ');
 	i = 0;
-	while (cmds[i])
+	pos = 0;
+	nbr = 0;
+	while (cmds[pos])
 	{
-		if (cmds[i][0] == '>' || cmds[i][0] == '<')
-			cmds[i] = NULL;
+		if (cmds[pos][0] == '>' || cmds[pos][0] == '<')
+			break ;
+		pos++;
+	}
+	while (cmds[nbr])
+		nbr++;
+	i = pos - 1;
+	while (i < nbr - 1)
+	{
+		cmds[i] = cmds[i + 1];
 		i++;
 	}
 	//printf("%d",parser->parser_dleft_redir);
