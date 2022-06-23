@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 16:57:52 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/23 17:13:13 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ char	*get_env(t_env *env, char *search)
 		i++;
 	}
 	if (tab_env[i])
-		path_def = test(tab_env,path,path_def,i);
+		path_def = test(tab_env, path, path_def, i);
 	free(tab_env);
 	return (path_def);
 }
 
 char	*test(char **tab_env, char **path, char *path_def, int i)
 {
-	int k;
+	int	k;
 
 	k = 0;
 	path = ft_split(tab_env[i], '=');

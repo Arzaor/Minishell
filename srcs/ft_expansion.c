@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/23 16:09:26 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:07:57 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 		printf("%s", result);
 	free (result);
 	free (env_var);
-	return i;
+	return (i);
 }
