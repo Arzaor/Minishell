@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 17:10:00 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:30:22 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 		while (line[i] != '>' && line[i] != '<')
 			i++;
 		if (line[i] == '>' || line[i] == '<')
-		{
 			i += 1;
-			
-		}
 		if ((line[i] == '>' && ft_isalpha(line[i + 1])) || \
 			(line[i] == '<' && ft_isalpha(line[i + 1])))
 			i += 1;
