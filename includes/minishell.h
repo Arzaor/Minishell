@@ -44,7 +44,7 @@ int			g_code;
 void		rl_replace_line(const char *text,int clear_undo);
 
 //PARSING
-void		parsing_symbols(char *line, t_env *env);
+void	parsing_symbols(t_parser *parser, char *line, t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
@@ -82,6 +82,7 @@ void	handler_redir(t_parser *parser, char **cmds, t_env *env);
 int handler_right_redir(t_parser *parser);
 int handler_left_redir(t_parser *parser, char *heredoc);
 int handler_dleft_redir(t_parser *parser);
-
-
+int	check_dollars(t_parser *parser, int i, t_env *env);
+void	style_prompt(void);
+t_parser	*parsing_cmd(char *line, t_parser *parser);
 #endif

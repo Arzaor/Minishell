@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_args.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
+/*   Updated: 2022/06/23 16:34:27 by jbarette         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+static int	ft_count_i(t_parser *parser, char *line)
+{
+	int	i;
+
+	i = 0;
+	if (parser->parser_cmd)
+		i += ft_strlen(parser->parser_cmd);
+	if (line[i] == ' ')
+		i++;
+	if (parser->parser_opt)
+		i += 3;
+	return (i);
+}
 
 t_parser	*parsing_args(char *line, t_parser *parser)
 {
@@ -6,15 +32,9 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 	int		k;
 	int		count;
 
-	i = 0;
 	k = 0;
 	count = 0;
-	if (parser->parser_cmd)
-		i += ft_strlen(parser->parser_cmd);
-	if (line[i] == ' ')
-		i++;
-	if (parser->parser_opt)
-		i += 3;
+	i = ft_count_i(parser, line);
 	k = i;
 	while (line[i])
 	{

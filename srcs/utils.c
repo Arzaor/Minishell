@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 16:47:49 by jbarette          #+#    #+#             */
+/*   Updated: 2022/06/23 16:49:43 by jbarette         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -18,23 +30,23 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 char	**create_tab(t_env *env)
 {
-	t_element *current = env->first;
-
-	int		i;
-	int		j;
-	char	**tri_tab;
+	t_element	*current;
+	int			i;
+	int			j;
+	char		**tri_tab;
 
 	i = 0;
 	j = 0;
 	tri_tab = NULL;
-	while(current != NULL)
+	current = env->first;
+	while (current != NULL)
 	{
 		current = current->next;
 		i++;
 	}
 	current = env->first;
 	tri_tab = malloc(sizeof(char *) * i + 1);
-	while(current != NULL)
+	while (current != NULL)
 	{
 		tri_tab[j++] = current->value;
 		current = current->next;
@@ -44,10 +56,42 @@ char	**create_tab(t_env *env)
 
 void	free_array(char **array)
 {
-	for (int i = 0; array[i]; i++) {
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
 		free(array[i]);
 		array[i] = NULL;
+		i++;
 	}
 	free(array);
 	array = NULL;
+}
+
+void	display_tab(char **env_tab)
+{
+	int	i;
+
+	i = 0;
+	while (env_tab[i])
+	{
+		ft_putstr_fd(env_tab[i], 1);
+		i++;
+	}
+}
+
+void	style_prompt(void)
+{
+	int		ret;
+	char	*term_type;
+	char	*color_cap;
+	char	*reset_cmd;
+
+	term_type = getenv("TERM");
+	ret = tgetent(NULL, term_type);
+	color_cap = tgetstr("AF", NULL);
+	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
+	reset_cmd = tgetstr("md", NULL);
+	tputs(reset_cmd, 1, putchar);
 }

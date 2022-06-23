@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
+/*   Updated: 2022/06/23 16:17:50 by jbarette         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_parser	*init()
+t_parser	*init(void)
 {
 	t_parser	*parser;
-	
+
 	parser = malloc(sizeof(t_parser));
 	parser->parser_cmd = NULL;
 	parser->parser_opt = 0;
@@ -18,14 +30,13 @@ t_parser	*init()
 	return (parser);
 }
 
-t_env		*init_env()
+t_env	*init_env(void)
 {
 	t_env		*env;
 	t_element	*element;
 
 	env = malloc(sizeof(*env));
 	element = malloc(sizeof(element));
-
 	if (env == NULL || element == NULL)
 		exit(EXIT_FAILURE);
 	element->value = NULL;
@@ -34,7 +45,7 @@ t_env		*init_env()
 	return (env);
 }
 
-void free_parser(t_parser *parser)
+void	free_parser(t_parser *parser)
 {
 	free(parser->parser_cmd);
 	free(parser->parser_args);

@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/23 16:16:41 by jbarette         ###   ########.fr       */
+/*   Created: 2022/06/23 16:47:16 by jbarette          #+#    #+#             */
+/*   Updated: 2022/06/23 16:47:26 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	delete_element(t_element *element, t_env *env, char *arg)
+t_parser	*parsing_cmd(char *line, t_parser *parser)
 {
-	t_element	*current;
+	int	i;
+	int	y;
+	int	count;
 
-	current = element;
-	while (element != NULL)
+	i = 0;
+	y = 0;
+	count = 0;
+	while (line[i])
 	{
-		element = element->next;
-		if (ft_strncmp(arg, element->value, ft_strlen(arg)) == 0)
-		{
-			current->next = element->next;
-			free(element->value);
-			free(element);
+		if (line[i] == ' ')
 			break ;
-		}
-		current = element;
+		if (line[i] == '>' || line[i] == '<')
+			break ;
+		i++;
 	}
-}
-
-void	ft_unset(t_env *env, char *arg)
-{
-	if (arg)
-		delete_element(env->first, env, arg);
+	parser->parser_cmd = malloc(sizeof(char) * i + 1);
+	while (count < i)
+		parser->parser_cmd[y++] = line[count++];
+	parser->parser_cmd[y] = '\0';
+	return (parser);
 }
