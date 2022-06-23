@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
+/*   Updated: 2022/06/23 15:36:40 by hterras          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void	ft_tri_tab(char **tri,int count)
+static	void	ft_tri_tab(char **tri, int count)
 {
-	char *t;
-	int j;
-	int i = 0;
+	char	*t;
+	int		j;
+	int		i;
 
-	while(i < count)
+	i = 0;
+	while (i < count)
 	{
-		while(j < count)
+		while (j < count)
 		{
-			if(ft_strcmp(tri[i],tri[j]) < 0)
+			if (ft_strcmp(tri[i], tri[j]) < 0)
 			{
 				t = tri[i];
 				tri[i] = tri[j];
@@ -36,14 +49,14 @@ void	ft_export(t_env *env, char *value)
 	if (!value)
 	{
 		tri = create_tab(env);
-		while(tri[i])
+		while (tri[i])
 			i++;
 		count = i;
 		ft_tri_tab(tri, i);
 		while (j < count)
-     		printf("declare -x %s\n", tri[j++]);
+			printf("declare -x %s\n", tri[j++]);
 		free(tri);
 	}
 	else
-		insert_env(env,value);
+		insert_env(env, value);
 }

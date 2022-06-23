@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 15:33:54 by hterras          ###   ########.fr       */
+/*   Created: 2022/06/23 15:47:04 by hterras           #+#    #+#             */
+/*   Updated: 2022/06/23 16:03:39 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(t_parser *parser)
+void	pwd(void)
 {
-	if (chdir(parser->parser_args) == -1)
-	{
-		printf("bash: cd: %s: No such file or directory\n", parser->parser_args);
-		g_code = 1;
-	}
+	char	pwd[256];
+
+	if (getcwd(pwd, sizeof(pwd)) != NULL)
+		printf("%s\n", pwd);
 	else
-		g_code = 0;
+		perror("getcwd() error");
 }
