@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
+#    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/23 16:50:52 by jbarette         ###   ########.fr        #
+#    Updated: 2022/06/23 16:58:34 by hterras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC 		=	main.c \
 				handler_cmd.c \
 				parsing_args.c \
 				parsing_heredoc.c \
+				parsing_cmd.c \
 				create_env.c \
 				utils.c \
 				ft_echo.c \
