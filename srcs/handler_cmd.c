@@ -164,6 +164,7 @@ int handler_left_redir(t_parser *parser, char *heredoc)
 void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 {
 	int saveout1 = 0;
+	int i = 0;
 
 	if (parser->parser_left_redir == 1)
 		saveout1 = handler_left_redir(parser, parser->parser_heredoc);
@@ -175,12 +176,10 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 		saveout1 = handler_dright_redir(parser);
 	if (is_build_in(parser->parser_cmd))
 		create_cmd(parser,env);
-	else
-	{
-		printf("%s    %s",cmds[0],cmds[1]);
+	if(parser->parser_dleft_redir  == 3 && !ft_strcmp(parser->parser_cmd,"cat"))
+		i = 1;
+	else if(i = 0)
 		exec_cmd(parser, cmds);
-
-	}
 	clean_redir(parser, saveout1);
 }
 
