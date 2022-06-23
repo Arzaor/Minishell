@@ -12,6 +12,8 @@ t_parser	*init()
 	parser->parser_single_quote = 0;
 	parser->parser_left_redir = 0;
 	parser->parser_right_redir = 0;
+	parser->parser_dleft_redir = 0;
+	parser->parser_dright_redir = 0;
 	parser->parser_heredoc = NULL;
 	return (parser);
 }
