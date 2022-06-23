@@ -114,6 +114,7 @@ static void	get_absolute_path(char *path, t_parser *parser)
 
 static void	exec_cmd(t_parser *parser, char **cmds)
 {
+	printf("%s\n", cmds[0]);
 	pid_t	pid = 0;
 	int		status = 0;
 
@@ -175,19 +176,30 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 	if (is_build_in(parser->parser_cmd))
 		create_cmd(parser,env);
 	else
+	{
+		printf("%s    %s",cmds[0],cmds[1]);
 		exec_cmd(parser, cmds);
+
+	}
 	clean_redir(parser, saveout1);
 }
 
 int handler_dleft_redir(t_parser *parser)
 {
+	char	*line;
 	int		saveout1;
 	
-	saveout1 = dup(0);
-	close(0);
-	while (parser->parser_heredoc != STDIN_FILENO)
-	dup2(1, 0);
-	return (saveout1);
+	saveout1 = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if(saveout1 == -1)
+		printf("fff");
+	while ((line = readline("> ")))
+	{
+		if(!ft_strcmp(parser->parser_heredoc,line))
+			break;
+		write(saveout1,line,ft_strlen(line));
+		write(saveout1,"\n",1);
+	}
+	return(saveout1);
 }
 
 int handler_dright_redir(t_parser *parser)
@@ -210,7 +222,7 @@ int handler_right_redir(t_parser *parser)
 	if(fd == -1)
 		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR, 0666), 1);
 	else
-		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR), 0666), 1);
+		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR, 0666), 1);
 	return (saveout1);
 }
 

@@ -18,11 +18,18 @@ t_parser	*parsing_cmd(char *line, t_parser *parser)
 	i = 0;	
 	y = 0;
 	count = 0;
-	while (ft_isalpha(line[i]))
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			break ;
+		if (line[i] == '>' || line[i] == '<')
+			break ;
 		i++;
+	}
 	parser->parser_cmd = malloc(sizeof(char) * i + 1);
 	while (count < i)
 		parser->parser_cmd[y++] = line[count++];
+	parser->parser_cmd[y] = '\0';
 	return (parser);
 }
 
@@ -42,11 +49,12 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 
 void	parsing_symbols(char *line, t_env *env)
 {
-	int			i;
+	int			i, k, h, s;
 	int			count_single;
 	int			count_double;
 	t_parser	*parser;
 	char		**cmds;
+	char		**cmds_bis;
 
 	i = 0;
 	count_single = 0;
@@ -55,30 +63,35 @@ void	parsing_symbols(char *line, t_env *env)
 	while (line[i])
 	{
 		if (line[i] == '<' && line[i - 1] != '<' && line[i + 1] != '<')
+		{
+			cmds = ft_split(line, '<');
 			parser->parser_left_redir = 1;
+		}
 		if (line[i] == '>' && line[i - 1] != '>' && line[i+ 1] != '>')
+		{
+			cmds = ft_split(line, '>');
 			parser->parser_right_redir = 2;
+		}
 		if (line[i] == '<' && line[i + 1] == '<')
+		{
+			cmds = ft_split(line, '<');
 			parser->parser_dleft_redir = 3;
+		}
 		if(line[i] == '>' && line[i + 1] == '>')
+		{
+			cmds = ft_split(line, '>');
 			parser->parser_dright_redir = 4;
+		}
 		if (line[i] == '\'')
 			parser->parser_single_quote++;
 		if (line[i] == '"')
 			parser->parser_double_quote++;
 		i++;
 	}
-	cmds = ft_split(line, ' ');
-	i = 0;
-	while (cmds[i])
-	{
-		if (cmds[i][0] == '>' || cmds[i][0] == '<')
-			cmds[i] = NULL;
-		i++;
-	}
-	//printf("%d",parser->parser_dleft_redir);
-	handler_cmd(parsing(parser, line), env, cmds);
+	cmds_bis = ft_split(cmds[0], ' ');
+	handler_cmd(parsing(parser, line), env, cmds_bis);
 	printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
 	free_array(cmds);
+	free_array(cmds_bis);
 	free_parser(parser);
 }

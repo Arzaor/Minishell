@@ -41,6 +41,8 @@ static int	check_dollars(t_parser *parser, int i, t_env *env)
 			break ;
 		if (parser->parser_args[i] == '"')
 			break ;
+		if (parser->parser_args[i + 1] == '$')
+			break ;
 		i++;
 	}
 	env_var = malloc(sizeof(char) * i + 1);
