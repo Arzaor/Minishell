@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/06/23 16:50:04 by jbarette         ###   ########.fr        #
+#    Updated: 2022/06/23 16:50:52 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,12 @@ SRC 		=	main.c \
 				ft_export.c \
 				ft_cd.c \
 				ft_unset.c \
+				right_redir.c \
+				left_redir.c \
+				handler_redir.c \
+				ft_env.c \
+				ft_pwd.c \
+				ft_expansion.c \
 				
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}
