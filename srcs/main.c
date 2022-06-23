@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/23 16:46:08 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:07:34 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static void	ft_exit(void)
 	printf("exit");
 }
 
-
 static void	show_prompt(char *line, t_env *envp)
 {
-	t_parser *parser;
+	t_parser	*parser;
 
 	parser = init();
 	if (line)
