@@ -147,15 +147,15 @@ static void	clean_redir(t_parser *parser, int saveout1)
 }
 
 
-int handler_left_redir(t_parser *parser)
+int handler_left_redir(t_parser *parser, char *heredoc)
 {
 	int		saveout1;
 	int		fd;
-	fd = open(parser->parser_heredoc, O_RDONLY);
+	fd = open(heredoc, O_RDONLY);
 	saveout1 = dup(0);
 	close(0);
 	if(fd == -1)
-		printf("bash: %s: No such file or directory\n", parser->parser_heredoc);
+		printf("bash: %s: No such file or directory\n", heredoc);
 	else
 		dup2(fd, 0);
 	return (saveout1);
@@ -166,7 +166,7 @@ void	handler_redir(t_parser *parser, char **cmds,t_env *env)
 	int saveout1 = 0;
 
 	if (parser->parser_left_redir == 1)
-		saveout1 = handler_left_redir(parser);
+		saveout1 = handler_left_redir(parser, parser->parser_heredoc);
 	if (parser->parser_right_redir == 2)
 		saveout1 = handler_right_redir(parser);
 	if (parser->parser_dleft_redir == 3)
@@ -198,6 +198,11 @@ int handler_dleft_redir(t_parser *parser)
 			break;
 		write(saveout1,line,ft_strlen(line));
 		write(saveout1,"\n",1);
+	}
+	if(!ft_strcmp(parser->parser_cmd,"cat"))
+	{
+		saveout1 = handler_left_redir(parser, "heredoc.txt");
+		// saveout1 = open("heredoc.txt",O_RDONLY,0777);
 	}
 	return(saveout1);
 }

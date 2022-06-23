@@ -80,7 +80,7 @@ void		display_tab(char **env_tab);
 int		handler_dright_redir(t_parser *parser);
 void	handler_redir(t_parser *parser, char **cmds, t_env *env);
 int handler_right_redir(t_parser *parser);
-int handler_left_redir(t_parser *parser);
+int handler_left_redir(t_parser *parser, char *heredoc);
 int handler_dleft_redir(t_parser *parser);
 
 
