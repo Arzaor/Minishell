@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/24 14:46:59 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/24 15:37:41 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ char	*get_env(t_env *env, char *search)
 	while (tab_env[i])
 	{
 		if (ft_strncmp(search, tab_env[i], 4) == 0)
+		{
+			free(tab_env[i]);
 			break ;
+		}
+			
 		i++;
 	}
 	if (tab_env[i])

@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 19:53:09 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/24 16:53:16 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	handler_dleft_redir(t_parser *parser)
 		line = readline("> ");
 		if (!ft_strcmp(parser->parser_heredoc, line))
 			break ;
-		write(1, line, ft_strlen(line));
-		write(1, "\n", 1);
+		write(saveout1, line, ft_strlen(line));
+		write(saveout1, "\n", 1);
 		free(line);
 	}
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
