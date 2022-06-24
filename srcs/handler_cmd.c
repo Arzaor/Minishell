@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/06/23 20:30:14 by hterras          ###   ########.fr       */
-=======
-/*   Updated: 2022/06/24 03:25:20 by hamza            ###   ########.fr       */
->>>>>>> 45906ff056bf3b366f3801a85396c3efa7893533
+/*   Updated: 2022/06/24 14:50:51 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +60,16 @@ void	get_absolute_path(char *path, t_parser *parser)
 
 	i = 0;
 	path_split = ft_split(path, ':');
-	// free(path);
+	free(path);
 	while (path_split[i])
 	{
 		bin = ft_calloc(sizeof(char), \
 			(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
 		if (bin == NULL)
 			break ;
-<<<<<<< HEAD
-		ft_strcat(bin, path_split[i],10);
-		ft_strcat(bin, "/",10);
-		ft_strcat(bin, parser->parser_cmd,10);
-=======
 		ft_strcat(bin, path_split[i]);
 		ft_strcat(bin, "/");
 		ft_strcat(bin, parser->parser_cmd);
->>>>>>> 45906ff056bf3b366f3801a85396c3efa7893533
 		if (access(bin, F_OK) == 0)
 			break ;
 		free(bin);
@@ -88,11 +78,7 @@ void	get_absolute_path(char *path, t_parser *parser)
 	}
 	free_array(path_split);
 	if (bin)
-	{
 		parser->parser_cmd = bin;
-		free(bin);
-	}
-		
 }
 
 void	exec_cmd(t_parser *parser, char **cmds)
