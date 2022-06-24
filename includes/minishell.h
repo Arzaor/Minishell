@@ -82,6 +82,7 @@ void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
 char	*test(char **tab_env, char **path, char *path_def, int i);
 
+char	*ft_strcat(char *dst, const char *src,size_t dstsize);
 
 //REDIR
 int		handler_dright_redir(t_parser *parser);
