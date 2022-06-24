@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 20:26:50 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/24 03:25:20 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ bool	is_build_in(char *cmd)
 	return (false);
 }
 
+char *ft_strcat(char *dest, char *src)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
+}
+
 void	get_absolute_path(char *path, t_parser *parser)
 {
 	char	**path_split;
@@ -42,16 +60,16 @@ void	get_absolute_path(char *path, t_parser *parser)
 
 	i = 0;
 	path_split = ft_split(path, ':');
-	free (path);
+	// free(path);
 	while (path_split[i])
 	{
 		bin = ft_calloc(sizeof(char), \
-			(strlen(path_split[i]) + 1 + strlen(parser->parser_cmd) + 1));
+			(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
 		if (bin == NULL)
 			break ;
-		strcat(bin, path_split[i]);
-		strcat(bin, "/");
-		strcat(bin, parser->parser_cmd);
+		ft_strcat(bin, path_split[i]);
+		ft_strcat(bin, "/");
+		ft_strcat(bin, parser->parser_cmd);
 		if (access(bin, F_OK) == 0)
 			break ;
 		free(bin);
@@ -105,6 +123,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-		get_absolute_path(get_env(env, "PATH"), parser);
+			get_absolute_path(get_env(env, "PATH"), parser);
 	handler_redir(parser, cmds, env);
 }

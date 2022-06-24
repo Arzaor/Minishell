@@ -49,8 +49,9 @@ t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
-char		*get_env(t_env *env, char *search);
+char	*get_env(t_env *env, char *search);
 void	get_absolute_path(char *path, t_parser *parser);
+
 
 //CMD
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds);
@@ -69,6 +70,7 @@ char	**create_tab(t_env *env);
 void	free_array(char **array);
 void	ft_test(t_env *env,char *args);
 bool	is_build_in(char *cmd);
+char *ft_strcat(char *dest, char *src);
 // INIT & FREE
 t_parser	*init();
 void		free_parser(t_parser *parser);
@@ -80,7 +82,7 @@ t_env		*create_env(char **env);
 void		insert_env(t_env *env, char *value);
 void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
-char	*test(char **tab_env, char **path, char *path_def, int i);
+char		*test(char **tab_env, int i);
 
 
 //REDIR
