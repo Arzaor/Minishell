@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/24 14:50:51 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/25 14:59:41 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,29 @@ void	get_absolute_path(char *path, t_parser *parser)
 	char	*bin;
 
 	i = 0;
-	path_split = ft_split(path, ':');
-	free(path);
-	while (path_split[i])
+	if(path != NULL)
 	{
-		bin = ft_calloc(sizeof(char), \
-			(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
-		if (bin == NULL)
-			break ;
-		ft_strcat(bin, path_split[i]);
-		ft_strcat(bin, "/");
-		ft_strcat(bin, parser->parser_cmd);
-		if (access(bin, F_OK) == 0)
-			break ;
-		free(bin);
-		bin = NULL;
-		i++;
+		path_split = ft_split(path, ':');
+		free(path);
+		while (path_split[i])
+		{
+			bin = ft_calloc(sizeof(char), \
+				(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
+			if (bin == NULL)
+				break ;
+			ft_strcat(bin, path_split[i]);
+			ft_strcat(bin, "/");
+			ft_strcat(bin, parser->parser_cmd);
+			if (access(bin, F_OK) == 0)
+				break ;
+			free(bin);
+			bin = NULL;
+			i++;
+		}
+		free_array(path_split);
+		if (bin)
+			parser->parser_cmd = bin;
 	}
-	free_array(path_split);
-	if (bin)
-		parser->parser_cmd = bin;
 }
 
 void	exec_cmd(t_parser *parser, char **cmds)

@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 15:36:40 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/25 15:34:16 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,37 @@ static	void	ft_tri_tab(char **tri, int count)
 	}
 }
 
+void static export_arg(t_env *env, char *value)
+{
+	int		j;
+	int		i;
+	char	**str;
+	char	**str2;
+
+	j = 0;
+	i = 0;
+	str = ft_split(value,'=');
+	str2 = create_tab(env);
+	while (str2[i])
+	{
+		if(!ft_strncmp(str2[i],str[0],ft_strlen(str[0])))
+		{
+			j = 1;
+			break;
+		}
+		i++;
+	}
+	if (j == 1)
+	{
+		ft_unset(env,value);
+		insert_env(env, value);
+	}
+	else
+		insert_env(env,value);
+	free_array(str);
+	free(str2);
+}
+
 void	ft_export(t_env *env, char *value)
 {
 	char	**tri;
@@ -58,5 +89,5 @@ void	ft_export(t_env *env, char *value)
 		free(tri);
 	}
 	else
-		insert_env(env, value);
+		export_arg(env,value);
 }

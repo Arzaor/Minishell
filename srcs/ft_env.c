@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/24 15:37:41 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/25 15:34:10 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,27 @@ char	*get_env(t_env *env, char *search)
 	char	*path_def;
 	int		i;
 	int		k;
-	char	**path;
+	int count = 0;
 
 	tab_env = create_tab(env);
 	i = 0;
 	k = 0;
-	path_def = 0;
+	path_def = NULL;
 	while (tab_env[i])
 	{
 		if (ft_strncmp(search, tab_env[i], 4) == 0)
 		{
-			free(tab_env[i]);
+			count = 1;
 			break ;
 		}
-			
+		count = 0;
 		i++;
 	}
-	if (tab_env[i])
+	if (count == 1)
+	{
+		if (tab_env[i])
 		path_def = test(tab_env, i);
-	//free_array(path);
+	}
 	free(tab_env);
 	return (path_def);
 }
@@ -53,13 +55,13 @@ char	*test(char **tab_env, int i)
 	char	*path_def;
 
 	k = 0;
+	path = NULL;
 	path = ft_split(tab_env[i], '=');
 	i = 0;
 	path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
 	while (path[1][i])
 		path_def[k++] = path[1][i++];
 	path_def[k] = '\0';
-	//printf("%s",path);
 	free_array(path);
 	return (path_def);
 }

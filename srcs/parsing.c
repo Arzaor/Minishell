@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/24 14:04:27 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/25 14:26:30 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,17 @@ void	parsing_redirection(char *line, t_parser *parser, int i)
 void	parsing_handler(t_parser *parser, char *line, \
 						t_env *env, char **cmds_bis)
 {
-	handler_cmd(parsing(parser, line), env, cmds_bis);
+	int i,count;
+	i = 0;
+	count = 0;
+	while(line[i])
+	{
+		if(line[i] == ' ')
+			count++;
+		i++;
+	}
+	if(count != ft_strlen(line))
+		handler_cmd(parsing(parser, line), env, cmds_bis);
 	free_array(cmds_bis);
 	free_parser(parser);
 }
@@ -64,10 +74,11 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	int			i;
 	char		**cmds;
 	char		**cmds_bis;
+	int count = 0;
 
 	i = 0;
 	while (line[i])
-		parsing_redirection(line, parser, i++);
+	parsing_redirection(line, parser, i++);
 	if (parser->parser_left_redir != 0 \
 		|| parser->parser_dleft_redir != 0)
 	{

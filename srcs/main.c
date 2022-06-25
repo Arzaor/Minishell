@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/23 17:07:34 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:57:06 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	start_minishell(char **env)
 {
 	char	*line;
 	t_env	*envp;
-
+	int		i = 0;
 	envp = create_env(env);
 	while (1)
 	{
@@ -62,6 +62,7 @@ static void	start_minishell(char **env)
 			}
 			else
 				show_prompt(line, envp);
+				
 		}
 	}
 	free(envp);
