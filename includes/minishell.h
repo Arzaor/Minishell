@@ -51,7 +51,7 @@ t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 char	*get_env(t_env *env, char *search);
 void	get_absolute_path(char *path, t_parser *parser);
-
+void	ft_exit_with_line(char *line);
 
 //CMD
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds);
@@ -63,7 +63,7 @@ void	ft_unset(t_env *env, char *arg);
 void	ft_env(t_env *env);
 void	pwd(void);
 void	exec_cmd(t_parser *parser, char **cmds);
-
+void	ft_exit(t_parser *parser);
 //UTILS
 int		ft_strcmp(const char *s1, const char *s2);
 char	**create_tab(t_env *env);

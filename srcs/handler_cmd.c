@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/25 14:59:41 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/26 02:28:11 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_build_in(char *cmd)
 {
-	const char	*built_in[7];
+	const char	*built_in[8];
 	int			i;
 
 	i = 0;
@@ -24,7 +24,8 @@ bool	is_build_in(char *cmd)
 	built_in[3] = "export";
 	built_in[4] = "unset";
 	built_in[5] = "env";
-	built_in[6] = NULL;
+	built_in[6] = "exit";
+	built_in[7] = NULL;
 	while (built_in[i])
 	{
 		if (!ft_strcmp(built_in[i], cmd))
@@ -59,6 +60,8 @@ void	get_absolute_path(char *path, t_parser *parser)
 	char	*bin;
 
 	i = 0;
+	path_split = NULL;
+	bin = 0;
 	if(path != NULL)
 	{
 		path_split = ft_split(path, ':');
@@ -120,6 +123,8 @@ void	create_cmd(t_parser *parser, t_env *env)
 		ft_unset(env, parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "env", 3))
 		ft_env(env);
+	if (!ft_strncmp(parser->parser_cmd, "exit", 3))
+		ft_exit(parser);
 }
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
