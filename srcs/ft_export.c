@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/25 15:34:16 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/27 11:29:07 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void static export_arg(t_env *env, char *value)
 
 	j = 0;
 	i = 0;
-	str = ft_split(value,'=');
+	str = ft_split(value, '=');
 	str2 = create_tab(env);
 	while (str2[i])
 	{
-		if(!ft_strncmp(str2[i],str[0],ft_strlen(str[0])))
+		if(!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
 		{
 			j = 1;
 			break;
@@ -89,5 +89,5 @@ void	ft_export(t_env *env, char *value)
 		free(tri);
 	}
 	else
-		export_arg(env,value);
+		export_arg(env, value);
 }

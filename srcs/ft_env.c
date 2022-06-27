@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/27 11:12:33 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:29:56 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_env(t_env *env, char *search)
 	free(tab_env);
 	return (path_def);
 }
-// donne lui... "" o bon jvai pas te mentri je commence a fatiguer, envoie ce quon a fai sur github, je vais continuer d emoncote dacc
+
 char	*test(char **tab_env, int i)
 {
 	int		k;

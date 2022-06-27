@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/23 20:30:40 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:27:52 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
 			env->first = precent;
 		free(current->value);
         free(current);
+		free_array(split_arg);
         return precent;
     }
 	else
     {
         element->next = delete_element(element->next, env, arg);
+		free_array(split_arg);
         return element;
     }
-	free_array(split_arg);
 }
 
 void	ft_unset(t_env *env, char *arg)
