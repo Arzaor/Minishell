@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/25 15:34:10 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/27 11:12:33 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_env(t_env *env, char *search)
 	if (count == 1)
 	{
 		if (tab_env[i])
-		path_def = test(tab_env, i);
+			path_def = test(tab_env, i);
 	}
 	free(tab_env);
 	return (path_def);

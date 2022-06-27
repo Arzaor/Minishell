@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/27 11:10:20 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:12:58 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	get_absolute_path(char *path, t_parser *parser)
 	if (path != NULL)
 	{
 		path_split = ft_split(path, ':');
+		free(path);
 		while (path_split[i])
 		{
 			bin = (char *)ft_calloc(sizeof(char), \
@@ -134,6 +135,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-			get_absolute_path("/Users/jbarette/.brew/bin:/Users/jbarette/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki", parser);
+			get_absolute_path(get_env(env, "PATH"), parser);
 	handler_redir(parser, cmds, env);
 }
