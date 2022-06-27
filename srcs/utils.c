@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:49 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/26 02:02:41 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:47:03 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	display_tab(char **env_tab)
 	}
 }
 
-/*
 void	style_prompt(void)
 {
 	int		ret;
@@ -96,4 +95,3 @@ void	style_prompt(void)
 	reset_cmd = tgetstr("md", NULL);
 	tputs(reset_cmd, 1, putchar);
 }
-*/

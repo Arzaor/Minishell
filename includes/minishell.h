@@ -95,5 +95,5 @@ void	style_prompt(void);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 void	clean_redir(t_parser *parser, int saveout1);
 
-
+void	sig_handler(int signo);
 #endif

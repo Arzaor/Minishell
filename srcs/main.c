@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 12:14:39 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/27 12:45:55 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	start_minishell(char **env)
 	envp = create_env(env);
 	while (1)
 	{
-		// style_prompt();
+		style_prompt();
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
@@ -41,10 +41,13 @@ static void	start_minishell(char **env)
 	free(envp);
 }
 
-static void	sig_handler(int signo)
+void	sig_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
+		printf("\e[2K");
+		rl_on_new_line();
+		rl_redisplay();
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -52,6 +55,7 @@ static void	sig_handler(int signo)
 	}
 	else if (signo == SIGQUIT)
 	{
+		printf("\e[2K");
 		rl_on_new_line();
 		rl_redisplay();
 	}

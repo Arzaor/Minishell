@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/26 02:27:46 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 13:54:19 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	cmds = NULL;
 	cmds_bis = NULL;
 	count = 0;
+	
 	while (line[i])
 		parsing_redirection(line, parser, i++);
 	if (parser->parser_left_redir != 0 \
