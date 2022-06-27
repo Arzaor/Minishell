@@ -44,14 +44,14 @@ int			g_code;
 void		rl_replace_line(const char *text,int clear_undo);
 
 //PARSING
-void	parsing_symbols(t_parser *parser, char *line, t_env *env);
+void		parsing_symbols(t_parser *parser, char *line, t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
-char	*get_env(t_env *env, char *search);
-void	get_absolute_path(char *path, t_parser *parser);
-void	ft_exit_with_line(char *line);
+char		*get_env(t_env *env, char *search);
+void		get_absolute_path(char *path, t_parser *parser);
+void		ft_exit_with_line(char *line);
 
 //CMD
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds);
@@ -70,7 +70,7 @@ char	**create_tab(t_env *env);
 void	free_array(char **array);
 void	ft_test(t_env *env,char *args);
 bool	is_build_in(char *cmd);
-char *ft_strcat(char *dest, char *src);
+char 	*ft_strcat(char *dest, char *src);
 // INIT & FREE
 t_parser	*init();
 void		free_parser(t_parser *parser);
@@ -87,10 +87,10 @@ char		*test(char **tab_env, int i);
 //REDIR
 int		handler_dright_redir(t_parser *parser);
 void	handler_redir(t_parser *parser, char **cmds, t_env *env);
-int handler_right_redir(t_parser *parser);
-int handler_left_redir(t_parser *parser, char *heredoc);
-int handler_dleft_redir(t_parser *parser);
-int	check_dollars(t_parser *parser, int i, t_env *env);
+int 	handler_right_redir(t_parser *parser);
+int 	handler_left_redir(t_parser *parser, char *heredoc);
+int 	handler_dleft_redir(t_parser *parser);
+int		check_dollars(t_parser *parser, int i, t_env *env);
 void	style_prompt(void);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 void	clean_redir(t_parser *parser, int saveout1);

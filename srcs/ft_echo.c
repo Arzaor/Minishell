@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 14:37:23 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/27 14:40:09 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,13 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 	s = i;
 	if (ft_strlen(parser->parser_args) <= 1 && parser->parser_args[i] == quote)
 	{
-		printf("Format quotes.");
+		printf("Format quotes 2.");
 		return (i);
 	}
 	while (parser->parser_args[++i])
 	{
 		if (parser->parser_args[i] == quote)
 		{
-			if(quote == '\'')
-				parser->parser_single_quote -=1;
-			if(quote == '"')
-				parser->parser_double_quote -=1;
 			in_quote = 1;
 			break ;
 		}
