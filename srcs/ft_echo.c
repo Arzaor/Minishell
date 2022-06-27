@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 14:40:09 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/27 20:30:46 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,7 @@ int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 	if (parser->parser_args[s] == '$' && quote == '"')
 		s = check_dollars(parser, s, env);
 	if (parser->parser_args[s] == quote)
-	{
-		if(quote == '\'')
-			parser->parser_single_quote -=1;
-		if(quote == '"')
-			parser->parser_double_quote -=1;
 		s++;
-	}
 	else
 		printf("%c", parser->parser_args[s++]);
 	return (s);
@@ -39,7 +33,7 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 	s = i;
 	if (ft_strlen(parser->parser_args) <= 1 && parser->parser_args[i] == quote)
 	{
-		printf("Format quotes 2.");
+		printf("Format quotes.");
 		return (i);
 	}
 	while (parser->parser_args[++i])

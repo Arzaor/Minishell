@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/27 11:29:56 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:20:38 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_env(t_env *env, char *search)
 	path_def = NULL;
 	while (tab_env[i])
 	{
-		if (ft_strncmp(search, tab_env[i], 4) == 0)
+		if (ft_strncmp(search, tab_env[i], ft_strlen(search)) == 0)
 		{
 			count = 1;
 			break ;
