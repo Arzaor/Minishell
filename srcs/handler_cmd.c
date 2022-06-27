@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/26 02:28:11 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:10:20 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,19 @@ char *ft_strcat(char *dest, char *src)
 
 void	get_absolute_path(char *path, t_parser *parser)
 {
-	char	**path_split;
 	int		i;
+	char	**path_split;
 	char	*bin;
 
 	i = 0;
 	path_split = NULL;
 	bin = 0;
-	if(path != NULL)
+	if (path != NULL)
 	{
 		path_split = ft_split(path, ':');
-		free(path);
 		while (path_split[i])
 		{
-			bin = ft_calloc(sizeof(char), \
+			bin = (char *)ft_calloc(sizeof(char), \
 				(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
 			if (bin == NULL)
 				break ;
@@ -76,7 +75,11 @@ void	get_absolute_path(char *path, t_parser *parser)
 			ft_strcat(bin, "/");
 			ft_strcat(bin, parser->parser_cmd);
 			if (access(bin, F_OK) == 0)
+			{
+				free(parser->parser_cmd);
+				parser->parser_cmd = NULL;
 				break ;
+			}
 			free(bin);
 			bin = NULL;
 			i++;
@@ -131,6 +134,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-			get_absolute_path(get_env(env, "PATH"), parser);
+			get_absolute_path("/Users/jbarette/.brew/bin:/Users/jbarette/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki", parser);
 	handler_redir(parser, cmds, env);
 }
