@@ -52,6 +52,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser);
 char		*get_env(t_env *env, char *search);
 void		get_absolute_path(char *path, t_parser *parser);
 void		ft_exit_with_line(char *line);
+int	check_quote_redir(char *line, int i);
 
 //CMD
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds);

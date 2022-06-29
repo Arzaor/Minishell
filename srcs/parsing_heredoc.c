@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/23 17:31:17 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/29 16:15:03 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \
 		parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
 	{
-		while (line[i] != '>' && line[i] != '<')
+		while (line[i])
+		{
+			if ((line[i] == '>' || line[i] == '<') && !(check_quote_redir(line, i)))
+				break ;
 			i++;
+		}
 		i = ft_handler_space(line, parser, i);
 		if (i > 0)
 		{
