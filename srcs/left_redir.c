@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/29 17:02:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:03:01 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,47 @@ int	handler_left_redir(t_parser *parser, char *heredoc)
 	return (saveout1);
 }
 
+static void ts(int signo)
+{
+	t_parser *parser;
+	if(signo == SIGINT)
+	{
+		
+		 printf("killing process %d\n",getpid());
+		 kill(parser->parser_sig,SIGINT);
+
+	}
+	
+}
 int	handler_dleft_redir(t_parser *parser)
 {
 	char	*line;
 	int		saveout1;
 
+	parser->parser_sig = fork();
 	saveout1 = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (saveout1 == -1)
 		printf("fff");
+	signal(SIGINT, ts);
 	while (1)
 	{
 		line = readline("> ");
-		
 		if(line != NULL)
 		{
-			if(! ft_strcmp(line,parser->parser_heredoc))
+			if(!ft_strcmp(line,parser->parser_heredoc))
+			{
+				free(line);
 				break ;
+			}
+				
 			write(saveout1, line, ft_strlen(line));
 			write(saveout1, "\n", 1);
 		}
 		else
-			ft_exit_with_line(line);
+			break;
 		free(line);
 	}
+		
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
 	{
 		saveout1 = handler_left_redir(parser, "heredoc.txt");

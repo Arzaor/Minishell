@@ -25,6 +25,7 @@ typedef struct	s_parser {
 	int			parser_right_redir;
 	int			parser_dleft_redir;
 	int			parser_dright_redir;
+	int			parser_sig;
 	char		*parser_heredoc;
 }				t_parser;
 
