@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 12:08:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:22:59 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,21 @@ int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 		printf("%c", parser->parser_args[s++]);
 	return (s);
 }
+static void format_quotes(){
+	int		line_count;
+	int		col_cocunt;
+	char	*cm_cap;
 
+	printf("\e[2K");
+	line_count = tgetnum("li");
+	col_cocunt = tgetnum("cl");
+	cm_cap = tgetstr("cm", NULL);
+	tputs(tgoto(cm_cap, col_cocunt, line_count - 1), 1, putchar);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	printf("Format quotes.");
+}
 static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 {
 	int		s;
@@ -33,7 +47,7 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 	s = i;
 	if (ft_strlen(parser->parser_args) <= 1 && parser->parser_args[i] == quote)
 	{
-		printf("Format quotes.");
+		format_quotes();
 		return (i);
 	}
 	while (parser->parser_args[++i])
@@ -48,7 +62,10 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 		while (s < i)
 			s = ft_append_value(parser, s, quote, env);
 	else if (parser->parser_args[i + 1] != quote)
-		printf("Format quotes.");
+	{
+		format_quotes();
+	}
+		
 	return (i);
 }
 
@@ -58,6 +75,7 @@ int	ft_show_code(t_parser *parser, int i)
 	printf("%d", g_code);
 	return (i);
 }
+
 
 void	ft_echo(t_parser *parser, t_env *env)
 {
@@ -75,7 +93,7 @@ void	ft_echo(t_parser *parser, t_env *env)
 			else if (arg[i] == '$' && arg[i + 1] == '?')
 				i = ft_show_code(parser, i);
 			else if (ft_strlen(arg) <= 1 && (arg[i] == '"' || arg[i] == '\''))
-				printf("Error: Format quote.");
+				format_quotes();
 			else if (arg[i] == '"' || arg[i] == '\'')
 				i = ft_check_quote(parser, i, arg[i], env);
 			else if (arg[i] == '$' && arg[i + 1] != '?')
