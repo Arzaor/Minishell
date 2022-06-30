@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/29 14:10:41 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:08:28 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 	s = 0;
 	in_quote = 0;
 	s = i;
+	if (ft_strlen(parser->parser_args) <= 1 && parser->parser_args[i] == quote)
+	{
+		printf("Format quotes.");
+		return (i);
+	}
 	while (parser->parser_args[++i])
 	{
 		if (parser->parser_args[i] == quote)
@@ -42,6 +47,8 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 	if (in_quote)
 		while (s < i)
 			s = ft_append_value(parser, s, quote, env);
+	else if (parser->parser_args[i + 1] != quote)
+		printf("Format quotes.");
 	return (i);
 }
 
