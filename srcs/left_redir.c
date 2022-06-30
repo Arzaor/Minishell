@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/30 17:03:01 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/30 17:06:22 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	handler_left_redir(t_parser *parser, char *heredoc)
 	saveout1 = dup(0);
 	close(0);
 	if (fd == -1)
+	{
 		printf("bash: %s: No such file or directory\n", heredoc);
+		g_code = 1;
+	}
 	else
 		dup2(fd, 0);
 	return (saveout1);

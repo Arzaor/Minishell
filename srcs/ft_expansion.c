@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 20:21:20 by hamza            ###   ########.fr       */
+/*   Updated: 2022/06/30 12:39:02 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	check_symbols(t_parser *parser, int i)
 {
 	while (parser->parser_args[i])
 	{
-		//printf("%c\n",parser->parser_args[i]);
 		if (parser->parser_args[i ] == ' ')
 			break ;
 		if (parser->parser_args[i ] == '\'')
@@ -47,7 +46,6 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 	while (count < i)
 	{
 		env_var[k++] = parser->parser_args[count];
-		//printf("%c\n",parser->parser_args[count]);
 		count++;
 	}
 	env_var[k] = '\0';

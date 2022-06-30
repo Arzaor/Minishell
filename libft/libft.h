@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 13:17:38 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/08 13:17:07 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:24:55 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 long long				ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
-int					ft_isalnum(int c);
+int					ft_isnum(char c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);

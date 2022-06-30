@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 15:54:24 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/30 17:06:25 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,49 @@
 
 void	ft_exit(t_parser *parser)
 {
-	// Créer un free_env
+	int		i;
+	int		k;
+	char	*code;
+	char	**split_arg;
+
+	i = 0;
+	k = 0;
+	code = 0;
+	split_arg = NULL;
+	if (parser->parser_args)
+	{
+		split_arg = ft_split(parser->parser_args, ' ');
+		if (split_arg[1])
+		{
+			printf("%s: too many arguments\n", parser->parser_cmd);
+			g_code = 1;
+		}
+		else
+		{
+			if (ft_isnum(parser->parser_args[0]))
+			{
+				printf("exit");
+				while (ft_isnum(parser->parser_args[i]))
+					i++;
+				code = malloc(sizeof(char) * i + 1);
+				i = 0;
+				while (ft_isnum(parser->parser_args[i]))
+					code[k++] = parser->parser_args[i++];
+				g_code = ft_atoi(code);
+				free(code);
+			}
+			else
+			{
+				g_code = 255;
+				printf("exit\n");
+				printf("exit: %s: numeric argument required\n", parser->parser_args);
+			}
+		}
+	}
+	else
+		printf("exit");
 	free_parser(parser);
-	printf("exit");
-	exit(EXIT_SUCCESS);
+	exit(g_code);
 }
 
 void	ft_exit_with_line(char *line)
