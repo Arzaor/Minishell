@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/29 17:02:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:35:53 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	handler_left_redir(t_parser *parser, char *heredoc)
 	saveout1 = dup(0);
 	close(0);
 	if (fd == -1)
+	{
 		printf("bash: %s: No such file or directory\n", heredoc);
+		g_code = 1;
+	}
 	else
 		dup2(fd, 0);
 	return (saveout1);
@@ -38,10 +41,9 @@ int	handler_dleft_redir(t_parser *parser)
 	while (1)
 	{
 		line = readline("> ");
-		
 		if(line != NULL)
 		{
-			if(! ft_strcmp(line,parser->parser_heredoc))
+			if(!ft_strcmp(line, parser->parser_heredoc))
 				break ;
 			write(saveout1, line, ft_strlen(line));
 			write(saveout1, "\n", 1);

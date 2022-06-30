@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/27 11:12:58 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:38:30 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,11 @@ void	exec_cmd(t_parser *parser, char **cmds)
 	else
 	{
 		if (execve(parser->parser_cmd, cmds, NULL) == -1)
+		{
+			g_code = 127;
 			printf("bash: %s: command not found\n", cmds[0]);
-		exit(0);
+		}
+		exit(EXIT_SUCCESS);
 	}
 }
 

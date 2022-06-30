@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/29 16:15:03 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:02:18 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	ft_handler_space(char *line, t_parser *parser, int i)
 		i += 3;
 	else
 	{
+		g_code = 258;
 		printf("bash: syntax error near unexpected token `newline'\n");
 		parser->parser_heredoc = NULL;
 		return (-1);

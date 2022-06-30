@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 12:22:59 by hterras          ###   ########.fr       */
+/*   Updated: 2022/06/30 15:06:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 		printf("%c", parser->parser_args[s++]);
 	return (s);
 }
-static void format_quotes(){
+
+static void format_quotes()
+{
 	int		line_count;
 	int		col_cocunt;
 	char	*cm_cap;
@@ -35,8 +37,10 @@ static void format_quotes(){
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_code = 258;
 	printf("Format quotes.");
 }
+
 static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 {
 	int		s;
@@ -62,10 +66,7 @@ static int	ft_check_quote(t_parser *parser, int i, char quote, t_env *env)
 		while (s < i)
 			s = ft_append_value(parser, s, quote, env);
 	else if (parser->parser_args[i + 1] != quote)
-	{
 		format_quotes();
-	}
-		
 	return (i);
 }
 
@@ -75,7 +76,6 @@ int	ft_show_code(t_parser *parser, int i)
 	printf("%d", g_code);
 	return (i);
 }
-
 
 void	ft_echo(t_parser *parser, t_env *env)
 {
@@ -99,7 +99,10 @@ void	ft_echo(t_parser *parser, t_env *env)
 			else if (arg[i] == '$' && arg[i + 1] != '?')
 				i = check_dollars(parser, i, env);
 			else
+			{
+				g_code = 1;
 				printf("%s: erreur lors de l'éxecution", parser->parser_cmd);
+			}
 			i++;
 		}
 		if (!parser->parser_opt)
