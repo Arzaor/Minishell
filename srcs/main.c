@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 12:54:19 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/03 14:52:18 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static void	show_prompt(char *line, t_env *envp)
 	if (line)
 		add_history(line);
 	parsing_symbols(parser, line, envp);
+}
+void	set_signal(int sig)
+{
+	if(sig == SIGINT)
+	{
+		printf("ed");
+		signal (SIGQUIT, sig_handler);
+	}
+	printf("dw");
+		
 }
 
 static void	start_minishell(char **env)
@@ -43,6 +53,9 @@ static void	start_minishell(char **env)
 
 void	sig_handler(int signo)
 {
+	int process;
+	
+	//kill_process(&process);
 	if (signo == SIGINT)
 	{
 		g_code = 1;
@@ -53,6 +66,7 @@ void	sig_handler(int signo)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		
 	}
 	else if (signo == SIGQUIT)
 	{
@@ -66,8 +80,8 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	/*signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);*/
 	start_minishell(env);
 	return (0);
 }

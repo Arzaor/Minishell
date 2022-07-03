@@ -86,6 +86,12 @@ void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
 char		*test(char **tab_env, int i);
 
+void	signal_handler3(int sig);
+void	signal_handler_2(int sig);
+void	set_signal(int sig);
+
+void	kill_process(int *process);
+
 //REDIR
 int		handler_dright_redir(t_parser *parser);
 void	handler_redir(t_parser *parser, char **cmds, t_env *env);
