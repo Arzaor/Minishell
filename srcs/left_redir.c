@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/04 17:22:02 by hamza            ###   ########.fr       */
+/*   Updated: 2022/07/04 17:34:43 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	handler_dleft_redir(t_parser *parser)
 			write(saveout1, line, ft_strlen(line));
 			write(saveout1, "\n", 1);
 		}
-		else if(g_code == 1)
-				break ;
+		else
+			break ;
 		free(line);
 	}
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))

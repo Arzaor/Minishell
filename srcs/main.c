@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/04 17:22:27 by hamza            ###   ########.fr       */
+/*   Updated: 2022/07/04 17:34:31 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	start_minishell(char **env)
 	envp = create_env(env);
 	while (1)
 	{
-		
 		//set_signal(SIGUSR1);
 		style_prompt();
 		line = readline(":> ");
@@ -60,8 +59,6 @@ Si l'option du shell huponexit a été activée avec la fonction shopt, bash env
 Lorsque bash attend la fin d'une commande et qu'il reçoit un signal qu'il doit capturer, le gestionnaire de signal ne sera pas exécuté avant que la commande soit finie. Lorsque bash attend la fin d'une commande asynchrone avec wait la réception d'un signal capturé causera la fin immédiate de la commande wait avec un code de retour supérieur à 128, à la suite de quoi le gestionnaire de signal sera exécuté.*/
 void	sig_handler(int signo)
 {
-	
-	
 	if (signo == SIGINT)
 	{
 		g_code = 1;
@@ -72,7 +69,6 @@ void	sig_handler(int signo)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		
 	}
 	
 	else if (signo == SIGQUIT)
