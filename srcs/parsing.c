@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/03 14:01:07 by hamza            ###   ########.fr       */
+/*   Updated: 2022/07/04 17:19:04 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ static t_parser	*parsing(t_parser *parser, char *line)
 	parser = parsing_cmd(line, parser);
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser);
-	char **test = ft_split(line,  '>');
+	parser = parsing_heredoc(line,parser);
+	/*char **test = ft_split(line,  '>');
 	while (test[i])
 	{
 		parser = parsing_heredoc(test[i], parser);
 		i++;
-	}
+	}*/
 	return (parser);
 }
 

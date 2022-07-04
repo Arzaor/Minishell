@@ -15,6 +15,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
+# define CTRL_C SIGINT
+
 typedef struct	s_parser {
 	char		*parser_cmd;
 	int			parser_opt;
