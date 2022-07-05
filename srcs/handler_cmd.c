@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 15:04:57 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:43:02 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ bool	is_build_in(char *cmd)
 	return (false);
 }
 
-char *ft_strcat(char *dest, char *src)
+char	*ft_strcat(char *dest, char *src)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (dest[i] != '\0')
@@ -69,7 +69,8 @@ void	get_absolute_path(char *path, t_parser *parser)
 		while (path_split[i])
 		{
 			bin = (char *)ft_calloc(sizeof(char), \
-				(ft_strlen(path_split[i]) + 1 + ft_strlen(parser->parser_cmd) + 1));
+				(ft_strlen(path_split[i]) + 1 + \
+					ft_strlen(parser->parser_cmd) + 1));
 			if (bin == NULL)
 				break ;
 			ft_strcat(bin, path_split[i]);
@@ -138,6 +139,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-			get_absolute_path(get_env(env, "PATH"), parser);
+		get_absolute_path(get_env(env, "PATH"), parser);
 	handler_redir(parser, cmds, env);
 }

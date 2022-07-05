@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 13:45:04 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:14:58 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 	return (s);
 }
 
-static void format_quotes()
+
+static void	format_quotes()
 {
 	int		line_count;
 	int		col_cocunt;
@@ -76,38 +77,42 @@ int	ft_show_code(t_parser *parser, int i)
 	printf("%d", g_code);
 	return (i);
 }
-
-void	ft_echo(t_parser *parser, t_env *env)
+static void	ft_echo2(t_parser *parser, t_env *env,char *arg)
 {
 	int		i;
-	char	*arg;
 
 	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] != '"' && arg[i] != '\'' && arg[i] != '$')
+			printf("%c", arg[i]);
+		else if (arg[i] == '$' && arg[i + 1] == '?')
+			i = ft_show_code(parser, i);
+		else if (ft_strlen(arg) <= 1 && (arg[i] == '"' || arg[i] == '\''))
+			format_quotes();
+		else if (arg[i] == '"' || arg[i] == '\'')
+			i = ft_check_quote(parser, i, arg[i], env);
+		else if (arg[i] == '$' && arg[i + 1] != '?')
+		{
+			i = check_dollars(parser, i, env);
+			i -= 2;
+		}
+		else
+		{
+			g_code = 1;
+			printf("%s: erreur lors de l'éxecution", parser->parser_cmd);
+		}
+		i++;
+	}
+}
+void	ft_echo(t_parser *parser, t_env *env)
+{
+	char	*arg;
+
 	arg = parser->parser_args;
 	if (arg)
 	{
-		while (arg[i])
-		{
-			if (arg[i] != '"' && arg[i] != '\'' && arg[i] != '$')
-				printf("%c", arg[i]);
-			else if (arg[i] == '$' && arg[i + 1] == '?')
-				i = ft_show_code(parser, i);
-			else if (ft_strlen(arg) <= 1 && (arg[i] == '"' || arg[i] == '\''))
-				format_quotes();
-			else if (arg[i] == '"' || arg[i] == '\'')
-				i = ft_check_quote(parser, i, arg[i], env);
-			else if (arg[i] == '$' && arg[i + 1] != '?')
-			{
-				i = check_dollars(parser, i, env);
-				i -= 2;
-			}
-			else
-			{
-				g_code = 1;
-				printf("%s: erreur lors de l'éxecution", parser->parser_cmd);
-			}
-			i++;
-		}
+		ft_echo2(parser,env,arg);
 		if (!parser->parser_opt)
 			printf("\n");
 	}
