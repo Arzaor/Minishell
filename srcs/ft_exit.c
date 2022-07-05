@@ -3,24 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 14:51:06 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:31:10 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ft_exit2(t_parser *parser, int i)
+{
+	char	*code;
+	int		k;
+
+	code = 0;
+	k = 0;
+	if (ft_isnum(parser->parser_args[0]))
+	{
+		printf("exit");
+		while (ft_isnum(parser->parser_args[i]))
+			i++;
+		code = malloc(sizeof(char) * i + 1);
+		i = 0;
+		while (ft_isnum(parser->parser_args[i]))
+			code[k++] = parser->parser_args[i++];
+		g_code = ft_atoi(code);
+		free(code);
+	}
+	else
+	{
+		g_code = 255;
+		printf("exit\n");
+		printf("exit: %s: numeric argument required\n", \
+			parser->parser_args);
+	}
+}
+
 void	ft_exit(t_parser *parser)
 {
 	int		i;
-	int		k;
 	char	*code;
 	char	**split_arg;
 
 	i = 0;
-	k = 0;
 	code = 0;
 	split_arg = NULL;
 	if (parser->parser_args)
@@ -32,26 +58,7 @@ void	ft_exit(t_parser *parser)
 			g_code = 1;
 		}
 		else
-		{
-			if (ft_isnum(parser->parser_args[0]))
-			{
-				printf("exit");
-				while (ft_isnum(parser->parser_args[i]))
-					i++;
-				code = malloc(sizeof(char) * i + 1);
-				i = 0;
-				while (ft_isnum(parser->parser_args[i]))
-					code[k++] = parser->parser_args[i++];
-				g_code = ft_atoi(code);
-				free(code);
-			}
-			else
-			{
-				g_code = 255;
-				printf("exit\n");
-				printf("exit: %s: numeric argument required\n", parser->parser_args);
-			}
-		}
+			ft_exit2(parser, i);
 	}
 	else
 		printf("exit");
@@ -59,7 +66,7 @@ void	ft_exit(t_parser *parser)
 	exit(g_code);
 }
 
-void ft_exit_with_line2(char *line)
+void	ft_exit_with_line2(char *line)
 {
 	int		line_count;
 	int		col_cocunt;
@@ -86,7 +93,7 @@ void	ft_exit_with_line(char *line)
 	line_count = tgetnum("li");
 	col_cocunt = tgetnum("cl");
 	cm_cap = tgetstr("cm", NULL);
-	tputs(tgoto(cm_cap, col_cocunt + 4, line_count-2), 1, putchar);
+	tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
 	free(line);
 	printf("exit");
 	exit(EXIT_SUCCESS);

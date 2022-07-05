@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 14:35:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:34:40 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ static	void	ft_tri_tab(char **tri, int count)
 	}
 }
 
-void static export_arg(t_env *env, char *value)
+void static	export_arg2(t_env *env, char *value)
+{
+	ft_unset(env, value);
+	insert_env(env, value);
+}
+
+void static	export_arg(t_env *env, char *value)
 {
 	int		j;
 	int		i;
@@ -49,18 +55,15 @@ void static export_arg(t_env *env, char *value)
 	str2 = create_tab(env);
 	while (str2[i])
 	{
-		if(!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
+		if (!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
 		{
 			j = 1;
-			break;
+			break ;
 		}
 		i++;
 	}
 	if (j == 1)
-	{
-		ft_unset(env, value);
-		insert_env(env, value);
-	}
+		export_arg2(env, value);
 	else
 		insert_env(env, value);
 	free_array(str);

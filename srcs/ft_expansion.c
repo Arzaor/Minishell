@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 12:39:02 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:26:07 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static int	check_symbols(t_parser *parser, int i)
 {
 	while (parser->parser_args[i])
 	{
-		if (parser->parser_args[i ] == ' ')
+		if (parser->parser_args[i] == ' ')
 			break ;
-		if (parser->parser_args[i ] == '\'')
+		if (parser->parser_args[i] == '\'')
 			break ;
-		if (parser->parser_args[i ] == '"')
+		if (parser->parser_args[i] == '"')
 			break ;
-		if (parser->parser_args[i ] == '$')
+		if (parser->parser_args[i] == '$')
 			break ;
 		i++;
 	}
@@ -36,9 +36,7 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 	int		count;
 	int		k;
 
-	env_var = 0;
-	i += 1;
-	count = i;
+	count = i + 1;
 	k = 0;
 	result = NULL;
 	i = check_symbols(parser, i);
@@ -54,8 +52,8 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 		printf("%s", result);
 	free (result);
 	free (env_var);
-	if(parser->parser_args[i] == '\'')
+	if (parser->parser_args[i] == '\'')
 		return (i);
 	else
-		return(i+1);
+		return (i + 1);
 }

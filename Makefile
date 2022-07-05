@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
+#    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/07/05 16:46:40 by jbarette         ###   ########.fr        #
+=======
+#    Updated: 2022/07/05 16:11:36 by hterras          ###   ########.fr        #
+>>>>>>> 7aa29f2671136df2810f36699177af3efd3b4e73
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +47,7 @@ SRCS_ALL 	= 	${SRCS}
 OBJS 		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
-CFLAGS		=	
+CFLAGS		=
 
 LIB_RDL 	= 	libreadline.a ./libft/libft.a
 
