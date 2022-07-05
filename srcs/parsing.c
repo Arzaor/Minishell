@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/04 17:19:04 by hamza            ###   ########.fr       */
+/*   Updated: 2022/07/05 14:13:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,9 @@ static t_parser	*parsing(t_parser *parser, char *line)
 	parser = parsing_cmd(line, parser);
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser);
-	parser = parsing_heredoc(line,parser);
-	/*char **test = ft_split(line,  '>');
-	while (test[i])
-	{
-		parser = parsing_heredoc(test[i], parser);
-		i++;
-	}*/
+	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \
+		parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
+		parser = parsing_heredoc(line, parser);
 	return (parser);
 }
 
@@ -76,8 +72,8 @@ void	parsing_handler(t_parser *parser, char *line, \
 		i++;
 	}
 	if (count != ft_strlen(line))
-	handler_cmd(parsing(parser, line), env, cmds_bis);
-	//ßprintf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
+		handler_cmd(parsing(parser, line), env, cmds_bis);
+	printf("CMD: %s || OPT: %d || ARG: %s || LEFT_REDIR : %d || RIGHT_REDIR : %d || HEREDOC : %s\n", parser->parser_cmd,parser->parser_opt,parser->parser_args, parser->parser_left_redir, parser->parser_right_redir,parser->parser_heredoc);
 	free_array(cmds_bis);
 	free_parser(parser);
 }

@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/29 15:44:30 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:45:23 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,55 +25,6 @@ static int	ft_count_i(t_parser *parser, char *line)
 		i += 3;
 	return (i);
 }
-
-/*
-int	check_quote_redir(char *line, int i)
-{
-	char	quote;
-	int		in_quote;
-	int		pos;
-	int		second_pos;
-	int		i;
-
-	quote = 0;
-	in_quote = 0;
-	pos = 0;
-	second_pos = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' || line[i] == '"')
-		{
-			in_quote = 1;
-			pos = i;
-			quote = line[i];
-			break ;
-		}
-		i++;
-	}
-	if (in_quote != 0)
-	{
-		pos += 1;
-		while (line[pos])
-		{
-			if (line[pos] == quote)
-			{
-				second_pos = pos;
-				break ;
-			}
-			pos++;
-		}
-	}
-	pos = i;
-	while (pos < second_pos)
-	{
-		if (line[pos] == '<' || line[pos] == '>')
-			return (1);
-		pos++;
-	}
-	return (0);
-}
-*/
 
 int	check_quote_redir(char *line, int i)
 {
@@ -132,6 +83,7 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 		parser->parser_args = malloc(sizeof(char) * count + 1);
 		while (k < count)
 			parser->parser_args[k++] = line[i++];
+		parser->parser_args[k] = '\0';
 	}
 	return (parser);
 }

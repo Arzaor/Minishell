@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 15:06:42 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:45:04 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void	ft_echo(t_parser *parser, t_env *env)
 			else if (arg[i] == '"' || arg[i] == '\'')
 				i = ft_check_quote(parser, i, arg[i], env);
 			else if (arg[i] == '$' && arg[i + 1] != '?')
+			{
 				i = check_dollars(parser, i, env);
+				i -= 2;
+			}
 			else
 			{
 				g_code = 1;

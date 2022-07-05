@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/30 18:06:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:18:13 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,22 @@ static int	ft_handler_space(char *line, t_parser *parser, int i)
 t_parser	*parsing_heredoc(char *line, t_parser *parser)
 {
 	int		i;
+	int		j;
 	int		k;
 	int		count;
+	char	**test;
 
-	i = 0;
+	i = 1;
+	j = 0;
 	k = 0;
 	count = 0;
-	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \
-		parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
-	{
-		while (line[i])
-		{
-			if ((line[i] == '>' || line[i] == '<') && !(check_quote_redir(line, i)))
-				break ;
-			i++;
-		}
-		i = ft_handler_space(line, parser, i);
-		if (i > 0)
-		{
-			k = i;
-			while (line[i] && line[i] != ' ')
-			{
-				count++;
-				i++;
-			}
-			parser = save_heredoc(parser, count, k, line);
-		}
-	}
+	test = ft_split(line, '>');
+	while (test[i])
+		open(ft_strtrim(test[i++]), O_CREAT | O_RDWR, 0666);
+	parser->parser_heredoc = malloc(sizeof(char) * ft_strlen(ft_strtrim(test[i - 1])));
+	while (test[i - 1][j])
+		parser->parser_heredoc[k++] = test[i - 1][j++];
+	parser->parser_heredoc[k] = '\0';
+	free_array(test);
 	return (parser);
 }
