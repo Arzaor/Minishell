@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:18:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:28:10 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void		ft_exit_with_line(char *line);
 int			check_quote_redir(char *line, int i);
 void		format_quotes(void);
 int			ft_check_quote(t_parser *parser, int i, char quote, t_env *env);
+int			ft_append_value(t_parser *parser, int s, char quote, t_env *env);
+void		get_absolute_path(char *path, t_parser *parser);
 
 //PROMPT
 void		show_prompt(char *line, t_env *envp);
@@ -124,6 +126,6 @@ void		style_prompt(void);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 void		clean_redir(t_parser *parser, int saveout1);
 char		**fast_parsing(t_parser *parser, char *line);
-
 void		sig_handler(int signo);
+
 #endif
