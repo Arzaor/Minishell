@@ -104,6 +104,7 @@ int		check_dollars(t_parser *parser, int i, t_env *env);
 void	style_prompt(void);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 void	clean_redir(t_parser *parser, int saveout1);
+char	**fast_parsing(t_parser *parser, char *line);
 
 void	sig_handler(int signo);
 #endif

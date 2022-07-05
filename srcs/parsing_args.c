@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 13:45:23 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:44:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,29 @@ static int	ft_count_i(t_parser *parser, char *line)
 	return (i);
 }
 
+char	send_quote(char *line, int i)
+{
+	int	a;
+
+	a = 0;
+	while (a < i)
+	{
+		if (line[a] == '\'' || line[a] == '"')
+			return (line[a]);
+		a++;
+	}
+	return (0);
+}
+
 int	check_quote_redir(char *line, int i)
 {
 	char	quote;
 	int		a;
-	int		in_quote;
 	int		length;
 
-	quote = 0;
-	a = 0;
-	in_quote = 0;
 	length = ft_strlen(line);
-	while (a < i)
-	{
-		if (line[a] == '\'' || line[a] == '"')
-		{
-			in_quote = 1;
-			quote = line[a];
-			break ;
-		}
-		a++;
-	}
-	if (in_quote)
+	quote = send_quote(line, i);
+	if (quote != 0)
 	{
 		while (i < length)
 		{
@@ -65,7 +66,6 @@ t_parser	*parsing_args(char *line, t_parser *parser)
 	int		k;
 	int		count;
 
-	k = 0;
 	count = 0;
 	i = ft_count_i(parser, line);
 	k = i;

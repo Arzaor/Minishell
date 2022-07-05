@@ -1,8 +1,16 @@
-#include <ctype.h>
-#include <string.h>
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/05 16:19:55 by jbarette          #+#    #+#             */
+/*   Updated: 2022/07/05 16:23:34 by jbarette         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define NUL '\0'
+#include "libft.h"
 
 char	*ft_strtrim(char *str)
 {
@@ -37,14 +45,14 @@ char	*ft_strtrim(char *str)
 				}
 				obuf[i++] = *ibuf++;
 			}
-		}	
-		obuf[i] = NUL;
+		}
+		obuf[i] = '\0';
 		while (--i >= 0)
 		{
 			if (!ft_isspace(obuf[i]))
-				break;
+				break ;
 		}
-		obuf[++i] = NUL;
+		obuf[++i] = '\0';
 	}
-	return str;
+	return (str);
 }
