@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:16:17 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 17:18:14 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char		*get_env(t_env *env, char *search);
 void		get_absolute_path(char *path, t_parser *parser);
 void		ft_exit_with_line(char *line);
 int			check_quote_redir(char *line, int i);
+void		format_quotes(void);
+int			ft_check_quote(t_parser *parser, int i, char quote, t_env *env);
 
 //PROMPT
 void		show_prompt(char *line, t_env *envp);
@@ -96,6 +98,7 @@ t_parser	*init(void);
 void		free_parser(t_parser *parser);
 t_env		*init_env(void);
 void		ft_exit_with_line2(char *line);
+
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
 t_env		*create_env(char **env);

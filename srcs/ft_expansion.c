@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 15:26:07 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 17:03:55 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 	int		count;
 	int		k;
 
-	count = i + 1;
+	env_var = 0;
+	i += 1;
+	count = i;
 	k = 0;
 	result = NULL;
 	i = check_symbols(parser, i);
@@ -52,8 +54,8 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 		printf("%s", result);
 	free (result);
 	free (env_var);
-	if (parser->parser_args[i] == '\'')
+	if(parser->parser_args[i] == '\'')
 		return (i);
 	else
-		return (i + 1);
+		return(i+1);
 }

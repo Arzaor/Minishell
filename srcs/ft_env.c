@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 16:23:08 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 17:13:12 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	ft_env(t_env *env)
 	display_linked_list(env);
 }
 
-static char	*get_env2(char **tab_env, char *path_def, int i)
+char	*get_env2(int count, char **tab_env, int i)
 {
+	char	*path_def;
+
+	path_def = 0;
 	if (tab_env[i])
 		path_def = test(tab_env, i);
 	return (path_def);
@@ -32,11 +35,11 @@ char	*get_env(t_env *env, char *search)
 	int		k;
 	int		count;
 
-	count = 0;
 	tab_env = create_tab(env);
+	path_def = NULL;
+	count = 0;
 	i = 0;
 	k = 0;
-	path_def = NULL;
 	while (tab_env[i])
 	{
 		if (ft_strncmp(search, tab_env[i], ft_strlen(search)) == 0)
@@ -44,11 +47,10 @@ char	*get_env(t_env *env, char *search)
 			count = 1;
 			break ;
 		}
-		if (count == 1)
-			path_def = get_env2(tab_env, path_def, i);
-		count = 0;
 		i++;
 	}
+	if (count == 1)
+		path_def = get_env2(count, tab_env, i);
 	free(tab_env);
 	return (path_def);
 }
