@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 16:11:18 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:00:20 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	show_prompt(char *line, t_env *envp)
-{
-	t_parser	*parser;
-
-	parser = init();
-	if (line)
-		add_history(line);
-	parsing_symbols(parser, line, envp);
-}
 
 static void	start_minishell(char **env)
 {
@@ -43,7 +33,7 @@ static void	start_minishell(char **env)
 	free(envp);
 }
 
-void	handler_child(int sig)
+void	sig_handler2(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -90,8 +80,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, handler_child);
-	signal(SIGINT, handler_child);
+	signal(SIGQUIT, sig_handler2);
+	signal(SIGINT, sig_handler2);
 	start_minishell(env);
 	return (0);
 }

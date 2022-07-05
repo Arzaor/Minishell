@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:49 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 12:47:03 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 16:54:48 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,20 @@ void	display_tab(char **env_tab)
 	}
 }
 
-void	style_prompt(void)
+char	*ft_strcat(char *dest, char *src)
 {
-	int		ret;
-	char	*term_type;
-	char	*color_cap;
-	char	*reset_cmd;
+	int	i;
+	int	j;
 
-	term_type = getenv("TERM");
-	ret = tgetent(NULL, term_type);
-	color_cap = tgetstr("AF", NULL);
-	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
-	reset_cmd = tgetstr("md", NULL);
-	tputs(reset_cmd, 1, putchar);
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }
