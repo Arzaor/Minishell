@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/27 11:29:07 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:35:14 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void static export_arg(t_env *env, char *value)
 	}
 	if (j == 1)
 	{
-		ft_unset(env,value);
+		ft_unset(env, value);
 		insert_env(env, value);
 	}
 	else
-		insert_env(env,value);
+		insert_env(env, value);
 	free_array(str);
 	free(str2);
 }

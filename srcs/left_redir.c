@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 13:56:09 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 15:04:50 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,15 @@ int	handler_dleft_redir(t_parser *parser)
 {
 	char	*line;
 	int		saveout1;
-	int		count = 0;
 	saveout1 = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (saveout1 == -1)
 		printf("fff");
-	//printf("%s",parser->parser_heredoc);
+	// printf("%s",parser->parser_heredoc);
 	while (1)
 	{
 		line = readline("> ");
 		if(line != NULL)
 		{
-			if(g_code == 138)
-			{
-				count = 1;
-				break;
-				
-			}
 			if(! ft_strcmp(line,parser->parser_heredoc))
 			{
 				free(line);
@@ -59,8 +52,6 @@ int	handler_dleft_redir(t_parser *parser)
 			break ;
 		free(line);
 	}
-	if(count == 1)
-		ft_exit_with_line2(line);
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
 	{
 		saveout1 = handler_left_redir(parser, "heredoc.txt");

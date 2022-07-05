@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 13:10:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:04:20 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	start_minishell(char **env)
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
+		if (line && g_code == 138)
+			ft_exit_with_line2(line);
 		if (ft_strlen(line) > 0)
 			show_prompt(line, envp);
 		free(line);
@@ -46,6 +48,25 @@ Les commandes externes lancées par bash reçoivent les valeurs des signaux hér
 Par défaut, le shell se termine à la réception de SIGHUP. Avant de se terminer, un shell interactif renvoie SIGHUP à tous les jobs en cours ou arrêtés. Les jobs arrêtés reçoivent aussi SIGCONT pour s'assurer qu'il recevront bien le SIGHUP. Pour empêcher le shell d'envoyer ce signal à un job particulier, il faut le retirer de la table des jobs à l'aide de la commande interne disown (voir FONCTIONS INTERNES DU SHELL plus bas) ou le marquer comme exempté de SIGHUP avec disown -h.
 Si l'option du shell huponexit a été activée avec la fonction shopt, bash envoie un signal SIGHUP à tous les jobs lorsqu'un shell de login interactif se termine.
 Lorsque bash attend la fin d'une commande et qu'il reçoit un signal qu'il doit capturer, le gestionnaire de signal ne sera pas exécuté avant que la commande soit finie. Lorsque bash attend la fin d'une commande asynchrone avec wait la réception d'un signal capturé causera la fin immédiate de la commande wait avec un code de retour supérieur à 128, à la suite de quoi le gestionnaire de signal sera exécuté.*/
+
+void	handler_child(int sig)
+{
+	if (sig == SIGINT)
+	{
+		if (g_code != -111)
+			printf("\e[2K");
+		if (g_code == -111)
+			printf("\n");
+	}
+	else if (sig == SIGQUIT)
+	{
+		if (g_code == -111)
+		{
+			printf("Quit:3");
+			printf("\n");
+		}
+	}
+}
 
 void	sig_handler(int signo)
 {
@@ -63,7 +84,7 @@ void	sig_handler(int signo)
 	
 	else if (signo == SIGQUIT)
 	{
-		g_code = 138;
+		g_code =-110;
 		printf("\e[2K");
 		rl_on_new_line();
 		rl_redisplay();
@@ -76,6 +97,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, handler_child);
+	signal(SIGINT, handler_child);
 	start_minishell(env);
 	return (0);
 }

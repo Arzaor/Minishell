@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 14:18:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:16:19 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	j = 0;
 	k = 0;
 	count = 0;
-	test = ft_split(line, '>');
+	if (parser->parser_right_redir == 2 || parser->parser_dright_redir == 4)
+		test = ft_split(line, '>');
+	else
+		test = ft_split(line, '<');
 	while (test[i])
 		open(ft_strtrim(test[i++]), O_CREAT | O_RDWR, 0666);
 	parser->parser_heredoc = malloc(sizeof(char) * ft_strlen(ft_strtrim(test[i - 1])));

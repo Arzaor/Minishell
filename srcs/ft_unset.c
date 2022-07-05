@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/27 11:27:52 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:47:20 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
     t_element *current, *precent;
 
     current = element;
-    if (element == NULL)
-        return NULL;
 	char **split_arg = ft_split(current->value, '=');
+	if (element == NULL)
+        return NULL;
     if (ft_strncmp(arg, split_arg[0], ft_strlen(split_arg[0])) == 0)
     {
         precent = current->next;
@@ -40,6 +40,26 @@ static t_element* delete_element(t_element *element, t_env *env, char *arg)
 
 void	ft_unset(t_env *env, char *arg)
 {
-	if (arg)
+	int		j;
+	int		i;
+	char	**str;
+	char	**str2;
+
+	j = 0;
+	i = 0;
+	str = ft_split(arg, '=');
+	str2 = create_tab(env);
+	while (str2[i])
+	{
+		if(!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
+		{
+			j = 1;
+			break;
+		}
+		i++;
+	}
+	if (j == 1)
 		delete_element(env->first, env, arg);
+	free_array(str);
+	free(str2);
 }
