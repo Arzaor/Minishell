@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/07/05 17:18:40 by jbarette         ###   ########.fr        #
+#    Updated: 2022/07/05 17:19:44 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 		=	main.c \
 				parsing_cmd.c \
 				create_env.c \
 				utils.c \
+				utils2.c \
 				ft_echo.c \
 				ft_export.c \
 				ft_cd.c \
