@@ -6,13 +6,13 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 16:13:21 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:47:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handler_left_redir(t_parser *parser, char *heredoc)
+int	handler_left_redir(char *heredoc)
 {
 	int		saveout1;
 	int		fd;
@@ -61,7 +61,7 @@ int	handler_dleft_redir(t_parser *parser)
 	saveout1 = handler_dleft_redir_norm(parser, saveout1);
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
 	{
-		saveout1 = handler_left_redir(parser, "heredoc.txt");
+		saveout1 = handler_left_redir("heredoc.txt");
 		return (saveout1);
 	}
 	return (0);

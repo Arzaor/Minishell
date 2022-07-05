@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:21:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:47:48 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_env(t_env *env)
 	display_linked_list(env);
 }
 
-char	*get_env2(int count, char **tab_env, int i)
+char	*get_env2(char **tab_env, int i)
 {
 	char	*path_def;
 
@@ -50,7 +50,7 @@ char	*get_env(t_env *env, char *search)
 		i++;
 	}
 	if (count == 1)
-		path_def = get_env2(count, tab_env, i);
+		path_def = get_env2(tab_env, i);
 	free(tab_env);
 	return (path_def);
 }

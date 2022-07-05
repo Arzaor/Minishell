@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:19:19 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:46:48 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 	return (s);
 }
 
-int	ft_show_code(t_parser *parser, int i)
+int	ft_show_code(int i)
 {
 	i += 1;
 	printf("%d", g_code);
@@ -40,7 +40,7 @@ static void	ft_echo_parsing(char *arg, t_parser *parser, t_env *env)
 		if (arg[i] != '"' && arg[i] != '\'' && arg[i] != '$')
 			printf("%c", arg[i]);
 		else if (arg[i] == '$' && arg[i + 1] == '?')
-			i = ft_show_code(parser, i);
+			i = ft_show_code(i);
 		else if (ft_strlen(arg) <= 1 && (arg[i] == '"' || arg[i] == '\''))
 			format_quotes();
 		else if (arg[i] == '"' || arg[i] == '\'')

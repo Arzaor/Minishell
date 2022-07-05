@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:28:10 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:47:21 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		kill_process(int *process);
 int			handler_dright_redir(t_parser *parser);
 void		handler_redir(t_parser *parser, char **cmds, t_env *env);
 int			handler_right_redir(t_parser *parser);
-int			handler_left_redir(t_parser *parser, char *heredoc);
+int			handler_left_redir(char *heredoc);
 int			handler_dleft_redir(t_parser *parser);
 int			check_dollars(t_parser *parser, int i, t_env *env);
 void		style_prompt(void);

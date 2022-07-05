@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 16:18:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:46:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_parser	*save_heredoc(t_parser *parser, int count, int i, char *line)
 	return (parser);
 }
 
+/*
 static int	ft_handler_space(char *line, t_parser *parser, int i)
 {
 	if ((line[i] == '>' && ft_isalpha(line[i + 1])) || \
@@ -54,6 +55,7 @@ static int	ft_handler_space(char *line, t_parser *parser, int i)
 	}
 	return (i);
 }
+*/
 
 t_parser	*parsing_heredoc(char *line, t_parser *parser)
 {

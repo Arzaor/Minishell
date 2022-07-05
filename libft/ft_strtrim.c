@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:19:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:41:17 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:48:32 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_strtrim2(char *str, char *ibuf, char *obuf, int cnt)
 		}
 	}
 	obuf = ft_strtrim3(i, obuf);
+	return (str);
 }
 
 char	*ft_strtrim(char *str)

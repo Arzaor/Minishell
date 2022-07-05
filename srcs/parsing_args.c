@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 16:44:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:46:14 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	send_quote(char *line, int i)
 int	check_quote_redir(char *line, int i)
 {
 	char	quote;
-	int		a;
 	int		length;
 
 	length = ft_strlen(line);
