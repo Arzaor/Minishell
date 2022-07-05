@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
+/*   Updated: 2022/07/05 17:16:17 by hterras          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -17,7 +29,7 @@
 
 # define CTRL_C SIGINT
 
-typedef struct	s_parser {
+typedef struct s_parser {
 	char		*parser_cmd;
 	int			parser_opt;
 	char		*parser_args;
@@ -31,20 +43,18 @@ typedef struct	s_parser {
 	char		*parser_heredoc;
 }				t_parser;
 
-typedef struct			s_element
+typedef struct s_element
 {
 	char				*value;
 	struct s_element	*next;
 }						t_element;
 
-typedef struct			s_env
+typedef struct s_env
 {
 	t_element			*first;
 }						t_env;
 
 int			g_code;
-
-void		rl_replace_line(const char *text,int clear_undo);
 
 //PARSING
 void		parsing_symbols(t_parser *parser, char *line, t_env *env);
@@ -55,31 +65,37 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser);
 char		*get_env(t_env *env, char *search);
 void		get_absolute_path(char *path, t_parser *parser);
 void		ft_exit_with_line(char *line);
-int	check_quote_redir(char *line, int i);
+int			check_quote_redir(char *line, int i);
+
+//PROMPT
+void		show_prompt(char *line, t_env *envp);
+void		rl_replace_line(const char *text, int clear_undo);
 
 //CMD
-void	handler_cmd(t_parser *parser, t_env *env, char **cmds);
-void	create_cmd(t_parser *parser, t_env *env);
-void	ft_echo(t_parser *parser, t_env *env);
-void	ft_cd(t_parser *parser);
-void	ft_export(t_env *env,char *value);
-void	ft_unset(t_env *env, char *arg);
-void	ft_env(t_env *env);
-void	pwd(void);
-void	exec_cmd(t_parser *parser, char **cmds);
-void	ft_exit(t_parser *parser);
+void		handler_cmd(t_parser *parser, t_env *env, char **cmds);
+void		create_cmd(t_parser *parser, t_env *env);
+void		ft_echo(t_parser *parser, t_env *env);
+void		ft_cd(t_parser *parser);
+void		ft_export(t_env *env, char *value);
+void		ft_unset(t_env *env, char *arg);
+void		ft_env(t_env *env);
+void		pwd(void);
+void		exec_cmd(t_parser *parser, char **cmds);
+void		ft_exit(t_parser *parser);
+
 //UTILS
-int		ft_strcmp(const char *s1, const char *s2);
-char	**create_tab(t_env *env);
-void	free_array(char **array);
-void	ft_test(t_env *env,char *args);
-bool	is_build_in(char *cmd);
-char 	*ft_strcat(char *dest, char *src);
+int			ft_strcmp(const char *s1, const char *s2);
+char		**create_tab(t_env *env);
+void		free_array(char **array);
+void		ft_test(t_env *env, char *args);
+bool		is_build_in(char *cmd);
+char		*ft_strcat(char *dest, char *src);
+
 // INIT & FREE
-t_parser	*init();
+t_parser	*init(void);
 void		free_parser(t_parser *parser);
-t_env		*init_env();
-void ft_exit_with_line2(char *line);
+t_env		*init_env(void);
+void		ft_exit_with_line2(char *line);
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
 t_env		*create_env(char **env);
@@ -88,23 +104,23 @@ void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
 char		*test(char **tab_env, int i);
 
-void	signal_handler3(int sig);
-void	signal_handler_2(int sig);
-void	set_signal(int sig);
+void		signal_handler3(int sig);
+void		signal_handler_2(int sig);
+void		set_signal(int sig);
 
-void	kill_process(int *process);
+void		kill_process(int *process);
 
 //REDIR
-int		handler_dright_redir(t_parser *parser);
-void	handler_redir(t_parser *parser, char **cmds, t_env *env);
-int 	handler_right_redir(t_parser *parser);
-int 	handler_left_redir(t_parser *parser, char *heredoc);
-int 	handler_dleft_redir(t_parser *parser);
-int		check_dollars(t_parser *parser, int i, t_env *env);
-void	style_prompt(void);
+int			handler_dright_redir(t_parser *parser);
+void		handler_redir(t_parser *parser, char **cmds, t_env *env);
+int			handler_right_redir(t_parser *parser);
+int			handler_left_redir(t_parser *parser, char *heredoc);
+int			handler_dleft_redir(t_parser *parser);
+int			check_dollars(t_parser *parser, int i, t_env *env);
+void		style_prompt(void);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
-void	clean_redir(t_parser *parser, int saveout1);
-char	**fast_parsing(t_parser *parser, char *line);
+void		clean_redir(t_parser *parser, int saveout1);
+char		**fast_parsing(t_parser *parser, char *line);
 
-void	sig_handler(int signo);
+void		sig_handler(int signo);
 #endif
