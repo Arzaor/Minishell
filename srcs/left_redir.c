@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/04 17:34:43 by hamza            ###   ########.fr       */
+/*   Updated: 2022/07/05 13:56:09 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	handler_dleft_redir(t_parser *parser)
 {
 	char	*line;
 	int		saveout1;
-
+	int		count = 0;
 	saveout1 = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (saveout1 == -1)
 		printf("fff");
@@ -43,8 +43,9 @@ int	handler_dleft_redir(t_parser *parser)
 		{
 			if(g_code == 138)
 			{
-				ft_exit_with_line(line);
-				break ;
+				count = 1;
+				break;
+				
 			}
 			if(! ft_strcmp(line,parser->parser_heredoc))
 			{
@@ -58,6 +59,8 @@ int	handler_dleft_redir(t_parser *parser)
 			break ;
 		free(line);
 	}
+	if(count == 1)
+		ft_exit_with_line2(line);
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
 	{
 		saveout1 = handler_left_redir(parser, "heredoc.txt");

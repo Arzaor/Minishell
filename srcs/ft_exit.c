@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 17:06:25 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/05 13:59:03 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,23 @@ void	ft_exit(t_parser *parser)
 	free_parser(parser);
 	exit(g_code);
 }
+void ft_exit_with_line2(char *line)
+{
+	int		line_count;
+	int		col_cocunt;
+	char	*cm_cap;
 
+	line_count = tgetnum("li");
+	col_cocunt = tgetnum("cl");
+	cm_cap = tgetstr("cm", NULL);
+	tputs(tgoto(cm_cap, col_cocunt, line_count-2), 1, putchar);
+	printf("\e[2K");
+	rl_on_new_line();
+	rl_redisplay();
+	free(line);
+	printf(":> exit");
+	exit(EXIT_SUCCESS);
+}
 void	ft_exit_with_line(char *line)
 {
 	int		line_count;
@@ -68,7 +84,7 @@ void	ft_exit_with_line(char *line)
 	line_count = tgetnum("li");
 	col_cocunt = tgetnum("cl");
 	cm_cap = tgetstr("cm", NULL);
-	tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
+	tputs(tgoto(cm_cap, col_cocunt + 4, line_count-2), 1, putchar);
 	free(line);
 	printf("exit");
 	exit(EXIT_SUCCESS);

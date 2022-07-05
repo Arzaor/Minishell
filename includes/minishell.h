@@ -79,7 +79,7 @@ char 	*ft_strcat(char *dest, char *src);
 t_parser	*init();
 void		free_parser(t_parser *parser);
 t_env		*init_env();
-
+void ft_exit_with_line2(char *line);
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
 t_env		*create_env(char **env);
