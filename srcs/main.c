@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:00:20 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/06 14:20:23 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static void	start_minishell(char **env)
 	while (1)
 	{
 		style_prompt();
+		signal(SIGQUIT, sig_handler);
+		signal(SIGINT, sig_handler);
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
-		if (line && g_code == 138)
+		if (line && g_code == -110 && ft_strncmp(line,"^\\",ft_strlen(line)))
 			ft_exit_with_line2(line);
 		if (ft_strlen(line) > 0)
 			show_prompt(line, envp);
@@ -41,6 +43,7 @@ void	sig_handler2(int sig)
 			printf("\e[2K");
 		if (g_code == -111)
 			printf("\n");
+		g_code = 130;
 	}
 	else if (sig == SIGQUIT)
 	{
@@ -49,7 +52,9 @@ void	sig_handler2(int sig)
 			printf("Quit:3");
 			printf("\n");
 		}
+		g_code = 131;
 	}
+
 }
 
 void	sig_handler(int signo)
@@ -78,10 +83,7 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	signal(SIGQUIT, sig_handler);
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler2);
-	signal(SIGINT, sig_handler2);
+	
 	start_minishell(env);
 	return (0);
 }
