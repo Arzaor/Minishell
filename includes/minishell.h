@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:47:21 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/06 14:01:56 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,11 @@ void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
 char		*test(char **tab_env, int i);
 
+//SIGNAUX
 void		signal_handler3(int sig);
 void		signal_handler_2(int sig);
 void		set_signal(int sig);
-
+void		sig_handler2(int sig);
 void		kill_process(int *process);
 
 //REDIR
