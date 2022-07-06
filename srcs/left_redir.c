@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:40:41 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:47:37 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/06 14:39:31 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	handler_dleft_redir(t_parser *parser)
 {
 	int		saveout1;
 
-	saveout1 = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	saveout1 = open(".tmp/heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (saveout1 == -1)
 		printf("Erreur lors l'exécution de la commande.");
 	saveout1 = handler_dleft_redir_norm(parser, saveout1);
 	if (!ft_strcmp(parser->parser_cmd, "/bin/cat"))
 	{
-		saveout1 = handler_left_redir("heredoc.txt");
+		saveout1 = handler_left_redir(".tmp/heredoc.txt");
 		return (saveout1);
 	}
 	return (0);

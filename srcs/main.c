@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/06 14:20:23 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/06 14:36:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	start_minishell(char **env)
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
-		if (line && g_code == -110 && ft_strncmp(line,"^\\",ft_strlen(line)))
+		if (line && g_code == -110 && ft_strncmp(line, "^\\", ft_strlen(line)))
 			ft_exit_with_line2(line);
 		if (ft_strlen(line) > 0)
 			show_prompt(line, envp);
@@ -54,7 +54,6 @@ void	sig_handler2(int sig)
 		}
 		g_code = 131;
 	}
-
 }
 
 void	sig_handler(int signo)
@@ -83,7 +82,6 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	
 	start_minishell(env);
 	return (0);
 }
