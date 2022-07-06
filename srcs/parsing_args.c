@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:46:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/06 14:00:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,18 @@ static int	ft_count_i(t_parser *parser, char *line)
 	i = 0;
 	if (parser->parser_cmd)
 		i += ft_strlen(parser->parser_cmd);
-	if (line[i] == ' ')
+	while (line[i] == ' ')
 		i++;
 	if (parser->parser_opt)
-		i += 3;
+	{
+		if (line[i] == '-')
+		{
+			i++;
+			while (line[i] != ' ')
+				i++;
+			i += 1;
+		}
+	}
 	return (i);
 }
 
