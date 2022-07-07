@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 16:31:10 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 13:12:50 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	ft_exit(t_parser *parser)
 			ft_exit2(parser, i);
 	}
 	else
+	{
 		printf("exit");
+		g_code = 0;
+	}
 	free_parser(parser);
 	exit(g_code);
 }
@@ -81,7 +84,7 @@ void	ft_exit_with_line2(char *line)
 	rl_redisplay();
 	free(line);
 	printf(":> exit");
-	exit(EXIT_SUCCESS);
+	exit(0);
 }
 
 void	ft_exit_with_line(char *line)
@@ -96,5 +99,5 @@ void	ft_exit_with_line(char *line)
 	tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
 	free(line);
 	printf("exit");
-	exit(EXIT_SUCCESS);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:04 by hterras           #+#    #+#             */
-/*   Updated: 2022/06/30 12:39:35 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 12:49:43 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	pwd(void)
 	}
 	else
 	{
-		perror("getcwd() error");
+		perror("getcwd()");
 		g_code = 1;
 	}
 }
