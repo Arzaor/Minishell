@@ -6,11 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/07/06 13:56:51 by jbarette         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/06 14:17:19 by hterras          ###   ########.fr       */
->>>>>>> 66789f435c97597aaccd9e85454f5ac1a5e8cd02
+/*   Updated: 2022/07/07 13:09:16 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +91,6 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	count = 0;
 	while (line[i])
 		parsing_redirection(line, parser, i++);
-	if(g_code != 130 && g_code != 131)
-	{
-		signal(SIGQUIT, sig_handler2);
-		signal(SIGINT, sig_handler2);
-	}
-	
 	parsing_handler(parser, line, env, fast_parsing(parser, line));
+	
 }
