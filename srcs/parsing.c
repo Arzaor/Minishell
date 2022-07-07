@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 13:09:16 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 13:13:23 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,4 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	while (line[i])
 		parsing_redirection(line, parser, i++);
 	parsing_handler(parser, line, env, fast_parsing(parser, line));
-	
 }

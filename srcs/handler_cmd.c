@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 13:09:07 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 13:13:36 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	create_cmd(t_parser *parser, t_env *env)
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
-	if(g_code != 130 && g_code != 131)
+	if (g_code != 130 && g_code != 131)
 	{
 		signal(SIGQUIT, sig_handler2);
 		signal(SIGINT, sig_handler2);

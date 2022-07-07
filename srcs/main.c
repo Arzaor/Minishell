@@ -6,7 +6,7 @@
 /*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 13:10:41 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 13:13:09 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	sig_handler2(int sig)
 		}
 		g_code = 131;
 	}
-
 }
 
 void	sig_handler(int signo)
@@ -85,7 +84,6 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	
 	start_minishell(env);
 	return (0);
 }
