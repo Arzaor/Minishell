@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/07/07 13:12:47 by jbarette         ###   ########.fr       */
+=======
+/*   Updated: 2022/07/07 13:13:36 by hterras          ###   ########.fr       */
+>>>>>>> 17c8d9321fab015ed1dbd28e64c576cb4db51e09
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +84,11 @@ void	create_cmd(t_parser *parser, t_env *env)
 
 void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 {
+	if (g_code != 130 && g_code != 131)
+	{
+		signal(SIGQUIT, sig_handler2);
+		signal(SIGINT, sig_handler2);
+	}
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 		get_absolute_path(get_env(env, "PATH"), parser);

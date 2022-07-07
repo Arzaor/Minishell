@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/06 14:36:42 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 13:13:09 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	start_minishell(char **env)
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
-		if (line && g_code == -110 && ft_strncmp(line, "^\\", ft_strlen(line)))
-			ft_exit_with_line2(line);
 		if (ft_strlen(line) > 0)
 			show_prompt(line, envp);
 		free(line);
@@ -40,7 +38,11 @@ void	sig_handler2(int sig)
 	if (sig == SIGINT)
 	{
 		if (g_code != -111)
+		{
 			printf("\e[2K");
+			rl_on_new_line();
+			rl_redisplay();
+		}
 		if (g_code == -111)
 			printf("\n");
 		g_code = 130;
@@ -58,7 +60,7 @@ void	sig_handler2(int sig)
 
 void	sig_handler(int signo)
 {
-	if (signo == SIGINT)
+	if (signo == SIGINT && g_code != -111)
 	{
 		g_code = 1;
 		printf("\e[2K");
