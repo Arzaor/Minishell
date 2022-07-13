@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 16:20:32 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:02:29 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,18 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 		while (k < count)
 			parser->parser_args[k++] = line[i++];
 		parser->parser_args[k] = '\0';
-		k = 0;
-		while (parser->parser_args[k])
+		if (ft_strcmp(parser->parser_cmd, "echo"))
 		{
-			if (parser->parser_args[k] == '$')
+			k = 0;
+			while (parser->parser_args[k])
 			{
-				check_dollars_other(parser, k, env);
-				break ;
+				if (parser->parser_args[k] == '$')
+				{
+					check_dollars_other(parser, k, env);
+					break ;
+				}
+				k++;
 			}
-			k++;
 		}
 	}
 	return (parser);
