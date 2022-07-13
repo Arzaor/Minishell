@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 13:13:23 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 16:02:44 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_parser	*parsing(t_parser *parser, char *line)
+static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ static t_parser	*parsing(t_parser *parser, char *line)
 		!strcmp(parser->parser_cmd, "sort"))
 		g_code = -111;
 	parser = parsing_opts(line, parser);
-	parser = parsing_args(line, parser);
+	parser = parsing_args(line, parser, env);
 	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \
 		parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
 		parser = parsing_heredoc(line, parser);
@@ -77,7 +77,7 @@ void	parsing_handler(t_parser *parser, char *line, \
 		i++;
 	}
 	if (count != ft_strlen(line))
-		handler_cmd(parsing(parser, line), env, cmds_bis);
+		handler_cmd(parsing(parser, line, env), env, cmds_bis);
 	free_array(cmds_bis);
 	free_parser(parser);
 }

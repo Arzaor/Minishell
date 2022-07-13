@@ -6,7 +6,11 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/07/11 22:34:26 by jbarette         ###   ########.fr       */
+=======
+/*   Updated: 2022/07/07 16:25:32 by jbarette         ###   ########.fr       */
+>>>>>>> a845f7f11c9acbb3406a384d948e11026b233926
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +71,11 @@ void	create_cmd(t_parser *parser, t_env *env)
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		ft_cd(parser, env);
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
+<<<<<<< HEAD
 		pwd(env);
+=======
+		pwd(parser);
+>>>>>>> a845f7f11c9acbb3406a384d948e11026b233926
 	if (!ft_strncmp(parser->parser_cmd, "export", 6))
 		ft_export(env, parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "unset", 5))

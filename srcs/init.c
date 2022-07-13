@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
 /*   Updated: 2022/07/11 22:33:13 by jbarette         ###   ########.fr       */
+=======
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
+/*   Updated: 2022/07/07 16:23:35 by jbarette         ###   ########.fr       */
+>>>>>>> a845f7f11c9acbb3406a384d948e11026b233926
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +35,7 @@ t_parser	*init(void)
 	parser->parser_dright_redir = 0;
 	parser->parser_sig = 0;
 	parser->parser_heredoc = NULL;
+	parser->parser_pwd = NULL;
 	return (parser);
 }
 
