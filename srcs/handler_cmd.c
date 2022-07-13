@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 13:24:11 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:25:32 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	create_cmd(t_parser *parser, t_env *env)
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		ft_cd(parser);
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
-		pwd();
+		pwd(parser);
 	if (!ft_strncmp(parser->parser_cmd, "export", 6))
 		ft_export(env, parser->parser_args);
 	if (!ft_strncmp(parser->parser_cmd, "unset", 5))

@@ -6,13 +6,13 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:04 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 12:49:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:26:00 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pwd(void)
+void	pwd(t_parser *parser)
 {
 	char	pwd[256];
 
@@ -23,7 +23,8 @@ void	pwd(void)
 	}
 	else
 	{
-		perror("getcwd()");
+		printf("%s\n", parser->parser_pwd);
+		// perror("getcwd()");
 		g_code = 1;
 	}
 }

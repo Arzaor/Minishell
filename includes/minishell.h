@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 12:47:26 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:25:09 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_parser {
 	int			parser_dright_redir;
 	int			parser_sig;
 	char		*parser_heredoc;
+	char		*parser_pwd;
 }				t_parser;
 
 typedef struct s_element
@@ -59,7 +60,7 @@ int			g_code;
 //PARSING
 void		parsing_symbols(t_parser *parser, char *line, t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
-t_parser	*parsing_args(char *line, t_parser *parser);
+t_parser	*parsing_args(char *line, t_parser *parser, t_env *env);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 t_parser	*parsing_heredoc(char *line, t_parser *parser);
 char		*get_env(t_env *env, char *search);
@@ -70,6 +71,8 @@ void		format_quotes(void);
 int			ft_check_quote(t_parser *parser, int i, char quote, t_env *env);
 int			ft_append_value(t_parser *parser, int s, char quote, t_env *env);
 void		get_absolute_path(char *path, t_parser *parser);
+char	*check_dollars1(int count, int i, char *env_var, t_parser *parser);
+int	check_symbols(t_parser *parser, int i);
 
 //PROMPT
 void		show_prompt(char *line, t_env *envp);
@@ -83,7 +86,7 @@ void		ft_cd(t_parser *parser);
 void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);
 void		ft_env(t_env *env);
-void		pwd(void);
+void		pwd(t_parser *parser);
 void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
 

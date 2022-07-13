@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
-/*   Updated: 2022/06/30 16:15:42 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/07 16:23:35 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_parser	*init(void)
 	parser->parser_dright_redir = 0;
 	parser->parser_sig = 0;
 	parser->parser_heredoc = NULL;
+	parser->parser_pwd = NULL;
 	return (parser);
 }
 

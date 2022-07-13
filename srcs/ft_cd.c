@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 13:21:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:54:10 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_cd(t_parser *parser)
 {
+
 	if (chdir(parser->parser_args) == -1)
 	{
 		g_code = 1;

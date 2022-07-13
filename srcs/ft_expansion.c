@@ -6,13 +6,13 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/06 14:24:10 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:08:02 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_symbols(t_parser *parser, int i)
+int	check_symbols(t_parser *parser, int i)
 {
 	while (parser->parser_args[i])
 	{
