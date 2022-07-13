@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/07/05 17:45:16 by jbarette         ###   ########.fr        #
+#    Updated: 2022/07/13 18:32:49 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

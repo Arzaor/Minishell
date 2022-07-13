@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:16:56 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:19:26 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:13:17 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	format_quotes(void)
 	char	*cm_cap;
 
 	printf("\e[2K");
-	line_count = tgetnum("li");
-	col_cocunt = tgetnum("cl");
-	cm_cap = tgetstr("cm", NULL);
-	tputs(tgoto(cm_cap, col_cocunt, line_count - 1), 1, putchar);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

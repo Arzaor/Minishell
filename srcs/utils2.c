@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 16:55:35 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/11 22:11:25 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	show_prompt(char *line, t_env *envp)
 	parsing_symbols(parser, line, envp);
 }
 
+/*
 void	style_prompt(void)
 {
 	int		ret;
@@ -36,3 +37,4 @@ void	style_prompt(void)
 	reset_cmd = tgetstr("md", NULL);
 	tputs(reset_cmd, 1, putchar);
 }
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 13:12:50 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:12:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,7 @@ void	ft_exit(t_parser *parser)
 	free_parser(parser);
 	exit(g_code);
 }
-
-void	ft_exit_with_line2(char *line)
-{
-	int		line_count;
-	int		col_cocunt;
-	char	*cm_cap;
-
-	line_count = tgetnum("li");
-	col_cocunt = tgetnum("cl");
-	cm_cap = tgetstr("cm", NULL);
-	tputs(tgoto(cm_cap, col_cocunt, line_count - 1), 1, putchar);
-	printf("\e[2K");
-	rl_on_new_line();
-	rl_redisplay();
-	free(line);
-	printf(":> exit");
-	exit(0);
-}
-
+/*
 void	ft_exit_with_line(char *line)
 {
 	int		line_count;
@@ -100,4 +82,4 @@ void	ft_exit_with_line(char *line)
 	free(line);
 	printf("exit");
 	exit(0);
-}
+}*/

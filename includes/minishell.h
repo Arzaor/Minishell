@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/07 12:47:26 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:33:10 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <errno.h>
 
 # define CTRL_C SIGINT
 
@@ -79,11 +80,11 @@ void		rl_replace_line(const char *text, int clear_undo);
 void		handler_cmd(t_parser *parser, t_env *env, char **cmds);
 void		create_cmd(t_parser *parser, t_env *env);
 void		ft_echo(t_parser *parser, t_env *env);
-void		ft_cd(t_parser *parser);
+void		ft_cd(t_parser *parser, t_env *env);
 void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);
 void		ft_env(t_env *env);
-void		pwd(void);
+void		pwd(t_env *env);
 void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
 
@@ -99,7 +100,6 @@ char		*ft_strcat(char *dest, char *src);
 t_parser	*init(void);
 void		free_parser(t_parser *parser);
 t_env		*init_env(void);
-void		ft_exit_with_line2(char *line);
 
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
