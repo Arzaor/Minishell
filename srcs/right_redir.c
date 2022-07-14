@@ -31,7 +31,7 @@ int	handler_right_redir(t_parser *parser)
 	saveout1 = dup(1);
 	close(1);
 	if (fd == -1)
-		dup2(open(parser->parser_heredoc, O_CREAT | O_RDWR, 0666), 1);
+		dup2(open(parser->parser_heredoc, O_CREAT| O_TRUNC | O_RDWR, 0666), 1);
 	else
 		dup2(open(parser->parser_heredoc, O_TRUNC | O_RDWR, 0666), 1);
 	return (saveout1);

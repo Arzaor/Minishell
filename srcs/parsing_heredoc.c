@@ -38,7 +38,14 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 		test = ft_split(line, '>');
 	else
 		test = ft_split(line, '<');
-	if (parser->parser_dleft_redir != 3)
+	if (parser->parser_right_redir == 2)
+	{
+		//i = 0;
+		while (test[i])
+			open(ft_strtrim(test[i++]), O_CREAT| O_TRUNC | O_RDWR, 0666);
+		parser = save_heredoc(parser, i - 1 , test);
+	}
+	if(parser->parser_dleft_redir != 3)
 	{
 		while (test[i])
 			open(ft_strtrim(test[i++]), O_CREAT | O_RDWR, 0666);
