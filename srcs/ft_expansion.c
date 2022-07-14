@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:05:02 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/13 15:04:59 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:44:17 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_dollars(t_parser *parser, int i, t_env *env)
 		printf("%s", result);
 	free(result);
 	free(env_var);
-	if (parser->parser_args[i] == '\'')
+	if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
 		return (i);
 	else
-		return (i);
+		return (i + 1);
 }

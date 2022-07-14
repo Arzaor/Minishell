@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/11 22:11:25 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:45:56 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	show_prompt(char *line, t_env *envp)
 	parsing_symbols(parser, line, envp);
 }
 
-/*
 void	style_prompt(void)
 {
 	int		ret;
@@ -37,4 +36,36 @@ void	style_prompt(void)
 	reset_cmd = tgetstr("md", NULL);
 	tputs(reset_cmd, 1, putchar);
 }
-*/
+
+char	send_quote(char *line, int i)
+{
+	int	a;
+
+	a = 0;
+	while (a < i)
+	{
+		if (line[a] == '\'' || line[a] == '"')
+			return (line[a]);
+		a++;
+	}
+	return (0);
+}
+
+int	check_quote_redir(char *line, int i)
+{
+	char	quote;
+	int		length;
+
+	length = ft_strlen(line);
+	quote = send_quote(line, i);
+	if (quote != 0)
+	{
+		while (i < length)
+		{
+			if (line[i] == quote)
+				return (1);
+			i++;
+		}
+	}
+	return (0);
+}
