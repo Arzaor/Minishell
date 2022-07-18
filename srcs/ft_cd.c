@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/14 13:44:46 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/18 12:39:24 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_cd(t_parser *parser, t_env *env)
 	else
 	{
 		g_code = 0;
-		pwd = (char *)ft_calloc(sizeof(char), (ft_strlen("OLDPWD=") + 1 \
+		pwd = (char *)ft_calloc(sizeof(char), (ft_strlen("PWD=") + 1 \
 				+ ft_strlen(getcwd(pwds, sizeof(pwds))) + 1));
-		ft_strcat(pwd, "OLDPWD=");
+		ft_strcat(pwd, "PWD=");
 		ft_strcat(pwd, getcwd(pwds, sizeof(pwds)));
 		ft_export(env, pwd);
 		free(pwd);

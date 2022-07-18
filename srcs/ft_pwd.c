@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:04 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/14 13:43:01 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/18 12:39:31 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	pwd(t_env *env)
 		if (errno == ENOENT)
 		{
 			g_code = 0;
-			oldpwd = get_env(env, "OLDPWD");
+			oldpwd = get_env(env, "PWD");
 			printf("%s\n", oldpwd);
 			free(oldpwd);
 		}
