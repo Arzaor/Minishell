@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hterras <hterras@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/07/14 13:09:36 by hterras          ###   ########.fr        #
+#    Updated: 2022/07/19 18:14:19 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= minishell
+NAME 		=	minishell
 
 SRC_DIR 	= 	srcs/
 INC_DIR 	= 	includes/
@@ -39,6 +39,7 @@ SRC 		=	main.c \
 				fast_parsing.c \
 				ft_check_quote.c \
 				get_path.c \
+				signals.c \
 				
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}
@@ -46,7 +47,7 @@ SRCS_ALL 	= 	${SRCS}
 OBJS 		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
-CFLAGS		=	#-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 
 LIB_RDL 	= 	libreadline.a ./libft/libft.a
 

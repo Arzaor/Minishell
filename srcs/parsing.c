@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/07 16:02:44 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:13:57 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 	parser = parsing_cmd(line, parser);
 	if (!strcmp(parser->parser_cmd, "cat") || \
 		!strcmp(parser->parser_cmd, "sort"))
+	{
 		g_code = -111;
+	}
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser, env);
 	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \

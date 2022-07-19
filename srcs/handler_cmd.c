@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/14 12:49:24 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/19 18:11:48 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	exec_cmd(t_parser *parser, char **cmds)
 			g_code = 127;
 			printf("bash: %s: command not found\n", cmds[0]);
 		}
-		exit(EXIT_FAILURE);
 	}
+	if (status == 256)
+		g_code = 1;
 }
 
 void	create_cmd(t_parser *parser, t_env *env)

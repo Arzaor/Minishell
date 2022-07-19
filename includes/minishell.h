@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/14 12:56:44 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/18 13:45:02 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ void		ft_env(t_env *env);
 void		pwd(t_env *env);
 void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
+
+//SIGNALS
+void		init_signals(void);
 
 //UTILS
 int			ft_strcmp(const char *s1, const char *s2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/14 13:02:55 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/19 18:12:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static void	start_minishell(char **env)
 	while (1)
 	{
 		style_prompt();
-		signal(SIGQUIT, sig_handler);
-		signal(SIGINT, sig_handler);
+		init_signals();
 		line = readline(":> ");
 		if (line == NULL)
 			ft_exit_with_line(line);
@@ -44,7 +43,10 @@ void	sig_handler2(int sig)
 			rl_redisplay();
 		}
 		if (g_code == -111)
+		{
+			printf("^C");
 			printf("\n");
+		}
 		g_code = 130;
 	}
 	else if (sig == SIGQUIT)
@@ -55,28 +57,6 @@ void	sig_handler2(int sig)
 			printf("\n");
 		}
 		g_code = 131;
-	}
-}
-
-void	sig_handler(int signo)
-{
-	if (signo == SIGINT && g_code != -111)
-	{
-		g_code = 1;
-		printf("\e[2K");
-		rl_on_new_line();
-		rl_redisplay();
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (signo == SIGQUIT)
-	{
-		g_code = -110;
-		printf("\e[2K");
-		rl_on_new_line();
-		rl_redisplay();
 	}
 }
 

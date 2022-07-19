@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/18 12:40:47 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:54:53 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 		else if (parser->parser_dleft_redir != 3)
 			open(ft_strtrim(test[i++]), O_CREAT | O_RDWR, 0666);
 		else
-			parser = save_heredoc(parser, i, test);
+			parser = save_heredoc(parser, i++, test);
 	}
 	parser = save_heredoc(parser, i - 1, test);
 	free_array(test);
