@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/20 17:31:58 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 01:06:55 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 		while (k < count)
 			parser->parser_args[k++] = line[i++];
 		parser->parser_args[k] = '\0';
-		if (ft_strcmp(parser->parser_cmd, "echo"))
+		if (ft_strcmp(parser->parser_cmd, "echo") && ft_strcmp(parser->parser_cmd, "export"))
 			test2(parser, k, env);
 	}
 	return (parser);

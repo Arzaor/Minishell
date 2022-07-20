@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/20 19:09:09 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 01:53:03 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,61 +51,79 @@ static void	export_arg2(t_env *env, char *value)
 	free_array(str);
 	insert_env(env, value);
 }
+
+static char	*check_symbols_w_parser(char *str, int i)
+{
+	int		count;
+	int		j;
+	char	*env_var;
+
+	count = i;
+	j = 0;
+	env_var = 0;
+	str++;
+	while (str[count] && (str[count] != ' ' || str[count] != '\'' || str[count] != '"' || str[count] != '$' || str[count] != '(' || str[count] != ')'))
+		count++;
+	env_var = malloc(sizeof(char) * count + 1);
+	while (str[i] && (str[i] != ' ' || str[i] != '\'' || str[i] != '"' || str[i] != '$' || str[i] != '(' || str[i] != ')'))
+		env_var[j++]= str[i++];
+	env_var[j] = '\0';
+	return (env_var);
+}
+
 static void	export_arg(t_env *env, char *value)
 {
 	int		j;
 	int		i;
 	char	**str;
-	char	**str2;
-	char	*str1;
+	char	**str1;
+	char	*str3;
+	char	*result;
+	char	*bin;
 
 	j = 0;
 	i = 0;
+	result = 0;
 	str = ft_split(value, ' ');
 	while (str[i])
 	{
-		str2 = ft_split(str[i], '=');
-		str1 = get_env(env, str2[0]);
-		if (str1)
+		str1 = ft_split(str[i], '=');
+		while (str1[1][j])
 		{
-			export_arg2(env, str[i]);
-			free(str1);
+			if (str1[1][j] == '$')
+				break ;
+			j++;
+		}
+		str3 = check_symbols_w_parser(str1[1], j++);
+		result = get_env(env, str3);
+		if (result)
+		{
+			bin = (char *)ft_calloc(sizeof(char), (ft_strlen(str1[0]) + 1 + ft_strlen(result) + 1));
+			ft_strcat(bin, str1[0]);
+			ft_strcat(bin, "=");
+			ft_strcat(bin, result);
+			result = get_env(env, str1[0]);
+			if (result)
+				export_arg2(env, bin);
+			else
+				insert_env(env, bin);
+			free(bin);
 		}
 		else
-			insert_env(env, str[i]);
-		free_array(str2);
+		{
+			result = get_env(env, str1[0]);
+			if (result)
+				export_arg2(env, str[i]);
+			else
+				insert_env(env, str[i]);
+		}
+		j = 0;
 		i++;
+		free_array(str1);
+		free(result);
 	}
 	free_array(str);
 }
-/*
-void static	export_arg(t_env *env, char *value)
-{
-	int		j;
-	int		i;
-	char	**str;
-	char	**str2;
-
-	j = 0;
-	i = 0;
-	str = ft_split(value, '=');
-	str2 = create_tab(env);
-	while (str2[i])
-	{
-		if (!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
-		{
-			j = 1;
-			break ;
-		}
-		i++;
-	}
-	if (j == 1)
-		export_arg2(env, value);
-	else
-		insert_env(env, value);
-	free_array(str);
-	free(str2);
-}*/
 
 void	ft_export(t_env *env, char *value)
 {
