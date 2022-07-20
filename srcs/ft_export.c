@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/20 18:37:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:09:09 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static	void	ft_tri_tab(char **tri, int count)
 	}
 }
 
+/*void static	export_arg2(t_env *env, char *value)
+{
+	ft_unset(env, value);
+	insert_env(env, value);
+}
+*/
 static void	export_arg2(t_env *env, char *value)
 {
 	char	**str;
@@ -45,7 +51,6 @@ static void	export_arg2(t_env *env, char *value)
 	free_array(str);
 	insert_env(env, value);
 }
-
 static void	export_arg(t_env *env, char *value)
 {
 	int		j;
@@ -73,6 +78,34 @@ static void	export_arg(t_env *env, char *value)
 	}
 	free_array(str);
 }
+/*
+void static	export_arg(t_env *env, char *value)
+{
+	int		j;
+	int		i;
+	char	**str;
+	char	**str2;
+
+	j = 0;
+	i = 0;
+	str = ft_split(value, '=');
+	str2 = create_tab(env);
+	while (str2[i])
+	{
+		if (!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
+		{
+			j = 1;
+			break ;
+		}
+		i++;
+	}
+	if (j == 1)
+		export_arg2(env, value);
+	else
+		insert_env(env, value);
+	free_array(str);
+	free(str2);
+}*/
 
 void	ft_export(t_env *env, char *value)
 {
