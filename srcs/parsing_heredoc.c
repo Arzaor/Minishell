@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:22:17 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/19 17:54:53 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:53:32 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 {
 	int		i;
 	char	**test;
+	int		fd;
 
 	i = 1;
 	test = NULL;
+	fd = -1;
 	if (parser->parser_right_redir == 2 || parser->parser_dright_redir == 4)
 		test = ft_split(line, '>');
 	else
@@ -41,11 +43,11 @@ t_parser	*parsing_heredoc(char *line, t_parser *parser)
 	while (test[i])
 	{
 		if (parser->parser_right_redir == 2)
-			open(ft_strtrim(test[i++]), O_CREAT | O_TRUNC | O_RDWR, 0666);
+			fd = open(ft_strtrim(test[i]), O_CREAT | O_TRUNC | O_RDWR, 0666);
 		else if (parser->parser_dleft_redir != 3)
-			open(ft_strtrim(test[i++]), O_CREAT | O_RDWR, 0666);
-		else
-			parser = save_heredoc(parser, i++, test);
+			fd = open(ft_strtrim(test[i]), O_CREAT | O_RDWR, 0666);
+		i++;
+		close (fd);
 	}
 	parser = save_heredoc(parser, i - 1, test);
 	free_array(test);

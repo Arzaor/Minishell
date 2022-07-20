@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/19 18:11:48 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:20:39 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ bool	is_build_in(char *cmd)
 	return (false);
 }
 
+static void	ft_exit_status(int status)
+{
+	if (WIFEXITED(status))
+		g_code = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+	{	
+		if (g_code == 2)
+			g_code += 128;
+		if (g_code == 3)
+		{
+			g_code += 128;
+		}
+	}
+}
+
 void	exec_cmd(t_parser *parser, char **cmds)
 {
 	pid_t	pid;
@@ -44,21 +59,21 @@ void	exec_cmd(t_parser *parser, char **cmds)
 	pid = fork();
 	if (pid == -1)
 		printf("Fork");
-	else if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		kill(pid, SIGTERM);
-	}
-	else
+	if (!pid)
 	{
 		if (execve(parser->parser_cmd, cmds, NULL) == -1)
 		{
 			g_code = 127;
 			printf("bash: %s: command not found\n", cmds[0]);
+			exit(g_code);
 		}
 	}
-	if (status == 256)
-		g_code = 1;
+	else
+	{
+		waitpid(pid, &status, 0);
+		g_code = status;
+		ft_exit_status(status);
+	}
 }
 
 void	create_cmd(t_parser *parser, t_env *env)

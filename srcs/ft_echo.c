@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/19 17:54:57 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:02:56 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_append_value(t_parser *parser, int s, char quote, t_env *env)
 {
-	if (parser->parser_args[s] == '$' && quote == '"')
+	while (parser->parser_args[s] == '$' && quote == '"')
 		s = check_dollars(parser, s, env);
 	if (parser->parser_args[s] == quote)
 		s++;
@@ -47,7 +47,7 @@ static void	ft_echo_parsing(char *arg, t_parser *parser, t_env *env)
 			i = ft_check_quote(parser, i, arg[i], env);
 		else if (arg[i] == '$' && arg[i + 1] != '?')
 		{
-			i = check_dollars(parser, i, env);
+			i = check_dollars_w_quote(parser, i, env);
 			i -= 2;
 		}
 		else

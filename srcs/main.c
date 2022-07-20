@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/19 18:12:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:36:50 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	sig_handler2(int sig)
 	{
 		if (g_code == -111)
 		{
-			printf("Quit:3");
+			printf("^\\Quit: 3");
 			printf("\n");
 		}
 		g_code = 131;

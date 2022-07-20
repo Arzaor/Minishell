@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/14 13:45:51 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/20 17:31:58 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static int	ft_count_i(t_parser *parser, char *line)
 {
 	int	i;
+	int	count;
+	char	letter;
 
 	i = 0;
+	count = 0;
+	letter = 0;
 	if (parser->parser_cmd)
 		i += ft_strlen(parser->parser_cmd);
 	while (line[i] == ' ')
@@ -26,8 +30,17 @@ static int	ft_count_i(t_parser *parser, char *line)
 		if (line[i] == '-')
 		{
 			i++;
-			while (line[i] != ' ')
+			while (line[i] == 'n')
+			{
 				i++;
+				count++;
+				letter = line[i];
+			}
+			if (letter != 'n' && letter != ' ')
+			{
+				i -= count + 2;
+				parser->parser_opt = 0;
+			}
 			i += 1;
 		}
 	}
@@ -79,7 +92,7 @@ static void	test2(t_parser *parser, int k, t_env *env)
 	k = 0;
 	while (parser->parser_args[k])
 	{
-		if (parser->parser_args[k] == '$')
+		if (parser->parser_args[k] == '$' && parser->parser_args[k - 1] != '\'')
 		{
 			check_dollars_other(parser, k, env);
 			break ;

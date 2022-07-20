@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/18 13:45:02 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:02:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int			ft_append_value(t_parser *parser, int s, char quote, t_env *env);
 void		get_absolute_path(char *path, t_parser *parser);
 char		*check_dollars1(int count, int i, char *env_var, t_parser *parser);
 int			check_symbols(t_parser *parser, int i);
+int			check_dollars_w_quote(t_parser *parser, int i, t_env *env);
 
 //PROMPT
 void		show_prompt(char *line, t_env *envp);
