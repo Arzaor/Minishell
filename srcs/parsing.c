@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/18 13:13:57 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:19:27 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 {
 	int		i;
 
-	i = 0;
-	while (line[i])
+	i = ft_strlen(parser->parser_cmd);
+	i += 1;
+	while (line[i] != ' ')
 	{
 		if (line[i] == '-' && line[i + 1] == 'n')
 			parser->parser_opt = 1;
