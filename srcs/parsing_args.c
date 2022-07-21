@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/21 01:06:55 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:27:10 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static void	check_dollars_other(t_parser *parser, int i, t_env *env)
 	result = get_env(env, env_var);
 	if (result != NULL)
 	{
-		parser->parser_args = malloc(sizeof(char) * ft_strlen(result) + 1);
 		i = 0;
 		while (result[i])
 			parser->parser_args[k++] = result[i++];
