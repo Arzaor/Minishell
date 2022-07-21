@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:15:07 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/21 16:37:17 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:45:21 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	export_arg(t_env *env, char *value)
 	while (split_space[i])
 	{
 		split_equals = ft_split(split_space[i], '=');
-		env_var = search_expansion(split_equals);
+		if (split_equals[1])
+			env_var = search_expansion(split_equals);
 		if (env_var != NULL)
 			result = get_env(env, env_var);
 		if (result)
@@ -83,8 +84,9 @@ void	export_arg(t_env *env, char *value)
 		else
 			export_w_expansion(env, split_equals, split_space, i);
 		free(result);
+		if (split_equals[1])
+			free(env_var);
 		free_array(split_equals);
-		free(env_var);
 		i++;
 	}
 	free_array(split_space);
