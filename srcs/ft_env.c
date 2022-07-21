@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 14:27:40 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:36:28 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,25 @@ char	*get_env(t_env *env, char *search)
 {
 	char	**tab_env;
 	char	*path_def;
+	char	**split_equals;
 	int		i;
-	int		k;
 	int		count;
 
 	tab_env = create_tab(env);
 	path_def = NULL;
+	split_equals = NULL;
 	count = 0;
 	i = 0;
-	k = 0;
 	while (tab_env[i])
 	{
-		if (ft_strncmp(search, tab_env[i], ft_strlen(search)) == 0)
+		split_equals = ft_split(tab_env[i], '=');
+		if (ft_strncmp(search, split_equals[0], ft_strlen(split_equals[0])) == 0)
 		{
 			count = 1;
+			free_array(split_equals);
 			break ;
 		}
+		free_array(split_equals);
 		i++;
 	}
 	if (count == 1)
