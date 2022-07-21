@@ -3,49 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:10 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:52:30 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_count_i(t_parser *parser, char *line)
-{
-	int	i;
-	int	count;
-	char	letter;
-
-	i = 0;
-	count = 0;
-	letter = 0;
-	if (parser->parser_cmd)
-		i += ft_strlen(parser->parser_cmd);
-	while (line[i] == ' ')
-		i++;
-	if (parser->parser_opt)
-	{
-		if (line[i] == '-')
-		{
-			i++;
-			while (line[i] == 'n')
-			{
-				i++;
-				count++;
-				letter = line[i];
-			}
-			if (letter != 'n' && letter != ' ')
-			{
-				i -= count + 2;
-				parser->parser_opt = 0;
-			}
-			i += 1;
-		}
-	}
-	return (i);
-}
 
 static void	check_dollars_other(t_parser *parser, int i, t_env *env)
 {
@@ -118,7 +83,8 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 		while (k < count)
 			parser->parser_args[k++] = line[i++];
 		parser->parser_args[k] = '\0';
-		if (ft_strcmp(parser->parser_cmd, "echo") && ft_strcmp(parser->parser_cmd, "export"))
+		if (ft_strcmp(parser->parser_cmd, "echo") && \
+			ft_strcmp(parser->parser_cmd, "export"))
 			test2(parser, k, env);
 	}
 	return (parser);
