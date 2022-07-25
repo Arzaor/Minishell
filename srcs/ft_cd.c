@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 18:14:08 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:25:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_cd2(char pwds[256], char *pwd, t_env *env)
+static void	ft_cd2(char *pwd, t_env *env)
 {
+	char pwds[256];
+
 	if (getcwd(pwds, sizeof(pwds)) != NULL)
 	{
 		g_code = 0;
@@ -32,7 +34,6 @@ static void	ft_cd2(char pwds[256], char *pwd, t_env *env)
 void	ft_cd(t_parser *parser, t_env *env)
 {
 	char	*pwd;
-	char	pwds[256];
 
 	pwd = 0;
 	if (parser->parser_args)
@@ -44,7 +45,7 @@ void	ft_cd(t_parser *parser, t_env *env)
 				directory\n", parser->parser_args);
 		}
 		else
-			ft_cd2(pwds, pwd, env);
+			ft_cd2(pwd, env);
 	}
 	else
 	{
