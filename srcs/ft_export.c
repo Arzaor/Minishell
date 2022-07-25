@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 14:03:47 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:58:55 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ char	*check_symbols_w_parser(char *str, int i)
 	j = 0;
 	env_var = 0;
 	str++;
-	while (str[count] && (str[count] != ' ' || str[count] != '\'' || str[count] != '"' || str[count] != '$' || str[count] != '(' || str[count] != ')'))
+	while (str[count] && (str[count] != ' ' || str[count] != '\'' || \
+			str[count] != '"' || str[count] != '$' || \
+				str[count] != '(' || str[count] != ')'))
 		count++;
 	env_var = malloc(sizeof(char) * count + 1);
-	while (str[i] && (str[i] != ' ' || str[i] != '\'' || str[i] != '"' || str[i] != '$' || str[i] != '(' || str[i] != ')'))
-		env_var[j++]= str[i++];
+	while (str[i] && (str[i] != ' ' || str[i] != '\'' || str[i] != '"' || \
+			str[i] != '$' || str[i] != '(' || str[i] != ')'))
+		env_var[j++] = str[i++];
 	env_var[j] = '\0';
 	if (env_var[j - 1] == '"')
 		env_var[j - 1] = '\0';

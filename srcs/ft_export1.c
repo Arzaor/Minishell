@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:15:07 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/21 16:55:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:57:19 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	concat_expansion(char **split_equals, char *result, t_env *env)
 {
 	char	*bin;
 
-	bin = (char *)ft_calloc(sizeof(char), (ft_strlen(split_equals[0]) + 1 + ft_strlen(result) + 1));
+	bin = (char *)ft_calloc(sizeof(char), \
+		(ft_strlen(split_equals[0]) + 1 + ft_strlen(result) + 1));
 	ft_strcat(bin, split_equals[0]);
 	ft_strcat(bin, "=");
 	ft_strcat(bin, result);
@@ -48,7 +49,8 @@ void	concat_expansion(char **split_equals, char *result, t_env *env)
 	free(result);
 }
 
-void	export_w_expansion(t_env *env, char **split_equals, char **split_space, int i)
+void	export_w_expansion(t_env *env, char **split_equals, \
+			char **split_space, int i)
 {
 	char	*result;
 
@@ -60,18 +62,15 @@ void	export_w_expansion(t_env *env, char **split_equals, char **split_space, int
 	free(result);
 }
 
-void	export_arg(t_env *env, char *value)
+static void	export_arg2(char **split_space, t_env *env)
 {
-	int		i;
-	char	**split_space;
 	char	**split_equals;
 	char	*env_var;
 	char	*result;
+	int		i;
 
-	(void)env;
-	i = 0;
 	result = 0;
-	split_space = ft_split(value, ' ');
+	i = 0;
 	while (split_space[i])
 	{
 		split_equals = ft_split(split_space[i], '=');
@@ -89,5 +88,14 @@ void	export_arg(t_env *env, char *value)
 		free_array(split_equals);
 		i++;
 	}
+}
+
+void	export_arg(t_env *env, char *value)
+{
+	char	**split_space;
+
+	(void)env;
+	split_space = ft_split(value, ' ');
+	export_arg2(split_space, env);
 	free_array(split_space);
 }
