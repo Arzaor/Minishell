@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/20 15:02:56 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:00:05 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int	ft_show_code(int i)
 	return (i);
 }
 
+static void	ft_echo_error(t_parser *parser)
+{
+	g_code = 1;
+	printf("%s: erreur lors de l'éxecution", parser->parser_cmd);
+}
+
 static void	ft_echo_parsing(char *arg, t_parser *parser, t_env *env)
 {
 	int	i;
@@ -51,10 +57,7 @@ static void	ft_echo_parsing(char *arg, t_parser *parser, t_env *env)
 			i -= 2;
 		}
 		else
-		{
-			g_code = 1;
-			printf("%s: erreur lors de l'éxecution", parser->parser_cmd);
-		}
+			ft_echo_error(parser);
 		i++;
 	}
 	g_code = 0;
