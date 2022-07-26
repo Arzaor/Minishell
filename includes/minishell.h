@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 13:50:57 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:21:56 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 //CMD
 void		handler_cmd(t_parser *parser, t_env *env, char **cmds);
 void		create_cmd(t_parser *parser, t_env *env);
-void		ft_echo(t_parser *parser, t_env *env);
+void		ft_echo(t_parser *parser);
 void		ft_cd(t_parser *parser, t_env *env);
 void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);

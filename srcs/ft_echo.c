@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 15:49:21 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:20:19 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_echo(t_parser *parser)
 	}
 	else
 		printf("\n");
+	g_code = 0;
 }

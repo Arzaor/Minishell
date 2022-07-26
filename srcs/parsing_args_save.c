@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 14:28:53 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:25:51 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ static int		found_second_quote_save(t_parser *parser, int i, char quote, t_env *
 {
 	int	result;
 	int	tmp;
+	int	k;
 
 	result = 0;
+	k = 0;
 	if (parser->parser_args[i + 1])
 		i += 1;
 	else
@@ -82,6 +84,17 @@ static int		found_second_quote_save(t_parser *parser, int i, char quote, t_env *
 			{
 				if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
 					i = get_var_env_save(parser, i, env);
+				else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+				{
+					if (g_code != 0)
+					{
+						while (ft_itoa_base(g_code, 10)[k])
+							parser->parser_arguments[parser->parser_count++] = ft_itoa_base(g_code, 10)[k++];
+					}
+					else
+						parser->parser_arguments[parser->parser_count++] = '0';
+					i += 2;
+				}
 				else
 					parser->parser_arguments[parser->parser_count++] = parser->parser_args[i++];
 			}
@@ -95,8 +108,10 @@ static int		found_second_quote_save(t_parser *parser, int i, char quote, t_env *
 static void	transform_arg_save(t_parser *parser, t_env *env)
 {
 	int	i;
+	int	k;
 
 	i = 0;
+	k = 0;
 	while (parser->parser_args[i])
 	{
 		if (parser->parser_args[i] != '\'' && parser->parser_args[i] != '"' && parser->parser_args[i] != '$')
@@ -112,6 +127,17 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 			i = get_var_env_save(parser, i, env);
 			if (parser->parser_args[i] == '$')
 				i -= 1;
+		}
+		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+		{
+			if (g_code != 0)
+			{
+				while (ft_itoa_base(g_code, 10)[k])
+					parser->parser_arguments[parser->parser_count++] = ft_itoa_base(g_code, 10)[k++];
+			}
+			else
+				parser->parser_arguments[parser->parser_count++] = '0';
+			i += 2;
 		}
 	}
 	parser->parser_arguments[parser->parser_count] = '\0';

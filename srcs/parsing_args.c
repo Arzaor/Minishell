@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 14:33:38 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:28:50 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,14 @@ static int		found_second_quote(t_parser *parser, char *arg, int i, char quote, t
 			{
 				if (arg[i] == '$' && arg[i + 1] != '?')
 					i = get_var_env(parser, i, env);
+				else if (arg[i] == '$' && arg[i + 1] == '?')
+				{
+					if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
+						parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+					else
+						parser->parser_count++;
+					i += 2;
+				}
 				else
 				{
 					parser->parser_count++;
@@ -164,6 +172,14 @@ static int	transform_arg(t_parser *parser, t_env *env)
 			if (parser->parser_args[i] == '$')
 				i -= 1;
 		}
+		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+		{
+			if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
+				parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+			else
+				parser->parser_count++;
+			i += 2;
+		}
 	}
 	return (1);
 }
@@ -177,16 +193,21 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 	start = count_cursor(parser, line);
 	tmp = start;
 	i = 0;
-	while (line[start])
-		start++;
-	parser->parser_args = malloc(sizeof(char) * start - tmp + 1);
-	start = tmp;
-	while (line[start])
-		parser->parser_args[i++] = line[start++]; 
-	parser->parser_args[i] = '\0';
-	tmp = transform_arg(parser, env);
-	if (tmp)
-		save_to_arg(parser, env);
+	if (line[start])
+	{
+		while (line[start])
+			start++;
+		parser->parser_args = malloc(sizeof(char) * start - tmp + 1);
+		start = tmp;
+		while (line[start])
+			parser->parser_args[i++] = line[start++]; 
+		parser->parser_args[i] = '\0';
+		tmp = transform_arg(parser, env);
+		if (tmp)
+			save_to_arg(parser, env);
+		else
+			parser->parser_args = NULL;
+	}
 	else
 		parser->parser_args = NULL;
 	return (parser);
