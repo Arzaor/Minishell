@@ -37,7 +37,6 @@ SRC 		=	main.c \
 				ft_expansion.c \
 				ft_exit.c \
 				fast_parsing.c \
-				ft_check_quote.c \
 				get_path.c \
 				signals.c \
 				ft_export1.c \
@@ -49,7 +48,7 @@ SRCS_ALL 	= 	${SRCS}
 OBJS 		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
 
 LIB_RDL 	= 	libreadline.a ./libft/libft.a
 

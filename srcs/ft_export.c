@@ -46,30 +46,6 @@ void	export_arg2(t_env *env, char *value)
 	insert_env(env, value);
 }
 
-char	*check_symbols_w_parser(char *str, int i)
-{
-	int		count;
-	int		j;
-	char	*env_var;
-
-	count = i;
-	j = 0;
-	env_var = 0;
-	str++;
-	while (str[count] && (str[count] != ' ' || str[count] != '\'' || \
-			str[count] != '"' || str[count] != '$' || \
-				str[count] != '(' || str[count] != ')'))
-		count++;
-	env_var = malloc(sizeof(char) * count + 1);
-	while (str[i] && (str[i] != ' ' || str[i] != '\'' || str[i] != '"' || \
-			str[i] != '$' || str[i] != '(' || str[i] != ')'))
-		env_var[j++] = str[i++];
-	env_var[j] = '\0';
-	if (env_var[j - 1] == '"')
-		env_var[j - 1] = '\0';
-	return (env_var);
-}
-
 void	ft_export(t_env *env, char *value)
 {
 	char	**tri;

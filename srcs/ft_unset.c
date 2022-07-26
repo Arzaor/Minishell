@@ -53,7 +53,7 @@ void	ft_unset(t_env *env, char *arg)
 	str2 = create_tab(env);
 	while (str2[i])
 	{
-		if (!ft_strncmp(str2[i], str[0], ft_strlen(str[0])))
+		if (!ft_strncmp(str2[i], str[0], ft_strlen(str2[i])))
 		{
 			j = 1;
 			break ;
