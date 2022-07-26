@@ -47,6 +47,7 @@ void	ft_exit(t_parser *parser)
 
 	i = 0;
 	split_arg = NULL;
+	printf("T %s\n",parser->parser_args);
 	if (parser->parser_args)
 	{
 		split_arg = ft_split(parser->parser_args, ' ');
