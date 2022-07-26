@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:18:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/21 01:53:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 10:58:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	start_minishell(char **env)
 	envp = create_env(env);
 	while (1)
 	{
-		style_prompt();
+		// style_prompt();
 		init_signals();
 		line = readline(":> ");
 		if (line == NULL)

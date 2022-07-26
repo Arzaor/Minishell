@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 18:15:02 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/26 13:50:57 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_parser {
 	int			parser_dleft_redir;
 	int			parser_dright_redir;
 	int			parser_sig;
+	int			parser_count;
 	char		*parser_heredoc;
 	char		*parser_pwd;
+	char		*parser_arguments;
 }				t_parser;
 
 typedef struct s_element
@@ -76,6 +78,7 @@ char		*check_dollars1(int count, int i, char *env_var, t_parser *parser);
 int			check_symbols(t_parser *parser, int i);
 int			ft_count_i1(char *line, int i, int count, t_parser *parser);
 int			ft_count_i(t_parser *parser, char *line);
+void		save_to_arg(t_parser *parser, t_env *env);
 
 //EXPORT
 void		export_arg(t_env *env, char *value);

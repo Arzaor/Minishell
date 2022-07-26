@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/25 13:25:42 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:41:04 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	ft_cd(t_parser *parser, t_env *env)
 		if (chdir(parser->parser_args) == -1)
 		{
 			g_code = 1;
-			printf("bash: cd: %s: No such file or \
-				directory\n", parser->parser_args);
+			printf("bash: cd: %s: No such file or directory\n", parser->parser_args);
 		}
 		else
 			ft_cd2(pwd, env);
