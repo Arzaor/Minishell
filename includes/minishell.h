@@ -98,7 +98,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 //CMD
 void		handler_cmd(t_parser *parser, t_env *env, char **cmds);
 void		create_cmd(t_parser *parser, t_env *env);
-void		ft_echo(t_parser *parser, t_env *env);
+void		ft_echo(t_parser *parser);
 void		ft_cd(t_parser *parser, t_env *env);
 void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);

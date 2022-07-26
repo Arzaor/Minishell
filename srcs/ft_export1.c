@@ -74,8 +74,6 @@ static void	export_arg3(char **split_space, t_env *env)
 	while (split_space[i])
 	{
 		split_equals = ft_split(split_space[i], '=');
-		if (split_equals[1] && split_equals[1][0] != '\'')
-			env_var = search_expansion(split_equals);
 		if (env_var != NULL)
 			result = get_env(env, env_var);
 		if (result)

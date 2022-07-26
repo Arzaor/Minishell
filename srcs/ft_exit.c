@@ -47,6 +47,7 @@ void	ft_exit(t_parser *parser)
 
 	i = 0;
 	split_arg = NULL;
+	printf("T %s\n",parser->parser_args);
 	if (parser->parser_args)
 	{
 		split_arg = ft_split(parser->parser_args, ' ');
@@ -69,14 +70,14 @@ void	ft_exit(t_parser *parser)
 
 void	ft_exit_with_line(char *line)
 {
-	// int		line_count;
-	// int		col_cocunt;
-	// char	*cm_cap;
+	int		line_count;
+	int		col_cocunt;
+	char	*cm_cap;
 
-	// line_count = tgetnum("li");
-	// col_cocunt = tgetnum("cl");
-	// cm_cap = tgetstr("cm", NULL);
-	// tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
+	line_count = tgetnum("li");
+	col_cocunt = tgetnum("cl");
+	cm_cap = tgetstr("cm", NULL);
+	tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
 	free(line);
 	printf("exit");
 	exit(0);
