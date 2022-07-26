@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 15:49:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:20:13 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void	ft_exit(t_parser *parser)
 
 void	ft_exit_with_line(char *line)
 {
-	// int		line_count;
-	// int		col_cocunt;
-	// char	*cm_cap;
+	int		line_count;
+	int		col_cocunt;
+	char	*cm_cap;
 
-	// line_count = tgetnum("li");
-	// col_cocunt = tgetnum("cl");
-	// cm_cap = tgetstr("cm", NULL);
-	// tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
+	line_count = tgetnum("li");
+	col_cocunt = tgetnum("cl");
+	cm_cap = tgetstr("cm", NULL);
+	tputs(tgoto(cm_cap, col_cocunt + 4, line_count - 2), 1, putchar);
 	free(line);
 	printf("exit");
 	exit(0);

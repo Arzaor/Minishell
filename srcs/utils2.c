@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 15:49:51 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:41:44 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	show_prompt(char *line, t_env *envp)
 	parsing_symbols(parser, line, envp);
 }
 
-void	style_prompt(void)
-{
-	int		ret;
-	char	*term_type;
-	char	*color_cap;
-	char	*reset_cmd;
+// void	style_prompt(void)
+// {
+// 	int		ret;
+// 	char	*term_type;
+// 	char	*color_cap;
+// 	char	*reset_cmd;
 
-	term_type = getenv("TERM");
-	ret = tgetent(NULL, term_type);
-	color_cap = tgetstr("AF", NULL);
-	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
-	reset_cmd = tgetstr("md", NULL);
-	tputs(reset_cmd, 1, putchar);
-}
+// 	term_type = getenv("TERM");
+// 	ret = tgetent(NULL, term_type);
+// 	color_cap = tgetstr("AF", NULL);
+// 	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
+// 	reset_cmd = tgetstr("md", NULL);
+// 	tputs(reset_cmd, 1, putchar);
+// }
 
 char	send_quote(char *line, int i)
 {

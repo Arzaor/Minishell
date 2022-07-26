@@ -6,73 +6,67 @@
 #    By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/07/26 15:48:41 by jbarette         ###   ########.fr        #
+#    Updated: 2022/07/26 16:43:30 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		=	minishell
+NAME	=	minishell
 
-SRC_DIR 	= 	srcs/
-INC_DIR 	= 	includes/
+CFLAGS	=	-I ./Includes -I /opt/homebrew/Cellar/readline/8.1.2/include -g
 
-SRC 		=	main.c \
-				init.c \
-				parsing.c \
-				handler_cmd.c \
-				parsing_args.c \
-				parsing_heredoc.c \
-				parsing_cmd.c \
-				create_env.c \
-				utils.c \
-				utils2.c \
-				ft_echo.c \
-				ft_export.c \
-				ft_cd.c \
-				ft_unset.c \
-				right_redir.c \
-				left_redir.c \
-				handler_redir.c \
-				ft_env.c \
-				ft_pwd.c \
-				ft_expansion.c \
-				ft_exit.c \
-				fast_parsing.c \
-				ft_check_quote.c \
-				get_path.c \
-				signals.c \
-				ft_export1.c \
-				parsing_args_save.c \
-				
-SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
-SRCS_ALL 	= 	${SRCS}
+SDIR	=	srcs
 
-OBJS 		= 	$(SRCS:.c=.o)
+SRCS_C	=	main.c \
+			init.c \
+			parsing.c \
+			handler_cmd.c \
+			parsing_args.c \
+			parsing_cmd.c \
+			create_env.c \
+			utils.c \
+			utils2.c \
+			ft_echo.c \
+			ft_export.c \
+			ft_cd.c \
+			ft_unset.c \
+			ft_env.c \
+			ft_pwd.c \
+			ft_expansion.c \
+			ft_exit.c \
+			fast_parsing.c \
+			get_path.c \
+			signals.c \
+			ft_export1.c \
+			parsing_args_save.c \
 
-CC			= 	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+SRCS	=	$(patsubst %, $(SDIR)/%, $(SRCS_C))
 
-LIB_RDL 	= 	libreadline.a ./libft/libft.a
+ODIR	=	.objs
+OBJS_O	=	$(SRCS_C:.c=.o)
+OBJS	=	$(patsubst %, $(ODIR)/%, $(OBJS_O))
 
-%.o: %.c
-		${CC} $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+LDIR 	=	./libft
+LIBFT 	=	libft/libft.a
 
-$(NAME): $(OBJS)
-		make -C ./libft
-		cp ./readline/libreadline.a ./
-		${CC} $(CFLAGS) $(OBJS) ${LIB_RDL} -lncurses -o $(NAME)
+all: $(NAME)
 
-all:
-		$(MAKE) -j $(NAME)
+$(NAME): .objs $(OBJS)
+	make -C $(LDIR)
+	gcc $(CFLAGS) -lreadline -L /opt/homebrew/Cellar/readline/8.1.2/lib $(LIBFT) $(OBJS) -o $@
+
+.objs:
+	mkdir .objs
+
+$(ODIR)/%.o: $(SDIR)/%.c
+	gcc $(CFLAGS) -c $^ -o $@
 
 clean:
-		make -C ./libft clean
-		rm -rf $(OBJS)
+	make -C $(LDIR) clean
+	rm -f $(OBJS)
+	rm -rf .objs
 
-fclean:	clean
-		make -C ./libft fclean
-		rm -rf $(NAME)
-		rm -rf libreadline.a
+fclean: clean
+	make -C $(LDIR) fclean
+	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all, clean, fclean, re

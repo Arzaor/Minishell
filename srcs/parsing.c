@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 15:49:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:44:38 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 	}
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser, env);
-	if (parser->parser_right_redir == 2 || parser->parser_left_redir == 1 || \
-		parser->parser_dright_redir == 4 || parser->parser_dleft_redir == 3)
-		parser = parsing_heredoc(line, parser);
 	return (parser);
 }
 
@@ -41,25 +38,6 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 		i++;
 	}
 	return (parser);
-}
-
-void	parsing_redirection(char *line, t_parser *parser, int i)
-{
-	if (!check_quote_redir(line, i))
-	{
-		if (line[i] == '<' && line[i - 1] != '<' && line[i + 1] != '<')
-			parser->parser_left_redir = 1;
-		if (line[i] == '>' && line[i - 1] != '>' && line[i + 1] != '>')
-			parser->parser_right_redir = 2;
-		if (line[i] == '<' && line[i + 1] == '<')
-			parser->parser_dleft_redir = 3;
-		if (line[i] == '>' && line[i + 1] == '>')
-			parser->parser_dright_redir = 4;
-	}
-	if (line[i] == '\'')
-		parser->parser_single_quote++;
-	if (line[i] == '"')
-		parser->parser_double_quote++;
 }
 
 void	parsing_handler(t_parser *parser, char *line, \
@@ -87,7 +65,5 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	int		i;
 
 	i = 0;
-	while (line[i])
-		parsing_redirection(line, parser, i++);
 	parsing_handler(parser, line, env, fast_parsing(parser, line));
 }

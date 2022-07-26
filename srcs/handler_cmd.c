@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 16:21:08 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:47:02 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 	if (!is_build_in(parser->parser_cmd) && \
 		cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 		get_absolute_path(get_env(env, "PATH"), parser);
-	handler_redir(parser, cmds, env);
+	if (is_build_in(parser->parser_cmd))
+		create_cmd(parser, env);
+	else
+		exec_cmd(parser, cmds);
 }
