@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 13:17:38 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 17:49:39 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:17:32 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(const char *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa_base(int value, int base);
 t_list				*ft_lstnew(void *conent);
 void				ft_lstadd_front(t_list **list, t_list *new);
 int					ft_lstsize(t_list *lst);

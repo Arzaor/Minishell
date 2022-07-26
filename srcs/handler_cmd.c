@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/20 17:20:39 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:21:08 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	exec_cmd(t_parser *parser, char **cmds)
 void	create_cmd(t_parser *parser, t_env *env)
 {
 	if (!ft_strncmp(parser->parser_cmd, "echo", 4))
-		ft_echo(parser, env);
+		ft_echo(parser);
 	if (!ft_strncmp(parser->parser_cmd, "cd", 2))
 		ft_cd(parser, env);
 	if (!ft_strncmp(parser->parser_cmd, "pwd", 3))
