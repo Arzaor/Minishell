@@ -6,13 +6,13 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:09:44 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 14:18:04 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:49:21 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(t_parser *parser, t_env *env)
+void	ft_echo(t_parser *parser)
 {
 	if (parser->parser_args)
 	{

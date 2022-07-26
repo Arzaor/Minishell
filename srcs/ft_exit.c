@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 10:58:16 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:49:43 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ static void	ft_exit2(t_parser *parser, int i)
 void	ft_exit(t_parser *parser)
 {
 	int		i;
-	char	*code;
 	char	**split_arg;
 
 	i = 0;
-	code = 0;
 	split_arg = NULL;
 	if (parser->parser_args)
 	{

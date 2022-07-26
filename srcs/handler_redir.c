@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:37:44 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/05 17:47:32 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:49:25 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	handler_redir(t_parser *parser, char **cmds, t_env *env)
 {
 	int		saveout1;
-	int		i;
 
 	saveout1 = 0;
-	i = 0;
 	if (parser->parser_left_redir == 1)
 		saveout1 = handler_left_redir(parser->parser_heredoc);
 	if (parser->parser_right_redir == 2)

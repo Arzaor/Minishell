@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/25 12:57:42 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:49:14 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 {
-	int	i;
-
-	i = 1;
 	parser = parsing_cmd(line, parser);
 	if (!strcmp(parser->parser_cmd, "cat") || \
 		!strcmp(parser->parser_cmd, "sort"))
@@ -88,10 +85,8 @@ void	parsing_handler(t_parser *parser, char *line, \
 void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 {
 	int		i;
-	int		count;
 
 	i = 0;
-	count = 0;
 	while (line[i])
 		parsing_redirection(line, parser, i++);
 	parsing_handler(parser, line, env, fast_parsing(parser, line));
