@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 16:16:42 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:59:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void		get_absolute_path(char *path, t_parser *parser);
 void		ft_exit_with_line(char *line);
 void		get_absolute_path(char *path, t_parser *parser);
 void		save_to_arg(t_parser *parser, t_env *env);
+int			found_second_quote(t_parser *parser, int i, char quote, t_env *env);
+int			found_second_quote_save(t_parser *parser, int i, char quote, t_env *env);
 
 //EXPORT
 void		export_arg(t_env *env, char *value);

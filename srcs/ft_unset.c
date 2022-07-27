@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 19:08:47 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:52:36 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_unset(t_env *env, char *arg)
 
 	if (arg)
 	{
-		str = get_env(env, arg);
+		str = getet_env(env, arg);
 		if (str)
 		{
 			delete_element(env->first, env, arg);
