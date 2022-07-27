@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	**fast_parsing(t_parser *parser, char *line)
+char	**fast_parsing(char *line)
 {
 	char	**cmds_bis;
 

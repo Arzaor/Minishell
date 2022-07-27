@@ -65,5 +65,5 @@ void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 	int		i;
 
 	i = 0;
-	parsing_handler(parser, line, env, fast_parsing(parser, line));
+	parsing_handler(parser, line, env, fast_parsing(line));
 }

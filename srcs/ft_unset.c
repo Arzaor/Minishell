@@ -43,7 +43,6 @@ static t_element	*delete_element(t_element *element, t_env *env, char *arg)
 
 void	ft_unset(t_env *env, char *arg)
 {
-	int		j;
 	char	*str;
 
 	if (arg)
