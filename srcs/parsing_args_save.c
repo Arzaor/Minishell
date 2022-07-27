@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 16:57:50 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:02:35 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 static int	transform_arg_save1(t_parser *parser, int i)
 {
-	int	k;
+	int		k;
+	char	*code;
 
 	k = 0;
 	if (g_code != 0)
 	{
-		while (ft_itoa_base(g_code, 10)[k])
+		code = ft_itoa_base(g_code, 10);
+		while (code[k])
 			parser->parser_arguments[parser->parser_count++] = \
-				ft_itoa_base(g_code, 10)[k++];
+				code[k++];
 	}
 	else
 		parser->parser_arguments[parser->parser_count++] = '0';
 	i += 2;
+	free(code);
 	return (i);
 }
 

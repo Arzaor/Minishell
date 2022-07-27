@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 17:08:34 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:02:27 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ static int	count_cursor(t_parser *parser, char *line)
 
 static int	transform_arg1(t_parser *parser, int i)
 {
-	if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
-		parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+	char	*code;
+
+	code = ft_itoa_base(g_code, 10);
+	if (ft_strlen(code) > 0)
+		parser->parser_count += ft_strlen(code);
 	else
 		parser->parser_count++;
 	i += 2;
+	free(code);
 	return (i);
 }
 
