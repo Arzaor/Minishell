@@ -33,10 +33,6 @@ SRC 		=	create_env.c \
 				parsing_args_save1.c \
 				parsing_args.c \
 				parsing_args1.c \
-<<<<<<< HEAD
-				parsing_cmd.c \
-=======
->>>>>>> 1ea950ffc088a1b30833a60c943497541675e77e
 				parsing.c \
 				signals.c \
 				parsing_cmd.c \

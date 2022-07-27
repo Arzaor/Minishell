@@ -17,6 +17,7 @@ static int	transform_arg_save1(t_parser *parser, int i)
 	int		k;
 	char	*code;
 
+	code = 0;
 	k = 0;
 	if (g_code != 0)
 	{
