@@ -12,82 +12,50 @@
 
 #include "minishell.h"
 
-static int	get_var_env_save(t_parser *parser, int i, t_env *env)
-{
-	char	*var_env;
-	char	*env_def;
-	int		length;
-	int		tmp;
-	int		k;
-
-	var_env = 0;
-	env_def = 0;
-	i += 1;
-	tmp = i;
-	k = 0;
-	length = 0;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
-	{
-		length++;
-		i++;
-	}
-	var_env = malloc(sizeof(char) * length + 1);
-	i = tmp;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
-		var_env[k++] = parser->parser_args[i++];
-	var_env[k] = '\0';
-	env_def = get_env(env, var_env);
-	k = 0;
-	if (env_def)
-	{
-		while (env_def[k])
-			parser->parser_arguments[parser->parser_count++] = env_def[k++];
-	}
-	free(env_def);
-	free(var_env);
-	return (i);
-}
-
-static int	fsq2(char quote, t_parser *parser, int i, t_env *env)
-{
-	while (parser->parser_args[i] != quote)
-	{
-		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env);
-		else if (parser->parser_args[i] == '$' && \
-				parser->parser_args[i + 1] == '?')
-		{
-			if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
-				parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
-			else
-				parser->parser_count++;
-			i += 2;
-		}
-		else
-		{
-			parser->parser_count++;
-			i++;
-		}
-	}
-	return (i);
-}
-
-static int	fsq3(char quote, t_parser *parser, int i, t_env *env)
+static int	fsq3(t_parser *parser, t_env *env, char quote, int i)
 {
 	if (quote == '\'')
 	{
 		while (parser->parser_args[i] != quote)
-		{
-			parser->parser_count++;
-			i++;
-		}
+			parser->parser_arguments[parser->parser_count++] = \
+				parser->parser_args[i++];
 	}
 	else
-		i = fsq2(quote, parser, i, env);
+		i = fsq2(parser, env, quote, i);
 	return (i);
 }
 
-static int	found_second_quote(t_parser *parser, int i, char quote, t_env *env)
+static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
+{
+	int	k;
+
+	k = 0;
+	while (parser->parser_args[i] != quote)
+	{
+		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
+			i = get_var_env_save(parser, i, env);
+		else if (parser->parser_args[i] == '$' && \
+					parser->parser_args[i + 1] == '?')
+		{
+			if (g_code != 0)
+			{
+				while (ft_itoa_base(g_code, 10)[k])
+					parser->parser_arguments[parser->parser_count++] = \
+							ft_itoa_base(g_code, 10)[k++];
+			}
+			else
+				parser->parser_arguments[parser->parser_count++] = '0';
+			i += 2;
+		}
+		else
+			parser->parser_arguments[parser->parser_count++] = \
+					parser->parser_args[i++];
+	}
+	return (i);
+}
+
+static int	found_second_quote_save(t_parser *parser, int i, \
+				char quote, t_env *env)
 {
 	int	result;
 	int	tmp;
@@ -109,7 +77,7 @@ static int	found_second_quote(t_parser *parser, int i, char quote, t_env *env)
 	}
 	i = tmp;
 	if (result)
-		i = fsq3(quote, parser, i, env);
+		i = fsq3(parser, env, quote, i);
 	else
 		return (-1);
 	return (i);
