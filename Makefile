@@ -33,6 +33,7 @@ SRC 		=	create_env.c \
 				parsing_args.c \
 				parsing.c \
 				signals.c \
+				parsing_cmd.c \
 				utils.c \
 				utils2.c \
 				

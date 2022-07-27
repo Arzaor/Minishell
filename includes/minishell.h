@@ -116,7 +116,7 @@ void		kill_process(int *process);
 
 //REDIR
 void		style_prompt(void);
-char		**fast_parsing(t_parser *parser, char *line);
+char		**fast_parsing(char *line);
 int			ft_isalnum(int c);
 int			char_is_var_attribution(char *str);
 int			get_var_env(t_parser *parser, int i, t_env *env, int count);
