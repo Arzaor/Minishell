@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 16:44:38 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:35:44 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,5 @@ void	parsing_handler(t_parser *parser, char *line, \
 
 void	parsing_symbols(t_parser *parser, char *line, t_env *env)
 {
-	int		i;
-
-	i = 0;
-	parsing_handler(parser, line, env, fast_parsing(parser, line));
+	parsing_handler(parser, line, env, fast_parsing(line));
 }
