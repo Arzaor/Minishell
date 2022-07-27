@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 16:27:10 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:54:28 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_isalnum(int c)
 	return (0);
 }
 
-int		char_is_var_attribution(char *str)
+int	char_is_var_attribution(char *str)
 {
 	int	i;
 
