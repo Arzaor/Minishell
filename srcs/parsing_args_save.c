@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 16:25:51 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:58:44 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,7 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 				i += 1;
 		}
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-		{
 			i = get_var_env_save(parser, i, env);
-			if (parser->parser_args[i] == '$')
-				i -= 1;
-		}
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
 		{
 			if (g_code != 0)
