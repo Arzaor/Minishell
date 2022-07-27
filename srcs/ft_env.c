@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:45:21 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 18:07:44 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/26 21:23:25 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,22 @@ char	*test(char **tab_env, int i)
 	char	*path_def;
 
 	k = 0;
-	path = NULL;
 	path = ft_split(tab_env[i], '=');
 	i = 0;
-	path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
-	while (path[1][i])
-		path_def[k++] = path[1][i++];
-	path_def[k] = '\0';
+	if (path[1])
+	{
+		path_def = malloc(sizeof(char) * ft_strlen(path[1]) + 1);
+		while (path[1][i])
+			path_def[k++] = path[1][i++];
+		path_def[k] = '\0';
+	}
+	else
+	{
+		path_def = malloc(sizeof(char) * ft_strlen(path[0]) + 1);
+		while (path[0][i])
+			path_def[k++] = path[0][i++];
+		path_def[k] = '\0';
+	}
 	free_array(path);
 	return (path_def);
 }

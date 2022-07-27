@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 16:21:56 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:54:39 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,8 @@ typedef struct s_parser {
 	char		*parser_cmd;
 	int			parser_opt;
 	char		*parser_args;
-	int			parser_double_quote;
-	int			parser_single_quote;
-	int			parser_left_redir;
-	int			parser_right_redir;
-	int			parser_dleft_redir;
-	int			parser_dright_redir;
 	int			parser_sig;
 	int			parser_count;
-	char		*parser_heredoc;
 	char		*parser_pwd;
 	char		*parser_arguments;
 }				t_parser;

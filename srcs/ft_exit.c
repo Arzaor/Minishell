@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 17:20:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:12:34 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_exit(t_parser *parser)
 
 	i = 0;
 	split_arg = NULL;
-	printf("T %s\n",parser->parser_args);
 	if (parser->parser_args)
 	{
 		split_arg = ft_split(parser->parser_args, ' ');

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/21 17:58:55 by hterras          ###   ########.fr       */
+/*   Updated: 2022/07/26 17:57:39 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ void	ft_tri_tab(char **tri, int count)
 		j = 0;
 		i++;
 	}
-}
-
-void	export_arg2(t_env *env, char *value)
-{
-	char	**str;
-
-	str = ft_split(value, '=');
-	ft_unset(env, str[0]);
-	free_array(str);
-	insert_env(env, value);
 }
 
 void	ft_export(t_env *env, char *value)
