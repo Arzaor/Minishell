@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 16:45:23 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:08:34 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,24 @@ static int	transform_arg1(t_parser *parser, int i)
 	return (i);
 }
 
+static int	transform_arg2(t_parser *parser, int i, t_env *env)
+{
+	if (parser->parser_args[i] == '$' && \
+			parser->parser_args[i + 1] != '?')
+		i = get_var_env(parser, i, env, 1);
+	else if (parser->parser_args[i] == '$' && \
+				parser->parser_args[i + 1] == '?')
+		i = transform_arg1(parser, i);
+	return (i);
+}
+
+static int	transform_arg3(t_parser *parser, int i)
+{
+	parser->parser_count++;
+	i++;
+	return (i);
+}
+
 static int	transform_arg(t_parser *parser, t_env *env)
 {
 	int	i;
@@ -71,10 +89,7 @@ static int	transform_arg(t_parser *parser, t_env *env)
 	{
 		if (parser->parser_args[i] != '\'' && \
 				parser->parser_args[i] != '"' && parser->parser_args[i] != '$')
-		{
-			parser->parser_count++;
-			i++;
-		}
+			i = transform_arg3(parser, i);
 		else if (parser->parser_args[i] == '\'' || \
 					parser->parser_args[i] == '"')
 		{
@@ -87,12 +102,8 @@ static int	transform_arg(t_parser *parser, t_env *env)
 			if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
 				i += 1;
 		}
-		else if (parser->parser_args[i] == '$' && \
-					parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env, 1);
-		else if (parser->parser_args[i] == '$' && \
-					parser->parser_args[i + 1] == '?')
-			i = transform_arg1(parser, i);
+		else
+			i = transform_arg2(parser, i, env);
 	}
 	return (1);
 }
