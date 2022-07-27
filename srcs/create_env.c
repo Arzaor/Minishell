@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:03:08 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 21:26:08 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:08:40 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,26 @@ t_env	*create_env(char **env)
 void	insert_env(t_env *env, char *value)
 {
 	t_element	*new;
+	char		**split_equals;
 
-	new = malloc(sizeof(*new));
-	if (env == NULL || new == NULL)
-		exit(EXIT_FAILURE);
-	new->value = ft_strdup(value);
-	new->next = env->first;
-	env->first = new;
+	split_equals = ft_split(value, '=');
+	if (!(char_is_var_attribution(split_equals[0])))
+	{
+		printf("minishell: export: ");
+		printf("%s", split_equals[0]);
+		printf(": not a valid identifier\n");
+		g_code = 1;
+	}
+	else
+	{
+		new = malloc(sizeof(*new));
+		if (env == NULL || new == NULL)
+			exit(EXIT_FAILURE);
+		new->value = ft_strdup(value);
+		new->next = env->first;
+		env->first = new;
+	}
+	free_array(split_equals);
 }
 
 void	delete_env(t_env *env)

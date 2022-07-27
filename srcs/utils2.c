@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 10:12:25 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:37:46 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,25 @@ char	send_quote(char *line, int i)
 	return (0);
 }
 
-int	check_quote_redir(char *line, int i)
+int	ft_isalnum(int c)
 {
-	char	quote;
-	int		length;
-
-	length = ft_strlen(line);
-	quote = send_quote(line, i);
-	if (quote != 0)
-	{
-		while (i < length)
-		{
-			if (line[i] == quote)
-				return (1);
-			i++;
-		}
-	}
+	if (((c >= 'a') && (c <= 'z'))
+		|| ((c >= 'A') && (c <= 'Z'))
+		|| ((c >= '0') && (c <= '9')))
+		return (1);
 	return (0);
+}
+
+int		char_is_var_attribution(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(ft_isalnum(str[i])) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
 }

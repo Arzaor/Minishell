@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 10:58:50 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:55:24 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ static int	get_var_env(t_parser *parser, int i, t_env *env)
 	tmp = i;
 	k = 0;
 	length = 0;
-	while (parser->parser_args[i] && (parser->parser_args[i] >= 'A' && parser->parser_args[i] <= 'Z'))
+	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
 	{
 		length++;
 		i++;
 	}
 	var_env = malloc(sizeof(char) * length + 1);
 	i = tmp;
-	while (parser->parser_args[i] && (parser->parser_args[i] >= 'A' && parser->parser_args[i] <= 'Z'))
+	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
 		var_env[k++] = parser->parser_args[i++];
 	var_env[k] = '\0';
 	env_def = get_env(env, var_env);
