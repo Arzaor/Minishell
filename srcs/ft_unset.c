@@ -47,7 +47,7 @@ void	ft_unset(t_env *env, char *arg)
 
 	if (arg)
 	{
-		str = getet_env(env, arg);
+		str = get_env(env, arg);
 		if (str)
 		{
 			delete_element(env->first, env, arg);
