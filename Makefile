@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/07/27 16:29:26 by jbarette         ###   ########.fr        #
+#    Updated: 2022/07/27 16:45:07 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC 		=	create_env.c \
 				main.c \
 				parsing_args_save.c \
 				parsing_args.c \
+				parsing_args1.c \
+				parsing_cmd.c \
 				parsing.c \
 				signals.c \
 				utils.c \
