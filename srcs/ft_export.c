@@ -39,7 +39,7 @@ void	ft_tri_tab(char **tri, int count)
 static void	export_arg3(char *split_space, t_env *env)
 {
 	char	*result;
-	
+
 	result = get_env(env, split_space);
 	if (result)
 	{

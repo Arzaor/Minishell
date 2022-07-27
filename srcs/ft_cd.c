@@ -14,7 +14,7 @@
 
 static void	ft_cd2(char *pwd, t_env *env)
 {
-	char pwds[256];
+	char	pwds[256];
 
 	if (getcwd(pwds, sizeof(pwds)) != NULL)
 	{
@@ -41,7 +41,8 @@ void	ft_cd(t_parser *parser, t_env *env)
 		if (chdir(parser->parser_args) == -1)
 		{
 			g_code = 1;
-			printf("bash: cd: %s: No such file or directory\n", parser->parser_args);
+			printf("bash: cd: %s: No such file \
+				or directory\n", parser->parser_args);
 		}
 		else
 			ft_cd2(pwd, env);
