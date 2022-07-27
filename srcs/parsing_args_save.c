@@ -33,7 +33,7 @@ static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
 	while (parser->parser_args[i] != quote)
 	{
 		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env_save(parser, i, env);
+			i = get_var_env(parser, i, env,0);
 		else if (parser->parser_args[i] == '$' && \
 					parser->parser_args[i + 1] == '?')
 		{
@@ -101,7 +101,7 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 				i += 1;
 		}
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env_save(parser, i, env);
+			i = get_var_env(parser, i, env,0);
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
 		{
 			if (g_code != 0)
