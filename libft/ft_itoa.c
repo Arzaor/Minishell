@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 13:14:42 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 16:16:53 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:41:56 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*itoa_reverse(char *str)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 	char	temp;
-	
+
 	len = ft_strlen(str) - 1;
 	i = 0;
-	while (i <= (len/2))
+	while (i <= (len / 2))
 	{
 		temp = str[i];
 		str[i] = str[len - i];
@@ -33,7 +33,7 @@ char	*itoa_reverse(char *str)
 char	*itoa_helper_neg(int nb, int base, char *res)
 {
 	char	*arr;
-	int	i;
+	int		i;
 
 	arr = "0123456789ABCDEF";
 	i = 0;
@@ -51,7 +51,7 @@ char	*itoa_helper_neg(int nb, int base, char *res)
 char	*itoa_helper(int nb, int base, char *res)
 {
 	char	*arr;
-	int	i;
+	int		i;
 
 	arr = "0123456789ABCDEF";
 	i = 0;
@@ -65,23 +65,8 @@ char	*itoa_helper(int nb, int base, char *res)
 	return (res);
 }
 
-char	*ft_itoa_base(int value, int base)
+char	*ft_itoa_base1(int value, int base, char *res)
 {
-	char	*res;
-	int 	i;
-	int	n;
-
-	n = value;
-	i = 0;
-	while ( n / base > 0)
-	{	
-		n = n / base;
-		i++;
-	}
-	if (value < 0 && base == 10)
-		res = (char *) malloc(sizeof(char) * (i + 1));
-	else
-		res = (char *) malloc(sizeof(char) * i);
 	if (value < 0)
 	{
 		value = value * -1;
@@ -91,6 +76,27 @@ char	*ft_itoa_base(int value, int base)
 			res = itoa_helper(value, base, res);
 	}
 	else
-		res = itoa_helper(value, base, res);		
+		res = itoa_helper(value, base, res);
+	return (res);
+}
+
+char	*ft_itoa_base(int value, int base)
+{
+	char	*res;
+	int		i;
+	int		n;
+
+	n = value;
+	i = 0;
+	while (n / base > 0)
+	{	
+		n = n / base;
+		i++;
+	}
+	if (value < 0 && base == 10)
+		res = (char *) malloc(sizeof(char) * (i + 1));
+	else
+		res = (char *) malloc(sizeof(char) * i);
+	res = ft_itoa_base1(value, base, res);
 	return (itoa_reverse(res));
 }

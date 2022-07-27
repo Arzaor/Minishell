@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 13:55:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:50:22 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
 	while (parser->parser_args[i] != quote)
 	{
 		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env,0);
+			i = get_var_env(parser, i, env, 0);
 		else if (parser->parser_args[i] == '$' && \
 					parser->parser_args[i + 1] == '?')
 		{
@@ -101,7 +101,7 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 				i += 1;
 		}
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env,0);
+			i = get_var_env(parser, i, env, 0);
 		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
 		{
 			if (g_code != 0)

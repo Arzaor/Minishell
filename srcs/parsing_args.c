@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 13:55:24 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:45:18 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	fsq2(char quote, t_parser *parser, int i, t_env *env)
 	while (parser->parser_args[i] != quote)
 	{
 		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env);
+			i = get_var_env(parser, i, env, 1);
 		else if (parser->parser_args[i] == '$' && \
 				parser->parser_args[i + 1] == '?')
 		{
@@ -119,6 +119,16 @@ static int	found_second_quote(t_parser *parser, int i, char quote, t_env *env)
 	return (i);
 }
 
+static int	transform_arg1(t_parser *parser, int i)
+{
+	if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
+		parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+	else
+		parser->parser_count++;
+	i += 2;
+	return (i);
+}
+
 static int	transform_arg(t_parser *parser, t_env *env)
 {
 	int	i;
@@ -140,23 +150,16 @@ static int	transform_arg(t_parser *parser, t_env *env)
 			{
 				printf("Erreur : Format quote.");
 				return (0);
-				break ;
 			}
 			if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
 				i += 1;
 		}
 		else if (parser->parser_args[i] == '$' && \
 					parser->parser_args[i + 1] != '?')
-			i = get_var_env(parser, i, env);
+			i = get_var_env(parser, i, env, 1);
 		else if (parser->parser_args[i] == '$' && \
 					parser->parser_args[i + 1] == '?')
-		{
-			if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
-				parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
-			else
-				parser->parser_count++;
-			i += 2;
-		}
+			i = transform_arg1(parser, i);
 	}
 	return (1);
 }
