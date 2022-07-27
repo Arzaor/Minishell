@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 14:09:10 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:16:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void		style_prompt(void);
 char		**fast_parsing(t_parser *parser, char *line);
 int			ft_isalnum(int c);
 int			char_is_var_attribution(char *str);
+int			get_var_env(t_parser *parser, int i, t_env *env, int count);
 
 #endif

@@ -6,24 +6,11 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 15:50:22 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:12:23 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	fsq3(t_parser *parser, t_env *env, char quote, int i)
-{
-	if (quote == '\'')
-	{
-		while (parser->parser_args[i] != quote)
-			parser->parser_arguments[parser->parser_count++] = \
-				parser->parser_args[i++];
-	}
-	else
-		i = fsq2(parser, env, quote, i);
-	return (i);
-}
 
 static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
 {
@@ -51,6 +38,19 @@ static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
 			parser->parser_arguments[parser->parser_count++] = \
 					parser->parser_args[i++];
 	}
+	return (i);
+}
+
+static int	fsq3(t_parser *parser, t_env *env, char quote, int i)
+{
+	if (quote == '\'')
+	{
+		while (parser->parser_args[i] != quote)
+			parser->parser_arguments[parser->parser_count++] = \
+				parser->parser_args[i++];
+	}
+	else
+		i = fsq2(parser, env, quote, i);
 	return (i);
 }
 

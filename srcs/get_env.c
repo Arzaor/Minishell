@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:53:21 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 15:07:08 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:17:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*get_var_env2(t_parser *parser, int i, char *var_env)
 	int	k;
 
 	k = 0;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
+	while (parser->parser_args[i] && ft_isalnum(parser->parser_args[i]))
 		var_env[k++] = parser->parser_args[i++];
 	var_env[k] = '\0';
 	return (var_env);
@@ -55,14 +55,13 @@ int	get_var_env(t_parser *parser, int i, t_env *env, int count)
 	i += 1;
 	tmp = i;
 	length = 0;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
+	while (parser->parser_args[i] && ft_isalnum(parser->parser_args[i]))
 	{
 		length++;
 		i++;
 	}
 	var_env = malloc(sizeof(char) * length + 1);
-	i = tmp;
-	var_env = get_var_env2(parser, i, var_env);
+	var_env = get_var_env2(parser, tmp, var_env);
 	env_def = get_env(env, var_env);
 	get_var_env1(env_def, count, parser);
 	free(env_def);
