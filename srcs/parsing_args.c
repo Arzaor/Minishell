@@ -52,38 +52,6 @@ static int	count_cursor(t_parser *parser, char *line)
 	return (i);
 }
 
-static int	get_var_env(t_parser *parser, int i, t_env *env)
-{
-	char	*var_env;
-	char	*env_def;
-	int		length;
-	int		tmp;
-	int		k;
-
-	var_env = 0;
-	env_def = 0;
-	i += 1;
-	tmp = i;
-	k = 0;
-	length = 0;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
-	{
-		length++;
-		i++;
-	}
-	var_env = malloc(sizeof(char) * length + 1);
-	i = tmp;
-	while (parser->parser_args[i] && (ft_isalnum(parser->parser_args[i])))
-		var_env[k++] = parser->parser_args[i++];
-	var_env[k] = '\0';
-	env_def = get_env(env, var_env);
-	if (env_def)
-		parser->parser_count += ft_strlen(env_def);
-	free(env_def);
-	free(var_env);
-	return (i);
-}
-
 static int	fsq2(char quote, t_parser *parser, int i, t_env *env)
 {
 	while (parser->parser_args[i] != quote)

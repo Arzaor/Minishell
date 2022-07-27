@@ -48,14 +48,51 @@ static int	get_var_env_save(t_parser *parser, int i, t_env *env)
 	return (i);
 }
 
-static int		found_second_quote_save(t_parser *parser, int i, char quote, t_env *env)
+static int	fsq2(char quote, t_parser *parser, int i, t_env *env)
+{
+	while (parser->parser_args[i] != quote)
+	{
+		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
+			i = get_var_env(parser, i, env);
+		else if (parser->parser_args[i] == '$' && \
+				parser->parser_args[i + 1] == '?')
+		{
+			if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
+				parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+			else
+				parser->parser_count++;
+			i += 2;
+		}
+		else
+		{
+			parser->parser_count++;
+			i++;
+		}
+	}
+	return (i);
+}
+
+static int	fsq3(char quote, t_parser *parser, int i, t_env *env)
+{
+	if (quote == '\'')
+	{
+		while (parser->parser_args[i] != quote)
+		{
+			parser->parser_count++;
+			i++;
+		}
+	}
+	else
+		i = fsq2(quote, parser, i, env);
+	return (i);
+}
+
+static int	found_second_quote(t_parser *parser, int i, char quote, t_env *env)
 {
 	int	result;
 	int	tmp;
-	int	k;
 
 	result = 0;
-	k = 0;
 	if (parser->parser_args[i + 1])
 		i += 1;
 	else
@@ -72,34 +109,7 @@ static int		found_second_quote_save(t_parser *parser, int i, char quote, t_env *
 	}
 	i = tmp;
 	if (result)
-	{
-		if (quote == '\'')
-		{
-			while (parser->parser_args[i] != quote)
-				parser->parser_arguments[parser->parser_count++] = parser->parser_args[i++];
-		}
-		else
-		{
-			while (parser->parser_args[i] != quote)
-			{
-				if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
-					i = get_var_env_save(parser, i, env);
-				else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
-				{
-					if (g_code != 0)
-					{
-						while (ft_itoa_base(g_code, 10)[k])
-							parser->parser_arguments[parser->parser_count++] = ft_itoa_base(g_code, 10)[k++];
-					}
-					else
-						parser->parser_arguments[parser->parser_count++] = '0';
-					i += 2;
-				}
-				else
-					parser->parser_arguments[parser->parser_count++] = parser->parser_args[i++];
-			}
-		}
-	}
+		i = fsq3(quote, parser, i, env);
 	else
 		return (-1);
 	return (i);
