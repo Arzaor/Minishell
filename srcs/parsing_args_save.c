@@ -92,22 +92,29 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 	k = 0;
 	while (parser->parser_args[i])
 	{
-		if (parser->parser_args[i] != '\'' && parser->parser_args[i] != '"' && parser->parser_args[i] != '$')
-			parser->parser_arguments[parser->parser_count++] = parser->parser_args[i++];
-		else if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
+		if (parser->parser_args[i] != '\'' && parser->parser_args[i] \
+				!= '"' && parser->parser_args[i] != '$')
+			parser->parser_arguments[parser->parser_count++] = \
+				parser->parser_args[i++];
+		else if (parser->parser_args[i] == '\'' || \
+				parser->parser_args[i] == '"')
 		{
 			i = found_second_quote_save(parser, i, parser->parser_args[i], env);
-			if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
+			if (parser->parser_args[i] == '\'' || \
+					parser->parser_args[i] == '"')
 				i += 1;
 		}
-		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
+		else if (parser->parser_args[i] == '$' && \
+				parser->parser_args[i + 1] != '?')
 			i = get_var_env(parser, i, env, 0);
-		else if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] == '?')
+		else if (parser->parser_args[i] == '$' && \
+				parser->parser_args[i + 1] == '?')
 		{
 			if (g_code != 0)
 			{
 				while (ft_itoa_base(g_code, 10)[k])
-					parser->parser_arguments[parser->parser_count++] = ft_itoa_base(g_code, 10)[k++];
+					parser->parser_arguments[parser->parser_count++] = \
+						ft_itoa_base(g_code, 10)[k++];
 			}
 			else
 				parser->parser_arguments[parser->parser_count++] = '0';
