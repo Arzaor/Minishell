@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/26 13:51:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:18:00 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,8 @@ t_parser	*init(void)
 	parser->parser_cmd = NULL;
 	parser->parser_opt = 0;
 	parser->parser_args = NULL;
-	parser->parser_double_quote = 0;
-	parser->parser_single_quote = 0;
-	parser->parser_left_redir = 0;
-	parser->parser_right_redir = 0;
-	parser->parser_dleft_redir = 0;
-	parser->parser_dright_redir = 0;
 	parser->parser_sig = 0;
 	parser->parser_count = 0;
-	parser->parser_heredoc = NULL;
 	parser->parser_pwd = NULL;
 	parser->parser_arguments = NULL;
 	return (parser);
@@ -53,7 +46,6 @@ void	free_parser(t_parser *parser)
 {
 	free(parser->parser_cmd);
 	free(parser->parser_args);
-	free(parser->parser_heredoc);
 	free(parser->parser_arguments);
 	free(parser);
 }

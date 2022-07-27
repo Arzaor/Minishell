@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:16 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/05 15:01:29 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:40:40 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_parser	*parsing_cmd(char *line, t_parser *parser)
 	while (line[i])
 	{
 		if (line[i] == ' ')
-			break ;
-		if (line[i] == '>' || line[i] == '<')
 			break ;
 		i++;
 	}
