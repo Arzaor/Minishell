@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 14:26:33 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:31:43 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ void	ft_tri_tab(char **tri, int count)
 static void	export_arg3(char *split_space, t_env *env)
 {
 	char	*result;
+	char	**split_equals;
 
-	result = get_env(env, split_space);
+	split_equals = ft_split(split_space, '=');
+	result = get_env(env, split_equals[0]);
 	if (result)
 	{
-		ft_unset(env, split_space);
+		ft_unset(env, split_equals[0]);
 		insert_env(env, split_space);
 	}
 	else
 		insert_env(env, split_space);
+	free_array(split_equals);
 	free(result);
 }
 
