@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 16:59:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:37:54 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void		ft_env(t_env *env);
 void		pwd(t_env *env);
 void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
+int			count_cursor(t_parser *parser, char *line);
+int			count_option(char *line, int i, t_parser *parser);
 
 //SIGNALS
 void		init_signals(void);
