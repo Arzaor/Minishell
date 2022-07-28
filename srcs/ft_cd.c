@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:33:31 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/26 13:41:04 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:33:27 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_cd2(char *pwd, t_env *env)
 	}
 	else
 		printf("cd: error retrieving current directory: getcwd: \
-			cannot access parent directories: No such file or directory\n");
+cannot access parent directories: No such file or directory\n");
 }
 
 void	ft_cd(t_parser *parser, t_env *env)
@@ -42,7 +42,7 @@ void	ft_cd(t_parser *parser, t_env *env)
 		{
 			g_code = 1;
 			printf("bash: cd: %s: No such file \
-				or directory\n", parser->parser_args);
+or directory\n", parser->parser_args);
 		}
 		else
 			ft_cd2(pwd, env);
