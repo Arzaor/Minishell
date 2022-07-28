@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 11:37:21 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:18:38 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ static int	transform_arg(t_parser *parser, t_env *env)
 			i = found_second_quote(parser, i, parser->parser_args[i], env);
 			if (i == -1)
 			{
-				printf("Erreur : Format quote.");
-				return (0);
+				printf("Erreur : Format quote.\n");
+				g_code = 1;
+				parser->parser_error = 1;
+				break ;
 			}
 			if (parser->parser_args[i] == '\'' || parser->parser_args[i] == '"')
 				i += 1;
@@ -91,12 +93,8 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 			parser->parser_args[i++] = line[start++];
 		parser->parser_args[i] = '\0';
 		tmp = transform_arg(parser, env);
-		if (tmp)
+		if (!parser->parser_error)
 			save_to_arg(parser, env);
-		else
-			parser->parser_args = NULL;
 	}
-	else
-		parser->parser_args = NULL;
 	return (parser);
 }

@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 11:31:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:54:21 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,27 @@ static void	export_arg3(char *split_space, t_env *env)
 	char	**split_equals;
 
 	split_equals = ft_split(split_space, '=');
-	result = get_env(env, split_equals[0]);
-	if (result)
+	if (split_equals[0])
 	{
-		ft_unset(env, split_equals[0]);
-		insert_env(env, split_space);
+		result = get_env(env, split_equals[0]);
+		if (result)
+		{
+			ft_unset(env, split_equals[0]);
+			insert_env(env, split_space);
+		}
+		else
+			insert_env(env, split_space);
+		free(result);
+		g_code = 0;
 	}
 	else
-		insert_env(env, split_space);
+	{
+		printf("minishell: export: ");
+		printf("%s", split_space);
+		printf(": not a valid identifier\n");
+		g_code = 1;
+	}
 	free_array(split_equals);
-	free(result);
 }
 
 void	export_arg(t_env *env, char *value)
@@ -86,8 +97,8 @@ void	ft_export(t_env *env, char *value)
 		while (j < count)
 			printf("declare -x %s\n", tri[j++]);
 		free(tri);
+		g_code = 0;
 	}
 	else
 		export_arg(env, value);
-	g_code = 0;
 }

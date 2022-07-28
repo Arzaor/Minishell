@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 11:37:54 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:37:33 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_parser {
 	char		*parser_args;
 	int			parser_sig;
 	int			parser_count;
+	int			parser_error;
 	char		*parser_pwd;
 	char		*parser_arguments;
 }				t_parser;
