@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 16:50:34 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:14:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef struct s_env
 int			g_code;
 
 //PARSING
-void		parsing_symbols(t_parser *parser, char *line, t_env *env);
+void	parsing_handler(t_parser *parser, char *line, \
+						t_env *env, char **cmds_bis);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser, t_env *env);
 t_parser	*parsing_opts(char *line, t_parser *parser);
@@ -85,7 +86,7 @@ void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);
 void		ft_env(t_env *env);
 void		pwd(t_env *env);
-void		exec_cmd(t_parser *parser, char **cmds, t_env *env);
+void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
 int			count_cursor(t_parser *parser, char *line);
 int			count_option(char *line, int i, t_parser *parser);

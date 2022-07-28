@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:49 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 16:46:05 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:48:31 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,45 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return (diff);
+}
+
+char	**create_tab_value(t_env *env)
+{
+	t_element	*current;
+	int			i;
+	int			j;
+	char		**tri_tab;
+
+	i = 0;
+	j = 0;
+	tri_tab = NULL;
+	current = env->first;
+	while (current != NULL)
+	{
+		current = current->next;
+		i++;
+	}
+	current = env->first;
+	tri_tab = malloc(sizeof(char *) * i + 1);
+	i = 0;
+	while (current != NULL)
+	{
+		if (current->value)
+		{
+			tri_tab[i] = malloc(sizeof(char) * ft_strlen(current->value) + 1);
+			while (current->value[j])
+			{
+				tri_tab[i][j] = current->value[j];
+				j++;
+			}
+			tri_tab[i][j] = '\0';
+			j = 0;
+			i++;
+		}
+		current = current->next;
+	}
+	tri_tab[i] = NULL;
+	return (tri_tab);
 }
 
 char	**create_tab(t_env *env)
