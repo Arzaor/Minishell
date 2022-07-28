@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 16:16:38 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:50:34 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);
 void		ft_env(t_env *env);
 void		pwd(t_env *env);
-void		exec_cmd(t_parser *parser, char **cmds);
+void		exec_cmd(t_parser *parser, char **cmds, t_env *env);
 void		ft_exit(t_parser *parser);
 int			count_cursor(t_parser *parser, char *line);
 int			count_option(char *line, int i, t_parser *parser);
-char		**create_tab_value(t_env *env);
+
 //SIGNALS
 void		init_signals(void);
 

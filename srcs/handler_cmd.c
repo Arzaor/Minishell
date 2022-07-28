@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 16:19:12 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:53:48 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_exit_status(int status)
 	}
 }
 
-void	exec_cmd(t_parser *parser, char **cmds)
+void	exec_cmd(t_parser *parser, char **cmds, t_env *env)
 {
 	pid_t	pid;
 	int		status;
@@ -109,6 +109,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 		if (is_build_in(parser->parser_cmd))
 			create_cmd(parser, env);
 		else
-			exec_cmd(parser, cmds);
+			exec_cmd(parser, cmds, env);
 	}
 }

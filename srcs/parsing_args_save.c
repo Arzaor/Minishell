@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 12:49:04 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:08:19 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 	{
 		if (parser->parser_args[i] != '\'' && parser->parser_args[i] \
 				!= '"' && parser->parser_args[i] != '$')
-			parser->parser_arguments[parser->parser_count++] = \
-				parser->parser_args[i++];
+		{
+			if (ft_isspace(parser->parser_args[i]) && ft_isspace(parser->parser_args[i + 1]))
+				i++;
+			else
+				parser->parser_arguments[parser->parser_count++] = parser->parser_args[i++];
+		}
 		else if (parser->parser_args[i] == '\'' || \
 				parser->parser_args[i] == '"')
 		{
