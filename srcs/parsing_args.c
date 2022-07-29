@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:03 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 16:51:23 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:29:33 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_parser	*parsing_args(char *line, t_parser *parser, t_env *env)
 		while (line[start])
 			parser->parser_args[i++] = line[start++];
 		parser->parser_args[i] = '\0';
+		parser->parser_count_arg = ft_strlen(parser->parser_args);
 		tmp = transform_arg(parser, env);
 		if (!parser->parser_error)
 			save_to_arg(parser, env);

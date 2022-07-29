@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:44:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 11:37:34 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:12:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,20 @@
 
 int	count_option(char *line, int i, t_parser *parser)
 {
-	char	letter;
-	int		count;
-
-	letter = 0;
-	count = 0;
-	if (line[i] == '-')
+	while (line[i])
 	{
-		i++;
-		while (line[i] == 'n')
+		if (line[i] == '-')
 		{
 			i++;
-			count++;
-			letter = line[i];
+			while (line[i] && ft_isalnum(line[i]))
+				i++;
 		}
-		if (letter != 'n' && letter != ' ')
-		{
-			i -= count + 2;
-			parser->parser_opt = 0;
-		}
-		i += 1;
+		else
+			break ;
+		i++;
 	}
+	while (line[i] && line[i] == ' ')
+		i++;
 	return (i);
 }
 
@@ -45,10 +38,9 @@ int	count_cursor(t_parser *parser, char *line)
 	i = 0;
 	if (parser->parser_cmd)
 		i += ft_strlen(parser->parser_cmd);
-	while (line[i] == ' ')
+	while (line[i] && line[i] == ' ')
 		i++;
-	if (parser->parser_opt)
-		i = count_option(line, i, parser);
+	i = count_option(line, i, parser);
 	return (i);
 }
 

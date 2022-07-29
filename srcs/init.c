@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 18:31:25 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:15:28 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_parser	*init(void)
 	parser->parser_error = 0;
 	parser->parser_pwd = NULL;
 	parser->parser_arguments = NULL;
+	parser->parser_count_arg = 0;
 	return (parser);
 }
 

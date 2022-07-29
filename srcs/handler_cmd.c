@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 18:14:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:08:48 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ void	create_cmd(t_parser *parser, t_env *env)
 		ft_exit(parser);
 }
 
-void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
+void	handler_cmd(t_parser *parser, t_env *env, char *line)
 {
+	char	**cmds;
 	if (g_code != 130 && g_code != 131)
 	{
 		signal(SIGQUIT, sig_handler2);
@@ -103,6 +104,7 @@ void	handler_cmd(t_parser *parser, t_env *env, char **cmds)
 	}
 	if (!parser->parser_error)
 	{
+		cmds = fast_parsing(line, parser);
 		if (!is_build_in(parser->parser_cmd) && \
 			cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
 			get_absolute_path(get_env(env, "PATH"), parser);

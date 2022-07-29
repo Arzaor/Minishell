@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/28 17:31:58 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:21:09 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 }
 
 void	parsing_handler(t_parser *parser, char *line, \
-						t_env *env, char **cmds_bis)
+						t_env *env)
 {
 	int	i;
 	int	count;
@@ -55,7 +55,6 @@ void	parsing_handler(t_parser *parser, char *line, \
 		i++;
 	}
 	if (count != ft_strlen(line))
-		handler_cmd(parsing(parser, line, env), env, cmds_bis);
-	free_array(cmds_bis);
+		handler_cmd(parsing(parser, line, env), env, line);
 	free_parser(parser);
 }

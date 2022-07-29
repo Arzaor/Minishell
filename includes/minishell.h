@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 18:14:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:21:24 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_parser {
 	int			parser_error;
 	char		*parser_pwd;
 	char		*parser_arguments;
+	int			parser_count_arg;
 }				t_parser;
 
 typedef struct s_element
@@ -56,7 +57,7 @@ int			g_code;
 
 //PARSING
 void	parsing_handler(t_parser *parser, char *line, \
-						t_env *env, char **cmds_bis);
+						t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser, t_env *env);
 t_parser	*parsing_opts(char *line, t_parser *parser);
@@ -78,7 +79,7 @@ void		show_prompt(char *line, t_env *envp);
 void		rl_replace_line(const char *text, int clear_undo);
 
 //CMD
-void		handler_cmd(t_parser *parser, t_env *env, char **cmds);
+void		handler_cmd(t_parser *parser, t_env *env, char *line);
 void		create_cmd(t_parser *parser, t_env *env);
 void		ft_echo(t_parser *parser);
 void		ft_cd(t_parser *parser, t_env *env);
@@ -123,7 +124,7 @@ void		kill_process(int *process);
 
 //REDIR
 void		style_prompt(void);
-char		**fast_parsing(char *line);
+char		**fast_parsing(char *line, t_parser *parser);
 int			ft_isalnum(int c);
 int			char_is_var_attribution(char *str);
 int			get_var_env(t_parser *parser, int i, t_env *env, int count);
