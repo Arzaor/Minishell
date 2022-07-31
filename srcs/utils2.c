@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/27 16:54:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:40:53 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	show_prompt(char *line, t_env *envp)
 	parser = init();
 	if (line)
 		add_history(line);
-	parsing_symbols(parser, line, envp);
+	parsing_handler(parser, line, envp);
 }
 
 void	style_prompt(void)
