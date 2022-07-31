@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:44:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/29 20:12:37 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:52:50 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,32 @@ int	count_option(char *line, int i, t_parser *parser)
 	return (i);
 }
 
+int	count_option_echo(char *line, int i, t_parser *parser)
+{
+	char	letter;
+	int		count;
+
+	letter = 0;
+	count = 0;
+	if (line[i] == '-')
+	{
+		i++;
+		while (line[i] == 'n')
+		{
+			i++;
+			count++;
+			letter = line[i];
+		}
+		if (letter != 'n' && letter != ' ')
+		{
+			i -= count + 2;
+			parser->parser_opt = 0;
+		}
+		i += 1;
+	}
+	return (i);
+}
+
 int	count_cursor(t_parser *parser, char *line)
 {
 	int		i;
@@ -40,7 +66,10 @@ int	count_cursor(t_parser *parser, char *line)
 		i += ft_strlen(parser->parser_cmd);
 	while (line[i] && line[i] == ' ')
 		i++;
-	i = count_option(line, i, parser);
+	if (!ft_strncmp(parser->parser_cmd, "echo", 4))
+		i = count_option_echo(line, i, parser);
+	else
+		i = count_option(line, i, parser);
 	return (i);
 }
 
