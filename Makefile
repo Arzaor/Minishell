@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/08/01 12:11:23 by jbarette         ###   ########.fr        #
+#    Updated: 2022/08/01 12:26:53 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC 		=	create_env.c \
 				parsing_cmd.c \
 				utils.c \
 				utils2.c \
+				utils3.c \
 				transform_arg.c \
 				count_cursor.c \
 				

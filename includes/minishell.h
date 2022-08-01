@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 12:09:38 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:27:24 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_env
 int			g_code;
 
 //PARSING
-void	parsing_handler(t_parser *parser, char *line, \
+void		parsing_handler(t_parser *parser, char *line, \
 						t_env *env);
 t_parser	*parsing_cmd(char *line, t_parser *parser);
 t_parser	*parsing_args(char *line, t_parser *parser, t_env *env);
