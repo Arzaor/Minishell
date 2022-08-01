@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/29 23:51:16 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:08:13 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,28 @@ static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 	return (parser);
 }
 
+static t_parser	*check_letter_opt(char *line, int j, t_parser *parser)
+{
+	while (line[j] != ' ')
+	{
+		if (line[j] != 'n')
+		{
+			parser->parser_opt = 0;
+			break ;
+		}
+		else
+			parser->parser_opt = 1;
+		j++;
+	}
+	return (parser);
+}
+
 t_parser	*parsing_opts(char *line, t_parser *parser)
 {
 	int		i;
-	int		j;
 
 	i = ft_strlen(parser->parser_cmd);
 	i += 1;
-	j = 0;
 	while (line[i])
 	{
 		if (parser->parser_opt)
@@ -42,18 +56,7 @@ t_parser	*parsing_opts(char *line, t_parser *parser)
 		if (line[i] == '-')
 		{
 			i += 1;
-			j = i;
-			while (line[j] != ' ')
-			{
-				if (line[j] != 'n')
-				{
-					parser->parser_opt = 0;
-					break ;
-				}
-				else
-					parser->parser_opt = 1;
-				j++;
-			}
+			parser = check_letter_opt(line, i, parser);
 		}
 		i++;
 	}

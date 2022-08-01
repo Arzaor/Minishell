@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 11:19:05 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:05:14 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	create_cmd(t_parser *parser, t_env *env)
 void	handler_cmd(t_parser *parser, t_env *env, char *line)
 {
 	char	**cmds;
+
 	if (g_code != 130 && g_code != 131)
 	{
 		signal(SIGQUIT, sig_handler2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fast_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:46:23 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/29 20:15:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:04:52 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	**fast_parsing(char *line, t_parser *parser)
 		count_dim = ft_strlen(line) - parser->parser_count_arg;
 		while (count >= count_dim)
 			line[count--] = '\0';
-		bin = (char *)ft_calloc(sizeof(char), (ft_strlen(line) + 1 + ft_strlen(parser->parser_args) + 1));
+		bin = (char *)ft_calloc(sizeof(char), \
+				(ft_strlen(line) + 1 + ft_strlen(parser->parser_args) + 1));
 		strcat(bin, line);
 		strcat(bin, parser->parser_args);
 		cmds_bis = ft_split(bin, ' ');

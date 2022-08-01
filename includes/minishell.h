@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 11:42:17 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:09:38 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		save_to_arg(t_parser *parser, t_env *env);
 int			found_second_quote(t_parser *parser, int i, char quote, t_env *env);
 int			found_second_quote_save(t_parser *parser, int i, \
 				char quote, t_env *env);
+int			transform_arg(t_parser *parser, t_env *env);
 
 //EXPORT
 void		export_arg(t_env *env, char *value);
