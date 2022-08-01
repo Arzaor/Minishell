@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:44:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 11:15:19 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:57:42 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,37 @@ int	count_option(char *line, int i)
 	return (i);
 }
 
-int	count_option_echo(char *line, int i, t_parser *parser)
+int	count_option_echo(char *line, int i)
 {
 	char	letter;
 	int		count;
 
 	letter = 0;
 	count = 0;
-	if (line[i] == '-')
+	while (line[i])
 	{
-		i++;
-		while (line[i] == 'n')
+		if (line[i] == ' ')
+			i++;
+		if (line[i] == '-')
 		{
 			i++;
-			count++;
-			letter = line[i];
+			while (line[i] == 'n')
+			{
+				i++;
+				count++;
+				letter = line[i];
+			}
+			if (letter != 'n' && letter != ' ')
+			{
+				i -= count + 1;
+				break ;
+			}
 		}
-		if (letter != 'n' && letter != ' ')
-		{
-			i -= count + 2;
-			parser->parser_opt = 0;
-		}
-		i += 1;
+		else
+			break ;
 	}
+	if (line[i] == ' ')
+		i++;
 	return (i);
 }
 
@@ -67,7 +75,7 @@ int	count_cursor(t_parser *parser, char *line)
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (!ft_strncmp(parser->parser_cmd, "echo", 4))
-		i = count_option_echo(line, i, parser);
+		i = count_option_echo(line, i);
 	else
 		i = count_option(line, i);
 	return (i);
