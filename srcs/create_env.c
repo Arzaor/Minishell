@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:03:08 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 14:08:40 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:42:41 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env	*create_env(char **env)
 	return (new_env);
 }
 
-void	insert_env(t_env *env, char *value)
+int	insert_env(t_env *env, char *value)
 {
 	t_element	*new;
 	char		**split_equals;
@@ -38,7 +38,7 @@ void	insert_env(t_env *env, char *value)
 		printf("minishell: export: ");
 		printf("%s", split_equals[0]);
 		printf(": not a valid identifier\n");
-		g_code = 1;
+		return (1);
 	}
 	else
 	{
@@ -50,6 +50,7 @@ void	insert_env(t_env *env, char *value)
 		env->first = new;
 	}
 	free_array(split_equals);
+	return (0);
 }
 
 void	delete_env(t_env *env)

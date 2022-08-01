@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 11:15:11 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:42:17 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_env		*init_env(void);
 // HANDLER LINKED LIST
 void		display_linked_list(t_env *env);
 t_env		*create_env(char **env);
-void		insert_env(t_env *env, char *value);
+int			insert_env(t_env *env, char *value);
 void		delete_env(t_env *env);
 void		display_tab(char **env_tab);
 char		*test(char **tab_env, int i);

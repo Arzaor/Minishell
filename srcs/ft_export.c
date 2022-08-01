@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/28 12:54:21 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:43:52 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	export_arg3(char *split_space, t_env *env)
 	char	*result;
 	char	**split_equals;
 
+	result = 0;
 	split_equals = ft_split(split_space, '=');
 	if (split_equals[0])
 	{
@@ -48,12 +49,10 @@ static void	export_arg3(char *split_space, t_env *env)
 		if (result)
 		{
 			ft_unset(env, split_equals[0]);
-			insert_env(env, split_space);
+			g_code = insert_env(env, split_space);
 		}
 		else
-			insert_env(env, split_space);
-		free(result);
-		g_code = 0;
+			g_code = insert_env(env, split_space);
 	}
 	else
 	{
