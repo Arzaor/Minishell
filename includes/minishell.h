@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/29 19:21:24 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:15:11 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		pwd(t_env *env);
 void		exec_cmd(t_parser *parser, char **cmds);
 void		ft_exit(t_parser *parser);
 int			count_cursor(t_parser *parser, char *line);
-int			count_option(char *line, int i, t_parser *parser);
+int			count_option(char *line, int i);
 
 //SIGNALS
 void		init_signals(void);

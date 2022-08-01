@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:44:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/29 23:52:50 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:15:19 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_option(char *line, int i, t_parser *parser)
+int	count_option(char *line, int i)
 {
 	while (line[i])
 	{
@@ -69,7 +69,7 @@ int	count_cursor(t_parser *parser, char *line)
 	if (!ft_strncmp(parser->parser_cmd, "echo", 4))
 		i = count_option_echo(line, i, parser);
 	else
-		i = count_option(line, i, parser);
+		i = count_option(line, i);
 	return (i);
 }
 

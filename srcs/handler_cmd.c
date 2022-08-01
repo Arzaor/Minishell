@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/29 20:08:48 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:19:05 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	handler_cmd(t_parser *parser, t_env *env, char *line)
 			create_cmd(parser, env);
 		else
 			exec_cmd(parser, cmds);
+		free_array(cmds);
 	}
 }
