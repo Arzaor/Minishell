@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/02 23:34:16 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/02 23:41:43 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	ft_exit(t_parser *parser)
 	else
 	{
 		printf("exit");
-		g_code = 0;
 		free_parser(parser);
 		exit(g_code);
 	}

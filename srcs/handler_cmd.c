@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 12:05:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/02 23:38:40 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ void	exec_cmd(t_parser *parser, char **cmds)
 	{
 		if (execve(parser->parser_cmd, cmds, NULL) == -1)
 		{
+			if (parser->parser_cmd[0] == '$' && parser->parser_cmd[1] == '?')
+				printf("bash: %d: command not found\n", g_code);
+			else
+				printf("bash: %s: command not found\n", cmds[0]);
 			g_code = 127;
-			printf("bash: %s: command not found\n", cmds[0]);
 			exit(g_code);
 		}
 	}
