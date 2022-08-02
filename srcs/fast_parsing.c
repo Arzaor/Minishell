@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:46:23 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 12:04:52 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:25:11 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ char	**fast_parsing(char *line, t_parser *parser)
 	char	*bin;
 	char	**cmds_bis;
 
+	count = 0;
+	count_dim = 0;
+	bin = 0;
+	cmds_bis = NULL;
 	if (parser->parser_args)
 	{
 		count = ft_strlen(line);
@@ -31,11 +35,8 @@ char	**fast_parsing(char *line, t_parser *parser)
 		strcat(bin, parser->parser_args);
 		cmds_bis = ft_split(bin, ' ');
 		free(bin);
-		return (cmds_bis);
 	}
 	else
-	{
 		cmds_bis = ft_split(line, ' ');
-		return (cmds_bis);
-	}
+	return (cmds_bis);
 }

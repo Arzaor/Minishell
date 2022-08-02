@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 12:23:14 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:33:07 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,5 @@ void	save_to_arg(t_parser *parser, t_env *env)
 	parser->parser_count = 0;
 	transform_arg_save(parser, env);
 	free(parser->parser_args);
-	parser->parser_args = malloc(sizeof(char) * parser->parser_count + 1);
-	while (parser->parser_arguments[i])
-		parser->parser_args[k++] = parser->parser_arguments[i++];
-	parser->parser_args[k] = '\0';
+	parser->parser_args = ft_strdup(parser->parser_arguments);
 }
