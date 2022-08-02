@@ -6,38 +6,61 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 16:26:59 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/02 23:34:16 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_exit2(t_parser *parser, int i)
+static void	ft_exit2(t_parser *parser)
 {
 	char	*code;
 	int		k;
+	int		i;
 
 	code = 0;
 	k = 0;
-	if (ft_isnum(parser->parser_args[0]))
+	i = 0;
+
+	while (ft_isnum(parser->parser_args[i]))
+		i++;
+	code = malloc(sizeof(char) * i + 1);
+	i = 0;
+	while (ft_isnum(parser->parser_args[i]))
+		code[k++] = parser->parser_args[i++];
+	g_code = ft_atoi(code);
+	free(code);
+	printf("exit");
+	free_parser(parser);
+	exit(g_code);
+}
+
+static int	check_num_for_exit(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] && arg[i] != ' ')
 	{
-		printf("exit");
-		while (ft_isnum(parser->parser_args[i]))
-			i++;
-		code = malloc(sizeof(char) * i + 1);
-		i = 0;
-		while (ft_isnum(parser->parser_args[i]))
-			code[k++] = parser->parser_args[i++];
-		g_code = ft_atoi(code);
-		free(code);
+		if (!(ft_isnum(arg[i])))
+			return (1);
+		i++;
 	}
-	else
+	return (0);
+}
+
+static int	count_number_of_arg(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
 	{
-		g_code = 255;
-		printf("exit\n");
-		printf("exit: %s: numeric argument required\n", \
-			parser->parser_args);
+		if (arg[i] == ' ')
+			return (1);
+		i++;
 	}
+	return (0);
 }
 
 void	ft_exit(t_parser *parser)
@@ -49,22 +72,30 @@ void	ft_exit(t_parser *parser)
 	split_arg = NULL;
 	if (parser->parser_args)
 	{
-		split_arg = ft_split(parser->parser_args, ' ');
-		if (split_arg[1])
+		if (check_num_for_exit(parser->parser_args))
 		{
-			printf("%s: too many arguments\n", parser->parser_cmd);
+			printf("exit\n");
+			printf("bash: exit: %s: numeric argument required\n", \
+				parser->parser_args);
+			g_code = 255;
+			free_parser(parser);
+			exit(g_code);
+		}
+		else if (count_number_of_arg(parser->parser_args))
+		{
+			printf("bash: %s: too many arguments\n", parser->parser_cmd);
 			g_code = 1;
 		}
 		else
-			ft_exit2(parser, i);
+			ft_exit2(parser);
 	}
 	else
 	{
 		printf("exit");
 		g_code = 0;
+		free_parser(parser);
+		exit(g_code);
 	}
-	free_parser(parser);
-	exit(g_code);
 }
 
 void	ft_exit_with_line(char *line)
