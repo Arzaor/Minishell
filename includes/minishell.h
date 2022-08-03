@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 12:27:24 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:13:46 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct s_parser {
 	int			parser_error;
 	char		*parser_pwd;
 	char		*parser_arguments;
+	char		*parser_commands;
 	int			parser_count_arg;
+	int			parser_count_cmd;
 }				t_parser;
 
 typedef struct s_element
@@ -58,7 +60,7 @@ int			g_code;
 //PARSING
 void		parsing_handler(t_parser *parser, char *line, \
 						t_env *env);
-t_parser	*parsing_cmd(char *line, t_parser *parser);
+t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env);
 t_parser	*parsing_args(char *line, t_parser *parser, t_env *env);
 t_parser	*parsing_opts(char *line, t_parser *parser);
 char		*get_env(t_env *env, char *search);
@@ -66,11 +68,15 @@ void		get_absolute_path(char *path, t_parser *parser);
 void		ft_exit_with_line(char *line);
 void		get_absolute_path(char *path, t_parser *parser);
 void		save_to_arg(t_parser *parser, t_env *env);
+void		save_to_cmd(t_parser *parser, t_env *env);
 int			found_second_quote(t_parser *parser, int i, char quote, t_env *env);
 int			found_second_quote_save(t_parser *parser, int i, \
 				char quote, t_env *env);
 int			transform_arg(t_parser *parser, t_env *env);
-
+int			transform_cmd(t_parser *parser, t_env *env);
+int			found_second_quote_cmd(t_parser *parser, int i, char quote, t_env *env);
+int			found_second_quote_save_cmd(t_parser *parser, int i, \
+						char quote, t_env *env);
 //EXPORT
 void		export_arg(t_env *env, char *value);
 void		ft_tri_tab(char **tri, int count);
@@ -88,7 +94,7 @@ void		ft_export(t_env *env, char *value);
 void		ft_unset(t_env *env, char *arg);
 void		ft_env(t_env *env);
 void		pwd(t_env *env);
-void		exec_cmd(t_parser *parser, char **cmds);
+void		exec_cmd(t_parser *parser, char **cmds, t_env *env);
 void		ft_exit(t_parser *parser);
 int			count_cursor(t_parser *parser, char *line);
 int			count_option(char *line, int i);
@@ -129,5 +135,6 @@ char		**fast_parsing(char *line, t_parser *parser);
 int			ft_isalnum(int c);
 int			char_is_var_attribution(char *str);
 int			get_var_env(t_parser *parser, int i, t_env *env, int count);
+int			get_var_env_cmd(t_parser *parser, int i, t_env *env, int count);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/08/01 12:26:53 by jbarette         ###   ########.fr        #
+#    Updated: 2022/08/03 16:32:03 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,22 +25,27 @@ SRC 		=	create_env.c \
 				ft_pwd.c \
 				ft_unset.c \
 				get_env.c \
+				get_env_cmd.c \
 				get_path.c \
 				handler_cmd.c \
 				init.c \
 				main.c \
 				parsing_args_save.c \
+				parsing_cmd_save.c \
 				parsing_args_save1.c \
+				parsing_cmd_save1.c \
 				parsing_args.c \
 				parsing_args1.c \
 				parsing.c \
 				signals.c \
 				parsing_cmd.c \
+				parsing_cmd1.c \
 				utils.c \
 				utils2.c \
 				utils3.c \
 				transform_arg.c \
 				count_cursor.c \
+				transform_cmd.c \
 				
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}
@@ -48,7 +53,7 @@ SRCS_ALL 	= 	${SRCS}
 OBJS 		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	#-Wall -Wextra -Werror
 
 LIB_RDL 	= 	libreadline.a ./libft/libft.a
 

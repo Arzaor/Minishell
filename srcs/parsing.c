@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 12:08:13 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:08:31 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 {
-	parser = parsing_cmd(line, parser);
+	parser = parsing_cmd(line, parser, env);
 	if (!strcmp(parser->parser_cmd, "cat") || \
 		!strcmp(parser->parser_cmd, "sort"))
 	{

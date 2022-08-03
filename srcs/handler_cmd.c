@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/02 23:38:40 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:15:36 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_exit_status(int status)
 	}
 }
 
-void	exec_cmd(t_parser *parser, char **cmds)
+void	exec_cmd(t_parser *parser, char **cmds, t_env *env)
 {
 	pid_t	pid;
 	int		status;
@@ -63,12 +63,18 @@ void	exec_cmd(t_parser *parser, char **cmds)
 	{
 		if (execve(parser->parser_cmd, cmds, NULL) == -1)
 		{
-			if (parser->parser_cmd[0] == '$' && parser->parser_cmd[1] == '?')
-				printf("bash: %d: command not found\n", g_code);
+			if (chdir(parser->parser_cmd) == 0)
+			{
+				printf("bash: %s: is a directory\n", parser->parser_cmd);
+				chdir(get_env(env, "OLDPWD"));
+				g_code = 126;
+			}
 			else
-				printf("bash: %s: command not found\n", cmds[0]);
-			g_code = 127;
-			exit(g_code);
+			{
+				printf("bash: %s: command not found\n", parser->parser_cmd);
+				g_code = 127;
+				exit(g_code);
+			}
 		}
 	}
 	else
@@ -115,7 +121,7 @@ void	handler_cmd(t_parser *parser, t_env *env, char *line)
 		if (is_build_in(parser->parser_cmd))
 			create_cmd(parser, env);
 		else
-			exec_cmd(parser, cmds);
+			exec_cmd(parser, cmds, env);
 		free_array(cmds);
 	}
 }

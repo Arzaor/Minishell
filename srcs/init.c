@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:17:04 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/29 19:15:28 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:13:54 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_parser	*init(void)
 	parser->parser_error = 0;
 	parser->parser_pwd = NULL;
 	parser->parser_arguments = NULL;
+	parser->parser_commands = NULL;
 	parser->parser_count_arg = 0;
+	parser->parser_count_cmd = 0;
 	return (parser);
 }
 
@@ -49,5 +51,6 @@ void	free_parser(t_parser *parser)
 	free(parser->parser_cmd);
 	free(parser->parser_args);
 	free(parser->parser_arguments);
+	free(parser->parser_commands);
 	free(parser);
 }
