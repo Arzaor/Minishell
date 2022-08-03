@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:11:12 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 12:17:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:48:18 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	count_option(char *line, int i)
 {
 	while (line[i])
 	{
+		while (line[i] && line[i] == ' ')
+			i++;
 		if (line[i] == '-')
 		{
 			i++;
@@ -24,7 +26,6 @@ int	count_option(char *line, int i)
 		}
 		else
 			break ;
-		i++;
 	}
 	while (line[i] && line[i] == ' ')
 		i++;
@@ -77,7 +78,10 @@ int	count_cursor(t_parser *parser, char *line)
 
 	i = 0;
 	if (parser->parser_cmd)
-		i += ft_strlen(parser->parser_cmd);
+	{
+		while (line[i] && line[i] != ' ')
+			i++;
+	}
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (!ft_strncmp(parser->parser_cmd, "echo", 4))

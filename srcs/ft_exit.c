@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 02:09:25 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/02 23:41:43 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:34:57 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_exit(t_parser *parser)
 		}
 		else if (count_number_of_arg(parser->parser_args))
 		{
+			printf("exit\n");
 			printf("bash: %s: too many arguments\n", parser->parser_cmd);
 			g_code = 1;
 		}
