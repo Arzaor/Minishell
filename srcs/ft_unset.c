@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 16:52:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:26:28 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,25 @@ static t_element	*delete_element(t_element *element, t_env *env, char *arg)
 void	ft_unset(t_env *env, char *arg)
 {
 	char	*str;
+	char	**args;
+	int		i;
 
+	args = NULL;
+	i = 0;
 	if (arg)
 	{
-		str = get_env(env, arg);
-		if (str)
+		args = ft_split(arg, ' ');
+		while(args[i])
 		{
-			delete_element(env->first, env, arg);
-			free(str);
+			str = get_env(env, args[i]);
+			if (str)
+			{
+				delete_element(env->first, env, args[i]);
+				free(str);
+			}
+			i++;
 		}
+		free_array(args);
 	}
+	
 }
