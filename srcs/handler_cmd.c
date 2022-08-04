@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/03 17:15:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:17:04 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,16 @@ void	exec_cmd(t_parser *parser, char **cmds, t_env *env)
 				chdir(get_env(env, "OLDPWD"));
 				g_code = 126;
 			}
+			else if(!ft_strcmp(parser->parser_cmd,"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"))
+			{
+				printf("bash: %s: No such file or directory\n",parser->parser_cmd);
+			}
 			else
 			{
 				printf("bash: %s: command not found\n", parser->parser_cmd);
 				g_code = 127;
-				exit(g_code);
 			}
+			exit(g_code);
 		}
 	}
 	else
@@ -115,13 +119,18 @@ void	handler_cmd(t_parser *parser, t_env *env, char *line)
 	if (!parser->parser_error)
 	{
 		cmds = fast_parsing(line, parser);
-		if (!is_build_in(parser->parser_cmd) && \
-			cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
-			get_absolute_path(get_env(env, "PATH"), parser);
-		if (is_build_in(parser->parser_cmd))
-			create_cmd(parser, env);
+		if (ft_strlen(parser->parser_cmd) > 0)
+		{
+			if (!is_build_in(parser->parser_cmd) && \
+				cmds[0][0] != '/' && ft_strncmp(cmds[0], "./", 2) != 0)
+				get_absolute_path(get_env(env, "PATH"), parser);
+			if (is_build_in(parser->parser_cmd))
+				create_cmd(parser, env);
+			else
+				exec_cmd(parser, cmds, env);
+		}
 		else
-			exec_cmd(parser, cmds, env);
+			g_code = 0;
 		free_array(cmds);
 	}
 }

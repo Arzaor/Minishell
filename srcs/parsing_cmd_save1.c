@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd_save1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:57:56 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/03 16:18:54 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:34:43 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static int	fsq_save_cmd2(t_parser *parser, t_env *env, char quote, int i)
 {
 	int	k;
+	char	*code;
 
 	k = 0;
+	code = 0;
 	while (parser->parser_cmd[i] != quote)
 	{
 		if (parser->parser_cmd[i] == '$' && parser->parser_cmd[i + 1] != '?')
@@ -26,17 +28,21 @@ static int	fsq_save_cmd2(t_parser *parser, t_env *env, char quote, int i)
 		{
 			if (g_code != 0)
 			{
-				while (ft_itoa_base(g_code, 10)[k])
-					parser->parser_commands[parser->parser_count++] = \
-							ft_itoa_base(g_code, 10)[k++];
+				code = ft_itoa_base(g_code, 10);
+				while (code[k])
+					parser->parser_commands[parser->parser_count++] = code[k++];
+				k = 0;
+				free(code);
 			}
 			else
 				parser->parser_commands[parser->parser_count++] = '0';
 			i += 2;
 		}
 		else
+		{
 			parser->parser_commands[parser->parser_count++] = \
-					parser->parser_cmd[i++];
+				parser->parser_cmd[i++];
+		}
 	}
 	return (i);
 }
@@ -46,8 +52,11 @@ static int	fsq_save_cmd3(t_parser *parser, t_env *env, char quote, int i)
 	if (quote == '\'')
 	{
 		while (parser->parser_cmd[i] != quote)
+		{
 			parser->parser_commands[parser->parser_count++] = \
 				parser->parser_cmd[i++];
+		}
+			
 	}
 	else
 		i = fsq_save_cmd2(parser, env, quote, i);

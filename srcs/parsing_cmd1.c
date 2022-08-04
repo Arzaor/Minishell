@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:44:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/03 16:18:59 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:35:24 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static int	fsq_cmd2(char quote, t_parser *parser, int i, t_env *env)
 {
+	char	*code;
+
+	code = 0;
 	while (parser->parser_cmd[i] != quote)
 	{
 		if (parser->parser_cmd[i] == '$' && parser->parser_cmd[i + 1] != '?')
@@ -21,11 +24,13 @@ static int	fsq_cmd2(char quote, t_parser *parser, int i, t_env *env)
 		else if (parser->parser_cmd[i] == '$' && \
 				parser->parser_cmd[i + 1] == '?')
 		{
-			if (ft_strlen(ft_itoa_base(g_code, 10)) > 0)
-				parser->parser_count += ft_strlen(ft_itoa_base(g_code, 10));
+			code = ft_itoa_base(g_code, 10);
+			if (ft_strlen(code) > 0)
+				parser->parser_count += ft_strlen(code);
 			else
 				parser->parser_count++;
 			i += 2;
+			free(code);
 		}
 		else
 		{

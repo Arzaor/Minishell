@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:16 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/03 17:19:04 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:00:37 by hterras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@ t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
 	y = 0;
 	count = 0;
 	tmp = 0;
-	while (line[i])
+	if (line[0] == '\'' || line[0] == '"')
 	{
-		if (line[i] == ' ')
-			break ;
 		i++;
+		while (line[i] && line[i] != line[0])
+			i++;
+		i++;
+	}
+	else
+	{
+		while (line[i] && line[i] != ' ')
+			i++;
 	}
 	parser->parser_cmd = malloc(sizeof(char) * i + 1);
 	while (count < i)
