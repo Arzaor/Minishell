@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/06 18:14:15 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/06 18:29:01 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	ft_export(t_env *env, char *value)
 	int		count;
 	int		tail;
 
-	tail = 0;
 	i = 0;
 	j = 0;
 	count = 0;
@@ -101,7 +100,6 @@ void	ft_export(t_env *env, char *value)
 		ft_tri_tab(tri, i);
 		while (j < count)
 		{
-			tail = strlen(tri[j]);
 			printf("declare -x ");
 			while(tri[j][i])
 			{
@@ -114,7 +112,8 @@ void	ft_export(t_env *env, char *value)
 				printf("%c",tri[j][i]);
 				i++;
 			}
-			printf("\"");
+			if (ft_strchr(tri[j], '='))
+				printf("\"");
 			printf("\n");
 			i=0;
 			j++;
