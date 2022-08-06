@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:47:29 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/04 15:17:04 by hterras          ###   ########.fr       */
+/*   Updated: 2022/08/06 13:18:03 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,60 +33,6 @@ bool	is_build_in(char *cmd)
 		i++;
 	}
 	return (false);
-}
-
-static void	ft_exit_status(int status)
-{
-	if (WIFEXITED(status))
-		g_code = WEXITSTATUS(status);
-	if (WIFSIGNALED(status))
-	{	
-		if (g_code == 2)
-			g_code += 128;
-		if (g_code == 3)
-		{
-			g_code += 128;
-		}
-	}
-}
-
-void	exec_cmd(t_parser *parser, char **cmds, t_env *env)
-{
-	pid_t	pid;
-	int		status;
-
-	status = 0;
-	pid = fork();
-	if (pid == -1)
-		printf("Fork");
-	if (!pid)
-	{
-		if (execve(parser->parser_cmd, cmds, NULL) == -1)
-		{
-			if (chdir(parser->parser_cmd) == 0)
-			{
-				printf("bash: %s: is a directory\n", parser->parser_cmd);
-				chdir(get_env(env, "OLDPWD"));
-				g_code = 126;
-			}
-			else if(!ft_strcmp(parser->parser_cmd,"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"))
-			{
-				printf("bash: %s: No such file or directory\n",parser->parser_cmd);
-			}
-			else
-			{
-				printf("bash: %s: command not found\n", parser->parser_cmd);
-				g_code = 127;
-			}
-			exit(g_code);
-		}
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		g_code = status;
-		ft_exit_status(status);
-	}
 }
 
 void	create_cmd(t_parser *parser, t_env *env)

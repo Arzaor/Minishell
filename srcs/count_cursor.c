@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_cursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:11:12 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/04 15:19:05 by hterras          ###   ########.fr       */
+/*   Updated: 2022/08/06 13:07:10 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,7 @@ int	count_cursor(t_parser *parser, char *line)
 
 	i = 0;
 	if (parser->parser_cmd)
-	{
-		if (line[0] == '\'' || line[0] == '"')
-		{
-			i++;
-			while (line[i] && line[i] != line[0])
-				i++;
-			i++;
-		}
-		else
-		{
-			while (line[i] && line[i] != ' ')
-				i++;
-		}
-	}
+		i = check_quote_and_count(line);
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (!ft_strncmp(parser->parser_cmd, "echo", 4))

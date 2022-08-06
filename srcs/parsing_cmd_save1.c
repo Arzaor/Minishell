@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd_save1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:57:56 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/04 16:34:43 by hterras          ###   ########.fr       */
+/*   Updated: 2022/08/06 13:10:45 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	fsq_save_cmd2(t_parser *parser, t_env *env, char quote, int i)
 {
-	int	k;
+	int		k;
 	char	*code;
 
 	k = 0;
@@ -27,13 +27,7 @@ static int	fsq_save_cmd2(t_parser *parser, t_env *env, char quote, int i)
 					parser->parser_cmd[i + 1] == '?')
 		{
 			if (g_code != 0)
-			{
-				code = ft_itoa_base(g_code, 10);
-				while (code[k])
-					parser->parser_commands[parser->parser_count++] = code[k++];
-				k = 0;
-				free(code);
-			}
+				add_number_in_tab(parser, parser->parser_commands);
 			else
 				parser->parser_commands[parser->parser_count++] = '0';
 			i += 2;
@@ -56,7 +50,6 @@ static int	fsq_save_cmd3(t_parser *parser, t_env *env, char quote, int i)
 			parser->parser_commands[parser->parser_count++] = \
 				parser->parser_cmd[i++];
 		}
-			
 	}
 	else
 		i = fsq_save_cmd2(parser, env, quote, i);

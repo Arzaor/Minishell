@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:16 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/04 16:00:37 by hterras          ###   ########.fr       */
+/*   Updated: 2022/08/06 13:07:37 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
+int	check_quote_and_count(char *line)
 {
 	int	i;
-	int	y;
-	int	count;
-	int	tmp;
 
 	i = 0;
-	y = 0;
-	count = 0;
-	tmp = 0;
 	if (line[0] == '\'' || line[0] == '"')
 	{
 		i++;
@@ -35,6 +29,20 @@ t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
 		while (line[i] && line[i] != ' ')
 			i++;
 	}
+	return (i);
+}
+
+t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
+{
+	int	i;
+	int	y;
+	int	count;
+	int	tmp;
+
+		y = 0;
+	count = 0;
+	tmp = 0;
+	i = check_quote_and_count(line);
 	parser->parser_cmd = malloc(sizeof(char) * i + 1);
 	while (count < i)
 		parser->parser_cmd[y++] = line[count++];

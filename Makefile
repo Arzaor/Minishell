@@ -6,7 +6,7 @@
 #    By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 13:09:02 by jbarette          #+#    #+#              #
-#    Updated: 2022/08/03 17:32:24 by jbarette         ###   ########.fr        #
+#    Updated: 2022/08/06 13:25:31 by jbarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC 		=	create_env.c \
 				transform_arg.c \
 				count_cursor.c \
 				transform_cmd.c \
+				exec_cmd.c \
 				
 SRCS 		= 	$(addprefix ${SRC_DIR}, ${SRC})
 SRCS_ALL 	= 	${SRCS}

@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args_save1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:57:56 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/27 16:59:33 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:11:32 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
+void	add_number_in_tab(t_parser *parser, char *save)
 {
-	int	k;
+	int		k;
+	char	*code;
 
 	k = 0;
+	code = ft_itoa_base(g_code, 10);
+	while (code[k])
+		save[parser->parser_count++] = code[k++];
+	free(code);
+}
+
+static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
+{
 	while (parser->parser_args[i] != quote)
 	{
 		if (parser->parser_args[i] == '$' && parser->parser_args[i + 1] != '?')
@@ -25,11 +34,7 @@ static int	fsq2(t_parser *parser, t_env *env, char quote, int i)
 					parser->parser_args[i + 1] == '?')
 		{
 			if (g_code != 0)
-			{
-				while (ft_itoa_base(g_code, 10)[k])
-					parser->parser_arguments[parser->parser_count++] = \
-							ft_itoa_base(g_code, 10)[k++];
-			}
+				add_number_in_tab(parser, parser->parser_arguments);
 			else
 				parser->parser_arguments[parser->parser_count++] = '0';
 			i += 2;

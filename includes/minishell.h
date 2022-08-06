@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/03 17:13:46 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:25:57 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ int			found_second_quote_save(t_parser *parser, int i, \
 				char quote, t_env *env);
 int			transform_arg(t_parser *parser, t_env *env);
 int			transform_cmd(t_parser *parser, t_env *env);
-int			found_second_quote_cmd(t_parser *parser, int i, char quote, t_env *env);
+int			found_second_quote_cmd(t_parser *parser, int i, \
+						char quote, t_env *env);
 int			found_second_quote_save_cmd(t_parser *parser, int i, \
 						char quote, t_env *env);
+int			check_quote_and_count(char *line);
+void		add_number_in_tab(t_parser *parser, char *save);
+void		ft_error_check_num(t_parser *parser);
+
 //EXPORT
 void		export_arg(t_env *env, char *value);
 void		ft_tri_tab(char **tri, int count);

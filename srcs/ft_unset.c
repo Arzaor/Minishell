@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hterras <hterras@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:10:55 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/03 17:26:28 by hterras          ###   ########.fr       */
+/*   Updated: 2022/08/06 12:55:06 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_unset(t_env *env, char *arg)
 	if (arg)
 	{
 		args = ft_split(arg, ' ');
-		while(args[i])
+		while (args[i])
 		{
 			str = get_env(env, args[i]);
 			if (str)
@@ -64,5 +64,4 @@ void	ft_unset(t_env *env, char *arg)
 		}
 		free_array(args);
 	}
-	
 }
