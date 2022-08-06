@@ -100,7 +100,9 @@ void	ft_export(t_env *env, char *value)
 	int		i;
 	int		j;
 	int		count;
+	int		tail;
 
+	tail = 0;
 	i = 0;
 	j = 0;
 	count = 0;
@@ -112,7 +114,25 @@ void	ft_export(t_env *env, char *value)
 		count = i;
 		ft_tri_tab(tri, i);
 		while (j < count)
-			printf("declare -x %s\n", tri[j++]);
+		{
+			tail = strlen(tri[j]);
+			printf("declare -x ");
+			while(tri[j][i])
+			{
+				if(tri[j][i] == '=')
+				{
+					printf("%c",tri[j][i]);
+					i+=1;
+					printf("\"");
+				}
+				printf("%c",tri[j][i]);
+				i++;
+			}
+			printf("\"");
+			printf("\n");
+			i=0;
+			j++;
+		}
 		free(tri);
 		g_code = 0;
 	}
