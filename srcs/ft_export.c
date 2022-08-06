@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/01 12:02:54 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/06 18:14:15 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,20 @@ static void	export_arg3(char *split_space, t_env *env)
 {
 	char	*result;
 	char	**split_equals;
-	int i;
-	int j;
 
-	j = 0;
-	i = 0;
 	result = 0;
-	while(split_space[i])
-	{
-		if(split_space[i] == '=')
-		{
-			j++;
-			break;
-		}
-		i++;
-	}
 	split_equals = ft_split(split_space, '=');
 	if (split_equals[0])
 	{
 		result = get_env(env, split_equals[0]);
-		if (j != 0 && result)
+		if (result)
 		{
-			ft_unset(env, split_equals[0]);
-			g_code = insert_env(env, split_space);
+			if (ft_strchr(split_space, '='))
+			{
+				ft_unset(env, split_equals[0]);
+				g_code = insert_env(env, split_space);
+			}
 		}
-		else if(j == 0 && result)
-			printf("");
-		else if(j == 0 && !result)
-			g_code = insert_env(env, split_space);
 		else
 			g_code = insert_env(env, split_space);
 		free(result);
