@@ -68,6 +68,8 @@ static void	export_arg3(char *split_space, t_env *env)
 			printf("");
 		else if(j == 0 && !result)
 			g_code = insert_env(env, split_space);
+		else
+			g_code = insert_env(env, split_space);
 		free(result);
 	}
 	else
