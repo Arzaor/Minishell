@@ -40,18 +40,33 @@ static void	export_arg3(char *split_space, t_env *env)
 {
 	char	*result;
 	char	**split_equals;
+	int i;
+	int j;
 
+	j = 0;
+	i = 0;
 	result = 0;
+	while(split_space[i])
+	{
+		if(split_space[i] == '=')
+		{
+			j++;
+			break;
+		}
+		i++;
+	}
 	split_equals = ft_split(split_space, '=');
 	if (split_equals[0])
 	{
 		result = get_env(env, split_equals[0]);
-		if (result)
+		if (j != 0 && result)
 		{
 			ft_unset(env, split_equals[0]);
 			g_code = insert_env(env, split_space);
 		}
-		else
+		else if(j == 0 && result)
+			printf("");
+		else if(j == 0 && !result)
 			g_code = insert_env(env, split_space);
 		free(result);
 	}
