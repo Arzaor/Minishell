@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:55:50 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/06 13:25:57 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:01:21 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			found_second_quote_cmd(t_parser *parser, int i, \
 						char quote, t_env *env);
 int			found_second_quote_save_cmd(t_parser *parser, int i, \
 						char quote, t_env *env);
-int			check_quote_and_count(char *line);
+int			check_quote_and_count(char *line, int i);
 void		add_number_in_tab(t_parser *parser, char *save);
 void		ft_error_check_num(t_parser *parser);
 
