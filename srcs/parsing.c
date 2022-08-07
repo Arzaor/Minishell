@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/06 14:10:44 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/06 23:09:30 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
+static void		change_signal(t_parser *parser)
 {
-	parser = parsing_cmd(line, parser, env);
 	if (!strcmp(parser->parser_cmd, "cat") || \
 		!strcmp(parser->parser_cmd, "/bin/cat") || \
+		!strcmp(parser->parser_cmd, "yes") || \
 		!strcmp(parser->parser_cmd, "sort"))
 	{
 		g_code = -111;
 	}
+}
+
+static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
+{
+	parser = parsing_cmd(line, parser, env);
+	change_signal(parser);
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser, env);
 	return (parser);
