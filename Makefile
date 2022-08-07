@@ -44,6 +44,7 @@ SRC 		=	create_env.c \
 				utils2.c \
 				utils3.c \
 				transform_arg.c \
+				export_arg.c \
 				count_cursor.c \
 				transform_cmd.c \
 				exec_cmd.c \

@@ -36,59 +36,41 @@ void	ft_tri_tab(char **tri, int count)
 	}
 }
 
-static void	export_arg3(char *split_space, t_env *env)
+static void	ft_export2(char **tri, int count, int i)
 {
-	char	*result;
-	char	**split_equals;
+	int	j;
 
-	result = 0;
-	split_equals = ft_split(split_space, '=');
-	if (split_equals[0])
+	j = 0;
+	while (j < count)
 	{
-		result = get_env(env, split_equals[0]);
-		if (result)
+		printf("declare -x ");
+		while (tri[j][i])
 		{
-			if (ft_strchr(split_space, '='))
+			if (tri[j][i] == '=')
 			{
-				ft_unset(env, split_equals[0]);
-				g_code = insert_env(env, split_space);
+				printf("%c", tri[j][i]);
+				i += 1;
+				printf("\"");
 			}
+			printf("%c", tri[j][i]);
+			i++;
 		}
-		else
-			g_code = insert_env(env, split_space);
-		free(result);
+		if (ft_strchr(tri[j], '='))
+			printf("\"");
+		printf("\n");
+		i = 0;
+		j++;
 	}
-	else
-	{
-		printf("minishell: export: ");
-		printf("%s", split_space);
-		printf(": not a valid identifier\n");
-		g_code = 1;
-	}
-	free_array(split_equals);
-}
-
-void	export_arg(t_env *env, char *value)
-{
-	char	**split_space;
-	int		i;
-
-	i = 0;
-	split_space = ft_split(value, ' ');
-	while (split_space[i])
-		export_arg3(split_space[i++], env);
-	free_array(split_space);
+	free(tri);
 }
 
 void	ft_export(t_env *env, char *value)
 {
 	char	**tri;
 	int		i;
-	int		j;
 	int		count;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	if (!value)
 	{
@@ -97,27 +79,7 @@ void	ft_export(t_env *env, char *value)
 			i++;
 		count = i;
 		ft_tri_tab(tri, i);
-		while (j < count)
-		{
-			printf("declare -x ");
-			while(tri[j][i])
-			{
-				if(tri[j][i] == '=')
-				{
-					printf("%c",tri[j][i]);
-					i+=1;
-					printf("\"");
-				}
-				printf("%c",tri[j][i]);
-				i++;
-			}
-			if (ft_strchr(tri[j], '='))
-				printf("\"");
-			printf("\n");
-			i=0;
-			j++;
-		}
-		free(tri);
+		ft_export2(tri, count, i);
 		g_code = 0;
 	}
 	else
