@@ -86,7 +86,6 @@ void	ft_export(t_env *env, char *value)
 	int		i;
 	int		j;
 	int		count;
-	int		tail;
 
 	i = 0;
 	j = 0;
