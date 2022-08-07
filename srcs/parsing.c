@@ -15,9 +15,7 @@
 static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 {
 	parser = parsing_cmd(line, parser, env);
-	if (!strcmp(parser->parser_cmd, "cat") || \
-		!strcmp(parser->parser_cmd, "/bin/cat") || \
-		!strcmp(parser->parser_cmd, "sort"))
+	if (!is_build_in(parser->parser_cmd))
 	{
 		g_code = -111;
 	}
