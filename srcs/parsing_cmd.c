@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:16 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/07 15:01:22 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:17:46 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
 	int	i;
 	int	y;
 	int	count;
-	int	tmp;
 
 	y = 0;
 	count = 0;
-	tmp = 0;
 	while (line[count] && line[count] == ' ')
 		count++;
 	i = check_quote_and_count(line, count);
@@ -49,7 +47,7 @@ t_parser	*parsing_cmd(char *line, t_parser *parser, t_env *env)
 	while (count < i)
 		parser->parser_cmd[y++] = line[count++];
 	parser->parser_cmd[y] = '\0';
-	tmp = transform_cmd(parser, env);
+	transform_cmd(parser, env);
 	if (!parser->parser_error)
 		save_to_cmd(parser, env);
 	return (parser);

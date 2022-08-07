@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:47:49 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 12:26:55 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:18:00 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ char	**create_tab_value(t_env *env)
 {
 	t_element	*current;
 	int			i;
-	int			j;
 	char		**tri_tab;
 
 	i = 0;
-	j = 0;
 	tri_tab = NULL;
 	current = env->first;
 	while (current != NULL)

@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:52:59 by hterras           #+#    #+#             */
-/*   Updated: 2022/07/31 22:40:53 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:18:25 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void	show_prompt(char *line, t_env *envp)
 
 void	style_prompt(void)
 {
-	int		ret;
 	char	*term_type;
 	char	*color_cap;
 	char	*reset_cmd;
 
 	term_type = getenv("TERM");
-	ret = tgetent(NULL, term_type);
+	tgetent(NULL, term_type);
 	color_cap = tgetstr("AF", NULL);
 	tputs(tparm(color_cap, COLOR_GREEN), 1, putchar);
 	reset_cmd = tgetstr("md", NULL);

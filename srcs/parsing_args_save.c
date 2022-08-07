@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args_save.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:51:06 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/02 16:33:07 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:14:24 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ static void	transform_arg_save(t_parser *parser, t_env *env)
 
 void	save_to_arg(t_parser *parser, t_env *env)
 {
-	int		i;
-	int		k;
-
-	i = 0;
-	k = 0;
 	parser->parser_arguments = malloc(sizeof(char) * parser->parser_count + 1);
 	parser->parser_count = 0;
 	transform_arg_save(parser, env);

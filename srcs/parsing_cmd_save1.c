@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmd_save1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 16:57:56 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/06 13:10:45 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/07 15:16:52 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static int	fsq_save_cmd2(t_parser *parser, t_env *env, char quote, int i)
 {
-	int		k;
-	char	*code;
-
-	k = 0;
-	code = 0;
 	while (parser->parser_cmd[i] != quote)
 	{
 		if (parser->parser_cmd[i] == '$' && parser->parser_cmd[i + 1] != '?')
