@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:37:10 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/07 14:34:26 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:01:41 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static t_parser	*parsing(t_parser *parser, char *line, t_env *env)
 {
 	parser = parsing_cmd(line, parser, env);
 	if (!is_build_in(parser->parser_cmd))
-	{
 		g_code = -111;
-	}
 	parser = parsing_opts(line, parser);
 	parser = parsing_args(line, parser, env);
 	return (parser);
