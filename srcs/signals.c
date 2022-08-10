@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:42:50 by jbarette          #+#    #+#             */
-/*   Updated: 2022/07/20 17:08:36 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:37:56 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void	handle_signal(int signal)
 	if (signal == SIGINT)
 	{
 		g_code = 1;
-		rl_on_new_line();
-		rl_redisplay();
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
