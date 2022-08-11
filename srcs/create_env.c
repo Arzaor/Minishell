@@ -6,7 +6,7 @@
 /*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:03:08 by jbarette          #+#    #+#             */
-/*   Updated: 2022/08/01 11:42:41 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:46:20 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	insert_env(t_env *env, char *value)
 		printf("minishell: export: ");
 		printf("%s", split_equals[0]);
 		printf(": not a valid identifier\n");
+		free_array(split_equals);
 		return (1);
 	}
 	else

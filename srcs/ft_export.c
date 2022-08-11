@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarette <jbarette@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jbarette <jbarette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:02 by hterras           #+#    #+#             */
-/*   Updated: 2022/08/06 18:29:01 by jbarette         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:51:07 by jbarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_export(t_env *env, char *value)
 			i++;
 		count = i;
 		ft_tri_tab(tri, i);
+		i = 0;
 		ft_export2(tri, count, i);
 		g_code = 0;
 	}
